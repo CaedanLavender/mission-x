@@ -1,11 +1,35 @@
 import './App.css';
-import NavigationBar from './components/NavigationBar'
+// Component imports
+import NavigationBar from './components/NavigationBar';
+import ProjectView from './ProjectView';
+
+// React Router import
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from 'react-router-dom';
+import { AppBar, Toolbar } from '@material-ui/core'
 
 function App() {
   return (
     <div className="App">
-        <NavigationBar />
+        <Router>
+          <AppBar position="static">
+            <Toolbar>
+              <Link to="/projectview">Go to ProjectView</Link>
+              <Link to="/">Go to Home</Link>
+            </Toolbar>
+          </AppBar>
+          <Switch>
+            <Route path="/" exact render={() => <div>Home</div>}/>
+            <Route path="/projectview" component={ProjectView}/>
+          </Switch>
+        </Router>
         {/* Route stuff needs to go here so that each of our components will render based on url ending with /whatever */}
+        {/* ...I'm assuming that's how they want us to do it :) */}
+        {/* Fay, I'm thinking that you build the homepage in a separate file (something like Home.js) and then we can import it to this location into the routes etc. */}
     </div>
   );
 }
