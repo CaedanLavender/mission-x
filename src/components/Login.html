@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="Login.css">
+</head>
+<body>
+    <button onclick="document.getElementById('id01').style.display='block'">Login</button>
+    <div id="id01" class="modal">
+        <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+
+    <div class="row">
+        <div class="column">
+            <form class="modal-content animate" action="/Students.php">
+                <div class="imgcontainer">
+                    <img src="Students.png" alt="Students" class="image">
+                </div>
+                <h1 class="p">Students</h1>
+                <h3 class="p">LOG IN㉾SIGN UP</h3>
+                <br/>
+                <div class="container">
+                    <input type="text" placeholder="Email Address" name="email">
+                    <br/><br/>
+                    <input type="password" placeholder="Password" name="pw">
+                    <br/><br/><br/><br/>
+                    <button class="btn" type="submit">LOG IN</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="column">
+            <form class="modal-content animate" action="/teacher.php">
+                <div class="imgcontainer">
+                    <img src="teacher.png" alt="teacher" class="image">
+                </div>
+                <h1 class="p">Teachers</h1>
+                <h3 class="p">LOG IN㉾SIGN UP</h3>
+                <br/>
+                <div class="container">
+                    <input type="text" placeholder="Email Address" name="email">
+                    <br/><br/>
+                    <input type="password" placeholder="Password" name="pw">
+                    <br/><br/><br/><br/>
+                    <button class="btn" type="submit">LOG IN</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    </div>
+</body>
+</html>
