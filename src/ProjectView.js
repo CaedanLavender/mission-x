@@ -4,10 +4,42 @@ import { Grid } from "@material-ui/core";
 import { Paper } from "@material-ui/core";
 import { Card } from "@material-ui/core"
 import { CardMedia } from "@material-ui/core";
+import { Divider } from "@material-ui/core";
+import { FormControlLabel } from "@material-ui/core"
+import { Checkbox } from "@material-ui/core"
+import FormLabel from '@material-ui/core/FormLabel'
+
 
 export default function ProjectView() {
 
 	const projects = [
+		{
+			name: "Introduction",
+			subscription: "Free",
+			image: require("./assets/Projects-Page/Project-01.png").default,
+			activityType: "Animation",
+			yearLevel: "1-4",
+			level: "Beginner",
+			subjectMatter: "Computer Science",
+		},
+		{
+			name: "Introduction",
+			subscription: "Free",
+			image: require("./assets/Projects-Page/Project-01.png").default,
+			activityType: "Animation",
+			yearLevel: "1-4",
+			level: "Beginner",
+			subjectMatter: "Computer Science",
+		},
+		{
+			name: "Introduction",
+			subscription: "Free",
+			image: require("./assets/Projects-Page/Project-01.png").default,
+			activityType: "Animation",
+			yearLevel: "1-4",
+			level: "Beginner",
+			subjectMatter: "Computer Science",
+		},
 		{
 			name: "Introduction",
 			subscription: "Free",
@@ -29,10 +61,17 @@ export default function ProjectView() {
 					<Typography variant="h4">PROJECTS</Typography>
 					<p>Welcome to the project library. You can use the filters on the right to help you search for specific projects.</p>
 				</Grid>
-				<Grid item xs={3}>
+				<Grid item container xs={3} lg={2} justify="left" direction="column">
 					<h3>Menu goes here</h3>
+					<FormLabel component="legend">Subscription</FormLabel>
+					<Typography variant="overline">Subscription</Typography>
+					<Divider />
+					<FormControlLabel
+						control={<Checkbox checked={true} name="test" color="primary" />}
+						label="Free"
+					/>
 				</Grid>
-				<Grid item xs={9} container spacing={5}>
+				<Grid item xs={9} lg={10} container spacing={5}>
 					<Grid item xs={12}>menu stuff</Grid>
 					{
 						projects.map(x =>(
