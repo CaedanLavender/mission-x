@@ -10,11 +10,75 @@ import { Checkbox } from '@material-ui/core';
 import FormLabel from '@material-ui/core/FormLabel';
 import Button from '@material-ui/core/Button';
 import { ButtonGroup } from '@material-ui/core';
+import Box from '@material-ui/core/Box';
 
 
 export default function ProjectView() {
 
 	const projects = [
+		{
+			name: "Introduction",
+			subscription: "Free",
+			image: require("./assets/Projects-Page/Project-01.png").default,
+			activityType: "Animation",
+			yearLevel: "1-4",
+			level: "Beginner",
+			subjectMatter: "Computer Science",
+		},
+		{
+			name: "My Birthday",
+			subscription: "Free",
+			image: require("./assets/Projects-Page/Project-02.png").default,
+			activityType: "Animation",
+			yearLevel: "1-4",
+			level: "Beginner",
+			subjectMatter: "Computer Science",
+		},
+		{
+			name: "10 Block Challenge",
+			subscription: "Free",
+			image: require("./assets/Projects-Page/Project-03.png").default,
+			activityType: "Animation",
+			yearLevel: "1-4",
+			level: "Beginner",
+			subjectMatter: "Computer Science",
+		},
+		{
+			name: "Build a band",
+			subscription: "Free",
+			image: require("./assets/Projects-Page/Project-04.png").default,
+			activityType: "Animation",
+			yearLevel: "1-4",
+			level: "Beginner",
+			subjectMatter: "Computer Science",
+		},
+		{
+			name: "The bear and the monkey",
+			subscription: "Free",
+			image: require("./assets/Projects-Page/Project-05.png").default,
+			activityType: "Animation",
+			yearLevel: "1-4",
+			level: "Beginner",
+			subjectMatter: "Computer Science",
+		},
+		{
+			name: "Debugging",
+			subscription: "Free",
+			image: require("./assets/Projects-Page/Project-06.png").default,
+			activityType: "Animation",
+			yearLevel: "1-4",
+			level: "Beginner",
+			subjectMatter: "Computer Science",
+		},
+		{
+			name: "Introduction",
+			subscription: "Free",
+			image: require("./assets/Projects-Page/Project-01.png").default,
+			activityType: "Animation",
+			yearLevel: "1-4",
+			level: "Beginner",
+			subjectMatter: "Computer Science",
+		},
 		{
 			name: "Introduction",
 			subscription: "Free",
@@ -95,17 +159,23 @@ export default function ProjectView() {
 	return (
 		<Container maxWidth="xl" style={{ padding: '2em' }}>
 			<Grid container spacing={6}>
+
+				{/* BLANK SPACE */}
 				<Grid item xs={3} xl={2}>
 				</Grid>
-				<Grid item xs={9} xl={10} style={{ textAlign: 'left',}}>
+
+				{/* HEADING CONTAINER */}
+				<Grid item xs={9} xl={10} style={{ textAlign: 'left', }}>
 					<Typography variant="h4">PROJECTS</Typography>
 					<p>Welcome to the project library. You can use the filters on the right to help you search for specific projects.</p>
 				</Grid>
+
+				{/* FILTER CONTAINER */}
 				<Grid item container xs={3} xl={2} justify="left" direction="column">
 					{
 						filters.map(category => (
-							<Grid item container direction="column" style={{marginBottom: '2em'}}>
-								<Typography variant="overline"  align="left">{category.name}</Typography>
+							<Grid item container direction="column" style={{ marginBottom: '2em' }}>
+								<Typography variant="overline" align="left">{category.name}</Typography>
 								<Divider />
 								{
 									category.options.map(option => (
@@ -125,8 +195,12 @@ export default function ProjectView() {
 						))
 					}
 				</Grid>
-				<Grid item xs={9} xl={10} container>
-					<Grid item container direction="row" justify="space-between" alignItems="center" style={{flexShrink: '1'}}>
+
+				{/* PROJECT GRID CONTAINER */}
+				<Grid item xs={9} xl={10}>
+
+					{/* //BUTTON GROUPS */}
+					<Grid item container direction="row" justify="space-between">
 						<Grid item>
 							<ButtonGroup size="small">
 								<Button>Beginner</Button>
@@ -143,21 +217,29 @@ export default function ProjectView() {
 							</ButtonGroup>
 						</Grid>
 					</Grid>
-					{
-						projects.map(project => (
-							<Grid item xs={4} style={{padding: '1.5em'}}>
-								<CardMedia
-									component="img"
-									alt={project.name}
-									image={project.image}
-								/>
-								<Typography variant="h5">{project.name}</Typography>
-								<Typography variant="overline">{project.level} | {project.activityType}</Typography>
-							</Grid>
-						))
-					}
+
+					{/* PROJECT ITEM */}
+					<Grid item container>
+						{/* LOOP THROUGH PROJECTS FROM OBJECT AND CREATE GRID ITEMS */}
+						{
+							projects.map(project => (
+								<Grid item xs={12} sm={6} md={4} style={{ padding: '1.5em' }}>
+									<CardMedia
+										component="img"
+										alt={project.name}
+										image={project.image}
+									/>
+									<Typography variant="h5">{project.name}</Typography>
+									<Typography variant="overline">{project.level} | {project.activityType}</Typography>
+								</Grid>
+							))
+						}
+					</Grid>
+
 				</Grid>
+
 			</Grid>
+
 		</Container>
 	)
 }
