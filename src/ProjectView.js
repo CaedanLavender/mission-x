@@ -51,13 +51,52 @@ export default function ProjectView() {
 		}
 	];
 
+	const filters = [
+		{
+			name: "Subscription",
+			options: [
+				"Free",
+				"Premium"
+			]
+		},
+		{
+			name: "Activity Type",
+			options: [
+				"Animation",
+				"Game",
+				"Chatbot",
+				"Augmented Reality",
+			]
+		},
+		{
+			name: "Year Level",
+			options: [
+				"1-4",
+				"5-6",
+				"7-8",
+				"9-13"
+			]
+		},
+		{
+			name: "Subject Matter",
+			options: [
+				"Computer Science",
+				"Maths",
+				"Science",
+				"Language",
+				"Art",
+				"Music"
+			]
+		}
+	]
+
 	return (
-		<Container maxWidth="xl" style={{backgroundColor: 'yellow', padding: '1em'}}>
-			<Grid container spacing={2} style={{backgroundColor: 'orange'}}>
-				<Grid item xs={3} lg={2} style={{backgroundColor: 'red'}}>
+		<Container maxWidth="xl" style={{ backgroundColor: 'yellow', padding: '1em' }}>
+			<Grid container spacing={2} style={{ backgroundColor: 'orange' }}>
+				<Grid item xs={3} lg={2} style={{ backgroundColor: 'red' }}>
 					<h1>NULL</h1>
 				</Grid>
-				<Grid item xs={9} lg={10} style={{textAlign: 'left', backgroundColor: 'blue'}}>
+				<Grid item xs={9} lg={10} style={{ textAlign: 'left', backgroundColor: 'blue' }}>
 					<Typography variant="h4">PROJECTS</Typography>
 					<p>Welcome to the project library. You can use the filters on the right to help you search for specific projects.</p>
 				</Grid>
@@ -70,20 +109,41 @@ export default function ProjectView() {
 						control={<Checkbox checked={true} name="test" color="primary" />}
 						label="Free"
 					/>
+					{
+						filters.map(category => (
+							<>
+								<FormLabel component="legend">{category.name}</FormLabel>
+								<Divider />
+								{
+									category.options.map(option => (
+										<FormControlLabel
+											control={
+												<Checkbox
+													checked={true}
+													name="test"
+													color="primary"
+												/>
+											}
+											label={option}
+										/>
+									))
+								}
+							</>
+						))
+					}
 				</Grid>
 				<Grid item xs={9} lg={10} container spacing={5}>
 					<Grid item xs={12}>menu stuff</Grid>
 					{
-						projects.map(x =>(
+						projects.map(project => (
 							<Grid item xs={4}>
-									<CardMedia
-										component="img"
-										// height="140"
-										alt={x.name}
-										image={x.image}
-									/>
-								<Typography variant="h5">{x.name}</Typography>
-								<Typography variant="overline">{x.level} | {x.activityType}</Typography>
+								<CardMedia
+									component="img"
+									alt={project.name}
+									image={project.image}
+								/>
+								<Typography variant="h5">{project.name}</Typography>
+								<Typography variant="overline">{project.level} | {project.activityType}</Typography>
 							</Grid>
 						))
 					}
