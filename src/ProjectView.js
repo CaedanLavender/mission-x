@@ -1,13 +1,15 @@
-import { Container } from "@material-ui/core";
-import { Typography } from "@material-ui/core"
-import { Grid } from "@material-ui/core";
-import { Paper } from "@material-ui/core";
-import { Card } from "@material-ui/core"
-import { CardMedia } from "@material-ui/core";
-import { Divider } from "@material-ui/core";
-import { FormControlLabel } from "@material-ui/core"
-import { Checkbox } from "@material-ui/core"
-import FormLabel from '@material-ui/core/FormLabel'
+import { Container } from '@material-ui/core';
+import { Typography } from '@material-ui/core'
+import { Grid } from '@material-ui/core';
+import { Paper } from '@material-ui/core';
+import { Card } from '@material-ui/core'
+import { CardMedia } from '@material-ui/core';
+import { Divider } from '@material-ui/core';
+import { FormControlLabel } from '@material-ui/core'
+import { Checkbox } from '@material-ui/core';
+import FormLabel from '@material-ui/core/FormLabel';
+import Button from '@material-ui/core/Button';
+import { ButtonGroup } from '@material-ui/core';
 
 
 export default function ProjectView() {
@@ -91,28 +93,19 @@ export default function ProjectView() {
 	]
 
 	return (
-		<Container maxWidth="xl" style={{ backgroundColor: 'yellow', padding: '1em' }}>
-			<Grid container spacing={2} style={{ backgroundColor: 'orange' }}>
-				<Grid item xs={3} lg={2} style={{ backgroundColor: 'red' }}>
-					<h1>NULL</h1>
+		<Container maxWidth="xl" style={{ padding: '2em' }}>
+			<Grid container spacing={6}>
+				<Grid item xs={3} xl={2}>
 				</Grid>
-				<Grid item xs={9} lg={10} style={{ textAlign: 'left', backgroundColor: 'blue' }}>
+				<Grid item xs={9} xl={10} style={{ textAlign: 'left',}}>
 					<Typography variant="h4">PROJECTS</Typography>
 					<p>Welcome to the project library. You can use the filters on the right to help you search for specific projects.</p>
 				</Grid>
-				<Grid item container xs={3} lg={2} justify="left" direction="column">
-					<h3>Menu goes here</h3>
-					<FormLabel component="legend">Subscription</FormLabel>
-					<Typography variant="overline">Subscription</Typography>
-					<Divider />
-					<FormControlLabel
-						control={<Checkbox checked={true} name="test" color="primary" />}
-						label="Free"
-					/>
+				<Grid item container xs={3} xl={2} justify="left" direction="column">
 					{
 						filters.map(category => (
-							<>
-								<FormLabel component="legend">{category.name}</FormLabel>
+							<Grid item container direction="column" style={{marginBottom: '2em'}}>
+								<Typography variant="overline"  align="left">{category.name}</Typography>
 								<Divider />
 								{
 									category.options.map(option => (
@@ -128,15 +121,31 @@ export default function ProjectView() {
 										/>
 									))
 								}
-							</>
+							</Grid>
 						))
 					}
 				</Grid>
-				<Grid item xs={9} lg={10} container spacing={5}>
-					<Grid item xs={12}>menu stuff</Grid>
+				<Grid item xs={9} xl={10} container>
+					<Grid item container direction="row" justify="space-between" alignItems="center" style={{flexShrink: '1'}}>
+						<Grid item>
+							<ButtonGroup size="small">
+								<Button>Beginner</Button>
+								<Button>Intermediate</Button>
+								<Button>Advanced</Button>
+							</ButtonGroup>
+						</Grid>
+						<Grid item>
+							<ButtonGroup size="small">
+								<Typography variant="overline">Show</Typography>
+								<Button>25</Button>
+								<Button>50</Button>
+								<Button>100</Button>
+							</ButtonGroup>
+						</Grid>
+					</Grid>
 					{
 						projects.map(project => (
-							<Grid item xs={4}>
+							<Grid item xs={4} style={{padding: '1.5em'}}>
 								<CardMedia
 									component="img"
 									alt={project.name}
