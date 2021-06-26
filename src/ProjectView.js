@@ -15,15 +15,11 @@ import { ToggleButtonGroup } from '@material-ui/lab';
 import { ToggleButton } from '@material-ui/lab'
 
 export default function ProjectView() {
-	const [subscriptionFilter, setSubscriptionFilter] = useState({
-		free: true,
-		premium: true
-	});
 	const [filteredProjects, setFilteredProjects] = useState([]);
-	const [filterArray, setFilterArray] = useState([]);
-	const [activityTypeFilter, setActivityTypeFilter] = useState({});
-	const [yearLevelFilter, setYearLevelFilter] = useState({});
-	const [subjectMatterFilter, setSubjectMatterFilter] = useState({});
+	const [subscriptionFilter, setSubscriptionFilter] = useState([]);
+	const [activityTypeFilter, setActivityTypeFilter] = useState([]);
+	const [yearLevelFilter, setYearLevelFilter] = useState([]);
+	const [subjectMatterFilter, setSubjectMatterFilter] = useState([]);
 	const [showFilter, setShowFilter] = useState('25');
 	const [levelFilter, setLevelFilter] = useState('');
 
@@ -36,6 +32,14 @@ export default function ProjectView() {
 		setLevelFilter(newLevelFilter);
 	}
 
+	const handleSubscriptionFilter = (event) => {
+		let newFilter = event.target.value;
+		if (subscriptionFilter.includes(newFilter)) {
+			setSubscriptionFilter(subscriptionFilter.filter(filter => filter !== newFilter))
+		} else {
+			setSubscriptionFilter([...subscriptionFilter,newFilter])
+		}
+	}
 
 	const projects = [
 		{
@@ -194,6 +198,18 @@ export default function ProjectView() {
 
 				{/* FILTER CONTAINER */}
 				<Grid item container xs={3} xl={2} justify="left" direction="column">
+					<Grid item container direction="column" style={{ marginBottom: '2em' }}>
+						<Typography variant="overline" align="left">Subscription ({subscriptionFilter})</Typography>
+						<Divider />
+						<FormControlLabel
+							control={<Checkbox checked={subscriptionFilter.includes("free")} onChange={handleSubscriptionFilter} name="free" value="free" color="primary"/>}
+							label={"Free"}
+						/>
+						<FormControlLabel
+							control={<Checkbox checked={subscriptionFilter.includes("premium")} onChange={handleSubscriptionFilter} name="premium" value="premium" color="primary"/>}
+							label={"Premium"}
+						/>
+					</Grid>
 					{
 						filters.map(category => (
 							<Grid item container direction="column" style={{ marginBottom: '2em' }}>
@@ -224,6 +240,7 @@ export default function ProjectView() {
 					{/* //BUTTON GROUPS */}
 					<Grid item container direction="row" justify="space-between">
 						<Grid item>
+							{/* Toggle Group for level filter */}
 							<ToggleButtonGroup
 								size="small"
 								value={levelFilter}
@@ -240,13 +257,9 @@ export default function ProjectView() {
 									Advanced
 								</ToggleButton>
 							</ToggleButtonGroup>
-							{/* <ButtonGroup size="small">
-								<Button>Beginner</Button>
-								<Button>Intermediate</Button>
-								<Button>Advanced</Button>
-							</ButtonGroup> */}
 						</Grid>
 						<Grid item>
+							{/* Toggle Group for amount of projects to show */}
 							<Typography variant="overline" style={{marginRight: '1em'}}>Show</Typography>
 							<ToggleButtonGroup
 								size="small"
@@ -264,11 +277,6 @@ export default function ProjectView() {
 									100
 								</ToggleButton>
 							</ToggleButtonGroup>
-							{/* <ButtonGroup size="small">
-								<Button variant="contained" color="primary">25</Button>
-								<Button>50</Button>
-								<Button>100</Button>
-							</ButtonGroup> */}
 						</Grid>
 					</Grid>
 
