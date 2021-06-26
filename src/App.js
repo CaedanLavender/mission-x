@@ -21,11 +21,13 @@ function App() {
 					<Toolbar>
 						<Link to="/projectview">Go to ProjectView</Link>
 						<Link to="/">Go to Home</Link>
+						{/* Add more links here by following the format above */}
 					</Toolbar>
 				</AppBar>
 				<Switch>
 					<Route path="/" exact render={() => <div>Home</div>} />
 					<Route path="/projectview" component={ProjectView} />
+					{/* Add your page to the route by following the example above. */}
 				</Switch>
 			</Router>
 			{/* Route stuff needs to go here so that each of our components will render based on url ending with /whatever */}
