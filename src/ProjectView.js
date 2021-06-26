@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Container } from '@material-ui/core';
 import { Typography } from '@material-ui/core'
 import { Grid } from '@material-ui/core';
@@ -6,14 +7,35 @@ import { Card } from '@material-ui/core'
 import { CardMedia } from '@material-ui/core';
 import { Divider } from '@material-ui/core';
 import { FormControlLabel } from '@material-ui/core'
-import { Checkbox } from '@material-ui/core';
 import FormLabel from '@material-ui/core/FormLabel';
+import { Checkbox } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import { ButtonGroup } from '@material-ui/core';
-import Box from '@material-ui/core/Box';
-
+import { ToggleButtonGroup } from '@material-ui/lab';
+import { ToggleButton } from '@material-ui/lab'
 
 export default function ProjectView() {
+	const [subscriptionFilter, setSubscriptionFilter] = useState({
+		free: true,
+		premium: true
+	});
+	const [filteredProjects, setFilteredProjects] = useState([]);
+	const [filterArray, setFilterArray] = useState([]);
+	const [activityTypeFilter, setActivityTypeFilter] = useState({});
+	const [yearLevelFilter, setYearLevelFilter] = useState({});
+	const [subjectMatterFilter, setSubjectMatterFilter] = useState({});
+	const [showFilter, setShowFilter] = useState('25');
+	const [levelFilter, setLevelFilter] = useState('');
+
+	const handleShowFilter = (event, newShowFilter) => {
+		console.log(newShowFilter)
+		setShowFilter(newShowFilter || showFilter);
+	}
+
+	const handleLevelFilter = (event, newLevelFilter) => {
+		setLevelFilter(newLevelFilter);
+	}
+
 
 	const projects = [
 		{
@@ -202,19 +224,51 @@ export default function ProjectView() {
 					{/* //BUTTON GROUPS */}
 					<Grid item container direction="row" justify="space-between">
 						<Grid item>
-							<ButtonGroup size="small">
+							<ToggleButtonGroup
+								size="small"
+								value={levelFilter}
+								exclusive
+								onChange={handleLevelFilter}
+							>
+								<ToggleButton value="Beginner">
+									Beginner
+								</ToggleButton>
+								<ToggleButton value="Intermediate">
+									Intermediate
+								</ToggleButton>
+								<ToggleButton value="Advanced">
+									Advanced
+								</ToggleButton>
+							</ToggleButtonGroup>
+							{/* <ButtonGroup size="small">
 								<Button>Beginner</Button>
 								<Button>Intermediate</Button>
 								<Button>Advanced</Button>
-							</ButtonGroup>
+							</ButtonGroup> */}
 						</Grid>
 						<Grid item>
-							<ButtonGroup size="small">
-								<Typography variant="overline">Show</Typography>
-								<Button>25</Button>
+							<Typography variant="overline" style={{marginRight: '1em'}}>Show</Typography>
+							<ToggleButtonGroup
+								size="small"
+								value={showFilter}
+								exclusive
+								onChange={handleShowFilter}
+							>
+								<ToggleButton value="25">
+									25
+								</ToggleButton>
+								<ToggleButton value="50">
+									50
+								</ToggleButton>
+								<ToggleButton value="100">
+									100
+								</ToggleButton>
+							</ToggleButtonGroup>
+							{/* <ButtonGroup size="small">
+								<Button variant="contained" color="primary">25</Button>
 								<Button>50</Button>
 								<Button>100</Button>
-							</ButtonGroup>
+							</ButtonGroup> */}
 						</Grid>
 					</Grid>
 
