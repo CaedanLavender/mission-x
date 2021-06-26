@@ -1,0 +1,44 @@
+/* Avatar section component */
+.avatarBlock {
+  display: inline-block;
+  width: 250px;
+  border: solid 2px lightgrey;
+  border-radius: 20px;
+  padding-top: 70px;
+  padding-bottom: 80px;
+  margin: 20px;
+  background-color: white;
+  vertical-align: top;
+}
+
+.button {
+  cursor: pointer;
+  font-size: 8pt;
+  font-weight: bold;
+  border: 2px solid rgb(81, 197, 243);
+  background-color: white;
+  color: rgb(81, 197, 243);
+  border-radius: 5px;
+  box-shadow: 0px 2px 2px #c7c5c5;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  margin: 10px;
+  width: 120px;
+}
+
+.avatar {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 30px;
+}
+
+@media screen and (max-width: 768px) {
+  .avatarBlock {
+    width: 90%;
+    margin: 0;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    padding-top: 20px;
+    padding-bottom: 30px;
+  }
+}
