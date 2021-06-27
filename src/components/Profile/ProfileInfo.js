@@ -39,7 +39,9 @@ export default function ProfileInfo() {
         </div>
       </div>
       <div className="backButtonMain">
-        <button className="backButton">BACK TO PROJECTS</button>
+        <a href="/ProjectView/">
+          <button className="backButton">BACK TO PROJECTS</button>
+        </a>
       </div>
     </div>
   );

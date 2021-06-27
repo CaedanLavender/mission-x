@@ -1,19 +1,14 @@
 import React from "react";
 import "./ProfileAvatar.css";
 import { Avatar } from "@material-ui/core";
+import userPic from "./userPic.png";
 
 export default function ProfileAvatar() {
   return (
     <div className="avatarBlock">
       <div className="avatar">
-        {/* <img
-          src="https://material-ui.com/static/images/avatar/1.jpg"
-          alt="Girl in a jacket"
-          width="100"
-          height="100"
-        /> */}
         <Avatar
-          src="https://material-ui.com/static/images/avatar/1.jpg"
+          src={userPic}
           style={{
             width: "100px",
             height: "100px",

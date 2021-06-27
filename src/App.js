@@ -2,6 +2,7 @@ import "./App.css";
 // Component imports
 import NavigationBar from "./components/NavigationBar";
 import ProjectView from "./ProjectView";
+import Profile from "./components/Profile/Profile";
 
 // React Router import
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
@@ -14,14 +15,16 @@ function App() {
         {/* Bellow is the navigation bar, it's just a material UI appbar for now, there are some dummy buttons in there to make sure Route works. This will need styled of course to match the design on the Adobe XD document */}
         <AppBar position="static">
           <Toolbar>
-            <Link to="/projectview">Go to ProjectView</Link>
-            <Link to="/">Go to Home</Link>
+            <Link to="/">Home..</Link>
+            <Link to="/projectview">Project View..</Link>
+            <Link to="/components/Profile/Profile">Profile View..</Link>
             {/* Add more links here by following the format above */}
           </Toolbar>
         </AppBar>
         <Switch>
           <Route path="/" exact render={() => <div>Home</div>} />
           <Route path="/projectview" component={ProjectView} />
+          <Route path="/components/Profile/Profile" component={Profile} />
           {/* Add your page to the route by following the example above. */}
         </Switch>
       </Router>

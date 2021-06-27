@@ -47,11 +47,52 @@ td {
   box-shadow: 0px 2px 2px #c7c5c5;
   padding: 5px;
   margin-top: 20px;
+  text-decoration: none;
+}
+
+/*  Change color on hover */
+.backButton:hover {
+  cursor: pointer;
+  font-size: 8pt;
+  font-weight: bold;
+  border: 2px solid rgb(231, 76, 148);
+  background-color: rgb(226, 126, 173);
+  color: white;
+  border-radius: 5px;
+  box-shadow: 0px 2px 2px #c7c5c5;
+  padding: 5px;
+  margin-top: 20px;
+  text-decoration: none;
+}
+
+/*  Change color on hover */
+.backButton:active {
+  cursor: pointer;
+  font-size: 8pt;
+  font-weight: bold;
+  border: 2px solid rgb(231, 76, 148);
+  background-color: rgb(187, 3, 89);
+  color: white;
+  border-radius: 5px;
+  box-shadow: 0px 2px 2px #c7c5c5;
+  padding: 5px;
+  margin-top: 20px;
+  text-decoration: none;
 }
 
 .backButtonMain {
   text-align: end;
 }
+
+/* ---- */
+@media screen and (max-width: 896px) {
+  .mainSection {
+    width: 90%;
+    margin: 0;
+    padding: 0;
+  }
+}
+/* ----- */
 
 @media screen and (max-width: 768px) {
   .mainSection {
