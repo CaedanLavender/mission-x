@@ -1,6 +1,6 @@
 
 export default function NavigationBar() {
-    return (
-
-    )
+	return (
+		<div>Hello Caedan</div>
+	)
 }
