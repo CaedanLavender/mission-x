@@ -1,5 +1,5 @@
 // LIBRARY IMPORTS
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Container } from '@material-ui/core';
 import { Typography } from '@material-ui/core'
 import { Grid } from '@material-ui/core';
@@ -22,6 +22,7 @@ import Filter from './components/projectView/Filter';
 import ProjectItem from './components/projectView/ProjectItem';
 
 export default function ProjectView() {
+	const [filteredProjects, setFilteredProjects] = useState([]);
 	const [subscriptionFilter, setSubscriptionFilter] = useState([]);
 	const [activityTypeFilter, setActivityTypeFilter] = useState([]);
 	const [yearLevelFilter, setYearLevelFilter] = useState([]);
@@ -46,7 +47,7 @@ export default function ProjectView() {
 		if (subscriptionFilter.includes(newFilter)) {
 			setSubscriptionFilter(subscriptionFilter.filter(filter => filter !== newFilter))
 		} else {
-			setSubscriptionFilter([...subscriptionFilter,newFilter])
+			setSubscriptionFilter([...subscriptionFilter, newFilter])
 		}
 	}
 
@@ -55,7 +56,7 @@ export default function ProjectView() {
 		if (activityTypeFilter.includes(newFilter)) {
 			setActivityTypeFilter(activityTypeFilter.filter(filter => filter !== newFilter))
 		} else {
-			setActivityTypeFilter([...activityTypeFilter,newFilter])
+			setActivityTypeFilter([...activityTypeFilter, newFilter])
 		}
 	}
 
@@ -64,7 +65,7 @@ export default function ProjectView() {
 		if (yearLevelFilter.includes(newFilter)) {
 			setYearLevelFilter(yearLevelFilter.filter(filter => filter !== newFilter))
 		} else {
-			setYearLevelFilter([...yearLevelFilter,newFilter])
+			setYearLevelFilter([...yearLevelFilter, newFilter])
 		}
 	}
 
@@ -73,8 +74,27 @@ export default function ProjectView() {
 		if (subjectMatterFilter.includes(newFilter)) {
 			setSubjectMatterFilter(subjectMatterFilter.filter(filter => filter !== newFilter))
 		} else {
-			setSubjectMatterFilter([...subjectMatterFilter,newFilter])
+			setSubjectMatterFilter([...subjectMatterFilter, newFilter])
 		}
+	}
+
+	// This sets the filtered projects array every time a filter changes. This is because the show-per-page value will determine which page each project should be shown on, but this of course changes every time a filter changes the number of projects visible
+	useEffect(() => {
+		handleFilteredProjects()
+	},[subscriptionFilter, activityTypeFilter, yearLevelFilter, subjectMatterFilter, levelFilter, showFilter]);
+
+	const handleFilteredProjects = () => {
+		setFilteredProjects(
+			projects.filter(project => {
+				if (subscriptionFilter.length && !subscriptionFilter.includes(project.subscription)) return false
+				if (activityTypeFilter.length && !activityTypeFilter.includes(project.activityType)) return false
+				if (yearLevelFilter.length && !yearLevelFilter.includes(project.yearLevel)) return false
+				if (subjectMatterFilter.length && !subjectMatterFilter.includes(project.subjectMatter)) return false
+				if (levelFilter && levelFilter !== !project.level) return false;
+				return project
+			}
+			)
+		)
 	}
 
 	// OBJECTS
@@ -181,10 +201,10 @@ export default function ProjectView() {
 	];
 
 	const filters = {
-		subscription: ['Free','Premium'],
-		activityType: ['Animation','Game','Chatbot','Augmented Reality'],
-		yearLevel: ['1-4','5-6','7-8','9-13'],
-		subjectMatter: ['Computer Science','Maths','Science','Language','Art','Music']
+		subscription: ['Free', 'Premium'],
+		activityType: ['Animation', 'Game', 'Chatbot', 'Augmented Reality'],
+		yearLevel: ['1-4', '5-6', '7-8', '9-13'],
+		subjectMatter: ['Computer Science', 'Maths', 'Science', 'Language', 'Art', 'Music']
 	}
 
 	// THEME
@@ -237,6 +257,8 @@ export default function ProjectView() {
 					{/* HEADING CONTAINER */}
 					<Grid item xs={9} xl={10} style={{ textAlign: 'left', }}>
 						<Typography variant="h4">PROJECTS</Typography>
+						<Button variant="contained" onClick={handleFilteredProjects}>Tester</Button>
+						<Button variant="contained" onClick={()=>console.log(filteredProjects)}>Console</Button>
 						<Typography variant="subtitle2">Welcome to the project library. You can use the filters on the right to help you search for specific projects.</Typography>
 					</Grid>
 
@@ -248,14 +270,14 @@ export default function ProjectView() {
 							filterState={subscriptionFilter}
 							filterArray={filters.subscription}
 							filterHandler={handleSubscriptionFilter}
-							/>		
+						/>
 						<Filter
 							filters={filters}
 							filterTitle="Activity Type"
 							filterState={activityTypeFilter}
 							filterArray={filters.activityType}
 							filterHandler={handleActivityTypeFilter}
-							/>
+						/>
 
 						<Filter
 							filters={filters}
@@ -263,7 +285,7 @@ export default function ProjectView() {
 							filterState={yearLevelFilter}
 							filterArray={filters.yearLevel}
 							filterHandler={handleYearLevelFilter}
-							/>
+						/>
 
 						<Filter
 							filters={filters}
@@ -280,7 +302,7 @@ export default function ProjectView() {
 
 						{/* //BUTTON GROUPS */}
 						<Grid item container direction="row" justify="space-between">
-							
+
 							{/* Toggle Group for level filter */}
 							<Grid item>
 								<ToggleButtonGroup
@@ -294,10 +316,10 @@ export default function ProjectView() {
 									<ToggleButton value="Advanced">Advanced</ToggleButton>
 								</ToggleButtonGroup>
 							</Grid>
-							
+
 							{/* Toggle Group for amount of projects to show */}
 							<Grid item>
-								<Typography variant="overline" style={{marginRight: '1em'}}>Show</Typography>
+								<Typography variant="overline" style={{ marginRight: '1em' }}>Show</Typography>
 								<ToggleButtonGroup
 									size="small"
 									value={showFilter}
@@ -309,14 +331,14 @@ export default function ProjectView() {
 									<ToggleButton value="100">100</ToggleButton>
 								</ToggleButtonGroup>
 							</Grid>
-						
+
 						</Grid>
 
 						{/* PROJECT ITEM */}
 						<Grid item container>
 							{/* LOOP THROUGH PROJECTS FROM OBJECT AND CREATE GRID ITEMS */}
 							{
-								projects.map(project => (
+								filteredProjects.map(project => (
 									<ProjectItem
 										project={project}
 										subscriptionFilter={subscriptionFilter}
