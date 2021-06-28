@@ -7,13 +7,14 @@ import { Checkbox } from '@material-ui/core';
 
 const Filter = (props) => {
 	return (
-	<Grid item container direction="column" style={{ marginBottom: '2em' }}>
+	<Grid item container direction="column" style={{ marginBottom: '2em' }} key={props.filterTitle}>
 	{/* --ACTIVITY TYPE FILTER */}
-	<Typography variant="overline" align="left">Activity Type({props.filterState})</Typography>
+	<Typography variant="overline" align="left">{props.filterTitle}({props.filterState})</Typography>
 	<Divider />
 	{
 		props.filterArray.map(option =>(
 			<FormControlLabel
+			key={option}
 			control={<Checkbox checked={props.filterState.includes(option)} onChange={props.filterHandler} name={option} value={option} color="primary"/>}
 			label={option}
 			/>
