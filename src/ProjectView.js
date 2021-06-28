@@ -12,7 +12,9 @@ import { Checkbox } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import { ButtonGroup } from '@material-ui/core';
 import { ToggleButtonGroup } from '@material-ui/lab';
-import { ToggleButton } from '@material-ui/lab'
+import { ToggleButton } from '@material-ui/lab';
+
+import Filter from './components/projectView/Filter';
 
 export default function ProjectView() {
 	const [filteredProjects, setFilteredProjects] = useState([]);
@@ -193,75 +195,36 @@ export default function ProjectView() {
 
 				{/* FILTER CONTAINER */}
 				<Grid item container xs={3} xl={2} justify="left" direction="column">
-					<Grid item container direction="column" style={{ marginBottom: '2em' }}>
+					<Filter
+						filters={filters}
+						filterState={subscriptionFilter}
+						filterArray={filters.subscription}
+						filterHandler={handleSubscriptionFilter}
+					/>
+					
+					<Filter
+						filters={filters}
+						filterState={activityTypeFilter}
+						filterArray={filters.activityType}
+						filterHandler={handleActivityTypeFilter}
+					/>
 
-						{/* --SUBSCRIPTION FILTER */}
-						<Typography variant="overline" align="left">Subscription ({subscriptionFilter})</Typography>
-						<Divider />
-						{filters.subscription.map(option =>(
-							<FormControlLabel
-									control={<Checkbox checked={subscriptionFilter.includes(option)} onChange={handleSubscriptionFilter} name={option} value={option} color="primary"/>}
-									label={option}
-								/>
-							))}
-					</Grid>
+					<Filter
+						filters={filters}
+						filterState={yearLevelFilter}
+						filterArray={filters.yearLevel}
+						filterHandler={handleYearLevelFilter}
+						/>
 
-					<Grid item container direction="column" style={{ marginBottom: '2em' }}>
-						{/* --ACTIVITY TYPE FILTER */}
-						<Typography variant="overline" align="left">Activity Type({activityTypeFilter})</Typography>
-						<Divider />
-						{filters.activityType.map(option =>(
-							<FormControlLabel
-							control={<Checkbox checked={activityTypeFilter.includes(option)} onChange={handleActivityTypeFilter} name={option} value={option} color="primary"/>}
-							label={option}
-							/>
-							))}
-					</Grid>
+					<Filter
+						filters={filters}
+						filterState={subjectMatterFilter}
+						filterArray={filters.subjectMatter}
+						filterHandler={handleSubjectMatterFilter}
+					/>
 
-					<Grid item container direction="column" style={{ marginBottom: '2em' }}>
-						{/* --YEAR LEVEL FILTER */}
-						<Typography variant="overline" align="left">Year Level ({yearLevelFilter})</Typography>
-						<Divider />
-						{filters.yearLevel.map(option =>(
-							<FormControlLabel
-							control={<Checkbox checked={yearLevelFilter.includes(option)} onChange={handleYearLevelFilter} name={option} value={option} color="primary"/>}
-							label={option}
-							/>
-							))}
-					</Grid>
-					<Grid item container direction="column" style={{ marginBottom: '2em' }}>
-						{/* --SUBJECT MATTER FILTER */}
-						<Typography variant="overline" align="left">Subject Matter ({subjectMatterFilter})</Typography>
-						<Divider />
-						{filters.subjectMatter.map(option =>(
-								<FormControlLabel
-									control={<Checkbox checked={subjectMatterFilter.includes(option)} onChange={handleSubjectMatterFilter} name={option} value={option} color="primary"/>}
-									label={option}
-								/>
-							))}
-					</Grid>
-					{/* {
-						filtersx.map(category => (
-							<Grid item container direction="column" style={{ marginBottom: '2em' }}>
-								<Typography variant="overline" align="left">{category.name}</Typography>
-								<Divider />
-								{
-									category.options.map(option => (
-										<FormControlLabel
-											control={
-												<Checkbox
-													checked={true}
-													name="test"
-													color="primary"
-												/>
-											}
-											label={option}
-										/>
-									))
-								}
-							</Grid>
-						))
-					} */}
+
+
 				</Grid>
 
 				{/* PROJECT GRID CONTAINER */}
