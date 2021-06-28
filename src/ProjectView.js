@@ -41,6 +41,33 @@ export default function ProjectView() {
 		}
 	}
 
+	const handleActivityTypeFilter = (event) => {
+		let newFilter = event.target.value;
+		if (activityTypeFilter.includes(newFilter)) {
+			setActivityTypeFilter(activityTypeFilter.filter(filter => filter !== newFilter))
+		} else {
+			setActivityTypeFilter([...activityTypeFilter,newFilter])
+		}
+	}
+
+	const handleYearLevelFilter = (event) => {
+		let newFilter = event.target.value;
+		if (yearLevelFilter.includes(newFilter)) {
+			setYearLevelFilter(yearLevelFilter.filter(filter => filter !== newFilter))
+		} else {
+			setYearLevelFilter([...yearLevelFilter,newFilter])
+		}
+	}
+
+	const handleSubjectMatterFilter = (event) => {
+		let newFilter = event.target.value;
+		if (subjectMatterFilter.includes(newFilter)) {
+			setSubjectMatterFilter(subjectMatterFilter.filter(filter => filter !== newFilter))
+		} else {
+			setSubjectMatterFilter([...subjectMatterFilter,newFilter])
+		}
+	}
+
 	const projects = [
 		{
 			name: "Introduction",
@@ -143,44 +170,12 @@ export default function ProjectView() {
 		}
 	];
 
-	const filters = [
-		{
-			name: "Subscription",
-			options: [
-				"Free",
-				"Premium"
-			]
-		},
-		{
-			name: "Activity Type",
-			options: [
-				"Animation",
-				"Game",
-				"Chatbot",
-				"Augmented Reality",
-			]
-		},
-		{
-			name: "Year Level",
-			options: [
-				"1-4",
-				"5-6",
-				"7-8",
-				"9-13"
-			]
-		},
-		{
-			name: "Subject Matter",
-			options: [
-				"Computer Science",
-				"Maths",
-				"Science",
-				"Language",
-				"Art",
-				"Music"
-			]
-		}
-	]
+	const filters = {
+		subscription: ['Free','Premium'],
+		activityType: ['Animation','Game','Chatbot','Augmented Reality'],
+		yearLevel: ['1-4','5-6','7-8','9-13'],
+		subjectMatter: ['Computer Science','Maths','Science','Language','Art','Music']
+	}
 
 	return (
 		<Container maxWidth="xl" style={{ padding: '2em' }}>
@@ -199,19 +194,54 @@ export default function ProjectView() {
 				{/* FILTER CONTAINER */}
 				<Grid item container xs={3} xl={2} justify="left" direction="column">
 					<Grid item container direction="column" style={{ marginBottom: '2em' }}>
+
+						{/* --SUBSCRIPTION FILTER */}
 						<Typography variant="overline" align="left">Subscription ({subscriptionFilter})</Typography>
 						<Divider />
-						<FormControlLabel
-							control={<Checkbox checked={subscriptionFilter.includes("free")} onChange={handleSubscriptionFilter} name="free" value="free" color="primary"/>}
-							label={"Free"}
-						/>
-						<FormControlLabel
-							control={<Checkbox checked={subscriptionFilter.includes("premium")} onChange={handleSubscriptionFilter} name="premium" value="premium" color="primary"/>}
-							label={"Premium"}
-						/>
+						{filters.subscription.map(option =>(
+							<FormControlLabel
+									control={<Checkbox checked={subscriptionFilter.includes(option)} onChange={handleSubscriptionFilter} name={option} value={option} color="primary"/>}
+									label={option}
+								/>
+							))}
 					</Grid>
-					{
-						filters.map(category => (
+
+					<Grid item container direction="column" style={{ marginBottom: '2em' }}>
+						{/* --ACTIVITY TYPE FILTER */}
+						<Typography variant="overline" align="left">Activity Type({activityTypeFilter})</Typography>
+						<Divider />
+						{filters.activityType.map(option =>(
+							<FormControlLabel
+							control={<Checkbox checked={activityTypeFilter.includes(option)} onChange={handleActivityTypeFilter} name={option} value={option} color="primary"/>}
+							label={option}
+							/>
+							))}
+					</Grid>
+
+					<Grid item container direction="column" style={{ marginBottom: '2em' }}>
+						{/* --YEAR LEVEL FILTER */}
+						<Typography variant="overline" align="left">Year Level ({yearLevelFilter})</Typography>
+						<Divider />
+						{filters.yearLevel.map(option =>(
+							<FormControlLabel
+							control={<Checkbox checked={yearLevelFilter.includes(option)} onChange={handleYearLevelFilter} name={option} value={option} color="primary"/>}
+							label={option}
+							/>
+							))}
+					</Grid>
+					<Grid item container direction="column" style={{ marginBottom: '2em' }}>
+						{/* --SUBJECT MATTER FILTER */}
+						<Typography variant="overline" align="left">Subject Matter ({subjectMatterFilter})</Typography>
+						<Divider />
+						{filters.subjectMatter.map(option =>(
+								<FormControlLabel
+									control={<Checkbox checked={subjectMatterFilter.includes(option)} onChange={handleSubjectMatterFilter} name={option} value={option} color="primary"/>}
+									label={option}
+								/>
+							))}
+					</Grid>
+					{/* {
+						filtersx.map(category => (
 							<Grid item container direction="column" style={{ marginBottom: '2em' }}>
 								<Typography variant="overline" align="left">{category.name}</Typography>
 								<Divider />
@@ -231,7 +261,7 @@ export default function ProjectView() {
 								}
 							</Grid>
 						))
-					}
+					} */}
 				</Grid>
 
 				{/* PROJECT GRID CONTAINER */}
