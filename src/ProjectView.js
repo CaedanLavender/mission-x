@@ -15,6 +15,7 @@ import { ToggleButtonGroup } from '@material-ui/lab';
 import { ToggleButton } from '@material-ui/lab';
 
 import Filter from './components/projectView/Filter';
+import ProjectItem from './components/projectView/ProjectItem';
 
 export default function ProjectView() {
 	const [filteredProjects, setFilteredProjects] = useState([]);
@@ -240,15 +241,9 @@ export default function ProjectView() {
 								exclusive
 								onChange={handleLevelFilter}
 							>
-								<ToggleButton value="Beginner">
-									Beginner
-								</ToggleButton>
-								<ToggleButton value="Intermediate">
-									Intermediate
-								</ToggleButton>
-								<ToggleButton value="Advanced">
-									Advanced
-								</ToggleButton>
+								<ToggleButton value="Beginner">Beginner</ToggleButton>
+								<ToggleButton value="Intermediate">Intermediate</ToggleButton>
+								<ToggleButton value="Advanced">Advanced</ToggleButton>
 							</ToggleButtonGroup>
 						</Grid>
 						<Grid item>
@@ -260,15 +255,9 @@ export default function ProjectView() {
 								exclusive
 								onChange={handleShowFilter}
 							>
-								<ToggleButton value="25">
-									25
-								</ToggleButton>
-								<ToggleButton value="50">
-									50
-								</ToggleButton>
-								<ToggleButton value="100">
-									100
-								</ToggleButton>
+								<ToggleButton value="25">25</ToggleButton>
+								<ToggleButton value="50">50</ToggleButton>
+								<ToggleButton value="100">100</ToggleButton>
 							</ToggleButtonGroup>
 						</Grid>
 					</Grid>
@@ -278,15 +267,7 @@ export default function ProjectView() {
 						{/* LOOP THROUGH PROJECTS FROM OBJECT AND CREATE GRID ITEMS */}
 						{
 							projects.map(project => (
-								<Grid item xs={12} sm={6} md={4} style={{ padding: '1.5em' }}>
-									<CardMedia
-										component="img"
-										alt={project.name}
-										image={project.image}
-									/>
-									<Typography variant="h5">{project.name}</Typography>
-									<Typography variant="overline">{project.level} | {project.activityType}</Typography>
-								</Grid>
+								<ProjectItem project={project}/>
 							))
 						}
 					</Grid>
