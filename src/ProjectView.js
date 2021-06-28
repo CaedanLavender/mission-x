@@ -187,136 +187,153 @@ export default function ProjectView() {
 		subjectMatter: ['Computer Science','Maths','Science','Language','Art','Music']
 	}
 
+	// THEME
+	const themeGrey = "#6c6c6c"
 
 	const theme = createMuiTheme({
 		typography: {
 			fontFamily: "Open Sans",
 			h1: {
 				fontFamily: 'Nunito',
-				fontWeight: 900
+				fontWeight: 900,
 			},
 			h2: {
-				fontFamily: 'Nunito'
+				fontFamily: 'Nunito',
+				color: themeGrey
 			},
 			h3: {
-				fontFamily: 'Nunito'
+				fontFamily: 'Nunito',
+				color: themeGrey
 			},
 			h4: {
 				fontFamily: 'Nunito',
-				fontWeight: 900
+				fontWeight: 900,
+				margin: "0.5em 0",
+				color: themeGrey
 			},
 			h5: {
-				fontFamily: 'Nunito'
+				fontFamily: 'Nunito',
+				fontWeight: 700,
+				color: themeGrey
+			},
+			subtitle2: {
+				color: themeGrey
+			},
+			overline: {
+				color: themeGrey
 			}
 		}
 	})
 
 	return (
 		<ThemeProvider theme={theme}>
-		<Container maxWidth="xl" style={{ padding: '2em' }}>
-			<Grid container spacing={6}>
+			<Container maxWidth="xl" style={{ padding: '2em' }}>
+				<Grid container spacing={6}>
 
-				{/* BLANK SPACE */}
-				<Grid item xs={3} xl={2}>
-				</Grid>
+					{/* BLANK SPACE */}
+					<Grid item xs={3} xl={2}>
+					</Grid>
 
-				{/* HEADING CONTAINER */}
-				<Grid item xs={9} xl={10} style={{ textAlign: 'left', }}>
-					<Typography variant="h4">PROJECTS</Typography>
-					<Typography variant="body1">Welcome to the project library. You can use the filters on the right to help you search for specific projects.</Typography>
-				</Grid>
+					{/* HEADING CONTAINER */}
+					<Grid item xs={9} xl={10} style={{ textAlign: 'left', }}>
+						<Typography variant="h4">PROJECTS</Typography>
+						<Typography variant="subtitle2">Welcome to the project library. You can use the filters on the right to help you search for specific projects.</Typography>
+					</Grid>
 
-				{/* FILTER CONTAINER */}
-				<Grid item container xs={3} xl={2} direction="column">
-					<Filter
-						filters={filters}
-						filterTitle="Subscription"
-						filterState={subscriptionFilter}
-						filterArray={filters.subscription}
-						filterHandler={handleSubscriptionFilter}
-						/>		
-					<Filter
-						filters={filters}
-						filterTitle="Activity Type"
-						filterState={activityTypeFilter}
-						filterArray={filters.activityType}
-						filterHandler={handleActivityTypeFilter}
+					{/* FILTER CONTAINER */}
+					<Grid item container xs={3} xl={2} direction="column">
+						<Filter
+							filters={filters}
+							filterTitle="Subscription"
+							filterState={subscriptionFilter}
+							filterArray={filters.subscription}
+							filterHandler={handleSubscriptionFilter}
+							/>		
+						<Filter
+							filters={filters}
+							filterTitle="Activity Type"
+							filterState={activityTypeFilter}
+							filterArray={filters.activityType}
+							filterHandler={handleActivityTypeFilter}
+							/>
+
+						<Filter
+							filters={filters}
+							filterTitle="Year Level"
+							filterState={yearLevelFilter}
+							filterArray={filters.yearLevel}
+							filterHandler={handleYearLevelFilter}
+							/>
+
+						<Filter
+							filters={filters}
+							filterTitle="Subject Matter"
+							filterState={subjectMatterFilter}
+							filterArray={filters.subjectMatter}
+							filterHandler={handleSubjectMatterFilter}
 						/>
 
-					<Filter
-						filters={filters}
-						filterTitle="Year Level"
-						filterState={yearLevelFilter}
-						filterArray={filters.yearLevel}
-						filterHandler={handleYearLevelFilter}
-						/>
+					</Grid>
 
-					<Filter
-						filters={filters}
-						filterTitle="Subject Matter"
-						filterState={subjectMatterFilter}
-						filterArray={filters.subjectMatter}
-						filterHandler={handleSubjectMatterFilter}
-					/>
+					{/* PROJECT GRID CONTAINER */}
+					<Grid item xs={9} xl={10}>
 
-				</Grid>
-
-				{/* PROJECT GRID CONTAINER */}
-				<Grid item xs={9} xl={10}>
-
-					{/* //BUTTON GROUPS */}
-					<Grid item container direction="row" justify="space-between">
-						<Grid item>
+						{/* //BUTTON GROUPS */}
+						<Grid item container direction="row" justify="space-between">
+							
 							{/* Toggle Group for level filter */}
-							<ToggleButtonGroup
-								size="small"
-								value={levelFilter}
-								exclusive
-								onChange={handleLevelFilter}
-							>
-								<ToggleButton value="Beginner">Beginner</ToggleButton>
-								<ToggleButton value="Intermediate">Intermediate</ToggleButton>
-								<ToggleButton value="Advanced">Advanced</ToggleButton>
-							</ToggleButtonGroup>
-						</Grid>
-						<Grid item>
+							<Grid item>
+								<ToggleButtonGroup
+									size="small"
+									value={levelFilter}
+									exclusive
+									onChange={handleLevelFilter}
+								>
+									<ToggleButton value="Beginner">Beginner</ToggleButton>
+									<ToggleButton value="Intermediate">Intermediate</ToggleButton>
+									<ToggleButton value="Advanced">Advanced</ToggleButton>
+								</ToggleButtonGroup>
+							</Grid>
+							
 							{/* Toggle Group for amount of projects to show */}
-							<Typography variant="overline" style={{marginRight: '1em'}}>Show</Typography>
-							<ToggleButtonGroup
-								size="small"
-								value={showFilter}
-								exclusive
-								onChange={handleShowFilter}
-							>
-								<ToggleButton value="25">25</ToggleButton>
-								<ToggleButton value="50">50</ToggleButton>
-								<ToggleButton value="100">100</ToggleButton>
-							</ToggleButtonGroup>
+							<Grid item>
+								<Typography variant="overline" style={{marginRight: '1em'}}>Show</Typography>
+								<ToggleButtonGroup
+									size="small"
+									value={showFilter}
+									exclusive
+									onChange={handleShowFilter}
+								>
+									<ToggleButton value="25">25</ToggleButton>
+									<ToggleButton value="50">50</ToggleButton>
+									<ToggleButton value="100">100</ToggleButton>
+								</ToggleButtonGroup>
+							</Grid>
+						
 						</Grid>
-					</Grid>
 
-					{/* PROJECT ITEM */}
-					<Grid item container>
-						{/* LOOP THROUGH PROJECTS FROM OBJECT AND CREATE GRID ITEMS */}
-						{
-							projects.map(project => (
-								<ProjectItem
-									project={project}
-									subscriptionFilter={subscriptionFilter}
-									activityTypeFilter={activityTypeFilter}
-									yearLevelFilter={yearLevelFilter}
-									subjectMatterFilter={subjectMatterFilter}
-									levelFilter={levelFilter}
+						{/* PROJECT ITEM */}
+						<Grid item container>
+							{/* LOOP THROUGH PROJECTS FROM OBJECT AND CREATE GRID ITEMS */}
+							{
+								projects.map(project => (
+									<ProjectItem
+										project={project}
+										subscriptionFilter={subscriptionFilter}
+										activityTypeFilter={activityTypeFilter}
+										yearLevelFilter={yearLevelFilter}
+										subjectMatterFilter={subjectMatterFilter}
+										levelFilter={levelFilter}
 									/>
-							))
-						}
+								))
+							}
+						</Grid>
+
 					</Grid>
 
 				</Grid>
 
-			</Grid>
-
-		</Container>
+			</Container>
 		</ThemeProvider>
 	)
 }

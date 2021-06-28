@@ -9,7 +9,7 @@ const Filter = (props) => {
 	return (
 	<Grid item container direction="column" style={{ marginBottom: '2em' }} key={props.filterTitle}>
 	{/* --ACTIVITY TYPE FILTER */}
-	<Typography variant="overline" align="left">{props.filterTitle}({props.filterState})</Typography>
+	<Typography variant="overline" align="left">{props.filterTitle}</Typography>
 	<Divider />
 	{
 		props.filterArray.map(option =>(

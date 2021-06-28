@@ -17,7 +17,7 @@ const ProjectItem = (props) => {
 				image={props.project.image}
 			/>
 			<Typography variant="h5">{props.project.name}</Typography>
-			<Typography variant="overline">{props.project.level} | {props.project.activityType}</Typography>
+			<Typography variant="subtitle2">{props.project.level.toUpperCase()} | {props.project.activityType}</Typography>
 		</Grid>
 	)
 }
