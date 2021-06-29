@@ -6,24 +6,17 @@ import { Grid } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import { ToggleButtonGroup } from '@material-ui/lab';
 import { ToggleButton } from '@material-ui/lab';
-import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
-import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import { createMuiTheme, makeStyles, ThemeProvider } from '@material-ui/core/styles';
-// BELLOW CAN POSSIBLY BE DELETED
-// import { Paper } from '@material-ui/core';
-// import { Card } from '@material-ui/core'
-// import { CardMedia } from '@material-ui/core';
-// import { Divider } from '@material-ui/core';
-// import { FormControlLabel } from '@material-ui/core'
-// import FormLabel from '@material-ui/core/FormLabel';
-// import { Checkbox } from '@material-ui/core';
-// import { ButtonGroup } from '@material-ui/core';
 
 // COMPONENT IMPORTS
 import Filter from './components/projectView/Filter';
 import ProjectItem from './components/projectView/ProjectItem';
+import PageToggle from './components/projectView/PageToggle';
+import ShowFilter from './components/projectView/ShowFilter';
+import LevelFilter from './components/projectView/LevelFilter';
 
 export default function ProjectView() {
+	// STATE HOOKS
 	const [filteredProjects, setFilteredProjects] = useState([]);
 	const [subscriptionFilter, setSubscriptionFilter] = useState([]);
 	const [activityTypeFilter, setActivityTypeFilter] = useState([]);
@@ -36,13 +29,12 @@ export default function ProjectView() {
 
 	// TOGGLE GROUP HANDLERS
 	const handleShowFilter = (event, newShowFilter) => {
-		console.log(newShowFilter)
 		setShowFilter(newShowFilter || showFilter);
 	}
 
+	// SHOW PER PAGE HANDLER
 	const handleLevelFilter = (event, newLevelFilter) => {
 		setLevelFilter(newLevelFilter);
-		console.log(newLevelFilter)
 	}
 
 	// FILTER HANDLERS
@@ -87,11 +79,13 @@ export default function ProjectView() {
 		handleFilteredProjects()
 	}, [subscriptionFilter, activityTypeFilter, yearLevelFilter, subjectMatterFilter, levelFilter, showFilter]);
 
+	// This updates the pageCount and page state every time the filteredProjects changes. It's in a separate useEffect so that the filteredProjects can complete it's change before triggering these updates
 	useEffect(()=>{
 		setPageCount(Math.ceil(filteredProjects.length/showFilter))
 		setPage(1)
 	}, [filteredProjects])
 
+	// Refilters the projects based on all the filters. This could pottentially be made more efficient by splitting all of this out into separate functions so that it's only refiltering based on the specific filter that changed instead of rechecking everything, but the return wouldn't be that great for the amount of effort put in
 	const handleFilteredProjects = () => {
 		setFilteredProjects(
 			projects.filter(project => {
@@ -106,15 +100,14 @@ export default function ProjectView() {
 		)
 	}
 
-	useEffect(()=>window.scrollTo(0, 0),[page])
+	// A simple useEffect that scrolls to the top when the page variable is updated. In other words, when the user changes page.
+	useEffect(() => window.scrollTo(0, 0),[page])
 
-	const handlePageIncrement = (adjustment) => {
-		setPage(page + adjustment)
-	}
+	// Adds the adjustment (which will be either 1 or -1) to the page state which, in other words, just bumps it up or down
+	const handlePageIncrement = (adjustment) => setPage(page + adjustment)
 
-	const handlePageChange = (newPage) => {
-		setPage(newPage)
-	}
+	// Simply directly updates the current page
+	const handlePageChange = (newPage) => setPage(newPage)
 
 	// OBJECTS
 	const projects = [
@@ -219,6 +212,7 @@ export default function ProjectView() {
 		}
 	];
 
+	// An object containing all of the filters and their options for the sake of dynamically generating the filters --- this is soley because I am lazy
 	const filters = {
 		subscription: ['Free', 'Premium'],
 		activityType: ['Animation', 'Game', 'Chatbot', 'Augmented Reality'],
@@ -226,9 +220,10 @@ export default function ProjectView() {
 		subjectMatter: ['Computer Science', 'Maths', 'Science', 'Language', 'Art', 'Music']
 	}
 
-	// THEME
+	// simply setting the 
 	const themeGrey = "#6c6c6c"
-
+	
+	// THEME -- may get rid of in favor of something more global, but this will do for now
 	const theme = createMuiTheme({
 		typography: {
 			fontFamily: "Open Sans",
@@ -275,9 +270,7 @@ export default function ProjectView() {
 
 					{/* HEADING CONTAINER */}
 					<Grid item xs={9} xl={10} style={{ textAlign: 'left', }}>
-						<Typography variant="h4">PROJECTS{showFilter*(page)+1}</Typography>
-						<Button variant="contained" onClick={handleFilteredProjects}>Tester</Button>
-						<Button variant="contained" onClick={() => console.log(filteredProjects)}>Console</Button>
+						<Typography variant="h4">PROJECTS</Typography>  
 						<Typography variant="subtitle2">Welcome to the project library. You can use the filters on the right to help you search for specific projects.</Typography>
 					</Grid>
 
@@ -297,7 +290,6 @@ export default function ProjectView() {
 							filterArray={filters.activityType}
 							filterHandler={handleActivityTypeFilter}
 						/>
-
 						<Filter
 							filters={filters}
 							filterTitle="Year Level"
@@ -305,7 +297,6 @@ export default function ProjectView() {
 							filterArray={filters.yearLevel}
 							filterHandler={handleYearLevelFilter}
 						/>
-
 						<Filter
 							filters={filters}
 							filterTitle="Subject Matter"
@@ -313,7 +304,6 @@ export default function ProjectView() {
 							filterArray={filters.subjectMatter}
 							filterHandler={handleSubjectMatterFilter}
 						/>
-
 					</Grid>
 
 					{/* PROJECT GRID CONTAINER */}
@@ -321,36 +311,15 @@ export default function ProjectView() {
 
 						{/* //BUTTON GROUPS */}
 						<Grid item container direction="row" justify="space-between">
+							<LevelFilter
+								levelFilter={levelFilter}
+								handleLevelFilter={handleLevelFilter}
+							/>
 
-							{/* Toggle Group for level filter */}
-							<Grid item>
-								<ToggleButtonGroup
-									size="small"
-									value={levelFilter}
-									exclusive
-									onChange={handleLevelFilter}
-								>
-									<ToggleButton value="Beginner">Beginner</ToggleButton>
-									<ToggleButton value="Intermediate">Intermediate</ToggleButton>
-									<ToggleButton value="Advanced">Advanced</ToggleButton>
-								</ToggleButtonGroup>
-							</Grid>
-
-							{/* Toggle Group for amount of projects to show */}
-							<Grid item>
-								<Typography variant="overline" style={{ marginRight: '1em' }}>Show</Typography>
-								<ToggleButtonGroup
-									size="small"
-									value={showFilter}
-									exclusive
-									onChange={handleShowFilter}
-								>
-									<ToggleButton value={6}>6</ToggleButton>
-									<ToggleButton value={12}>12</ToggleButton>
-									<ToggleButton value={100}>100</ToggleButton>
-								</ToggleButtonGroup>
-							</Grid>
-
+							<ShowFilter 
+								showFilter={showFilter}
+								handleShowFilter={handleShowFilter}
+							/>
 						</Grid>
 
 						{/* PROJECT ITEM */}
@@ -358,43 +327,20 @@ export default function ProjectView() {
 							{/* LOOP THROUGH PROJECTS FROM FILTEREDPROJECTS STATE AND CREATE GRID ITEMS */}
 							{
 								filteredProjects.filter((e,i)=>(i>=showFilter*(page-1)) && (i<showFilter*(page))).map(project => (
-									<ProjectItem
-										project={project}
-										// subscriptionFilter={subscriptionFilter}
-										// activityTypeFilter={activityTypeFilter}
-										// yearLevelFilter={yearLevelFilter}
-										// subjectMatterFilter={subjectMatterFilter}
-										// levelFilter={levelFilter}
-									/>
+									<ProjectItem project={project}/>
 								))
 							}
 						</Grid>
 
-						<Grid item container direction="row" justify="center" spacing={2}>
-							<Grid item>
-								<ToggleButton onClick={()=>handlePageIncrement(-1)} disabled={page-1<1}>Prev</ToggleButton>
-							</Grid>
-							<Grid item>
-								<ToggleButtonGroup
-									// size="small"
-									value={page}
-									exclusive
-									// onChange={handlePageChange}
-								>
-									{
-										[...Array(pageCount)].map((e, i) => (
-											<ToggleButton value={i+1} style={{ paddingLeft: "1em", paddingRight: "1em" }} onClick={()=>handlePageChange(i+1)}>{i+1}</ToggleButton>
-										))
-									}
-								</ToggleButtonGroup>
-							</Grid>
-							<Grid item>
-								<ToggleButton onClick={()=>handlePageIncrement(1)} disabled={page+1>pageCount}>Next</ToggleButton>
-							</Grid>
-						</Grid>
+						<PageToggle
+							handlePageIncrement={handlePageIncrement}
+							handlePageChange={handlePageChange}
+							page={page}
+							pageCount={pageCount}
+						/>
+
 					</Grid>
 				</Grid>
-
 			</Container>
 		</ThemeProvider>
 	)
