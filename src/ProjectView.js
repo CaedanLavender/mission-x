@@ -6,6 +6,8 @@ import { Grid } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import { ToggleButtonGroup } from '@material-ui/lab';
 import { ToggleButton } from '@material-ui/lab';
+import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import { createMuiTheme, makeStyles, ThemeProvider } from '@material-ui/core/styles';
 // BELLOW CAN POSSIBLY BE DELETED
 // import { Paper } from '@material-ui/core';
@@ -28,7 +30,9 @@ export default function ProjectView() {
 	const [yearLevelFilter, setYearLevelFilter] = useState([]);
 	const [subjectMatterFilter, setSubjectMatterFilter] = useState([]);
 	const [levelFilter, setLevelFilter] = useState('');
-	const [showFilter, setShowFilter] = useState('25');
+	const [showFilter, setShowFilter] = useState(6);
+	const [page, setPage] = useState(1);
+	const [pageCount, setPageCount] = useState(2);
 
 	// TOGGLE GROUP HANDLERS
 	const handleShowFilter = (event, newShowFilter) => {
@@ -81,7 +85,12 @@ export default function ProjectView() {
 	// This sets the filtered projects array every time a filter changes. This is because the show-per-page value will determine which page each project should be shown on, but this of course changes every time a filter changes the number of projects visible
 	useEffect(() => {
 		handleFilteredProjects()
-	},[subscriptionFilter, activityTypeFilter, yearLevelFilter, subjectMatterFilter, levelFilter, showFilter]);
+	}, [subscriptionFilter, activityTypeFilter, yearLevelFilter, subjectMatterFilter, levelFilter, showFilter]);
+
+	useEffect(()=>{
+		setPageCount(Math.ceil(filteredProjects.length/showFilter))
+		setPage(1)
+	}, [filteredProjects])
 
 	const handleFilteredProjects = () => {
 		setFilteredProjects(
@@ -90,11 +99,21 @@ export default function ProjectView() {
 				if (activityTypeFilter.length && !activityTypeFilter.includes(project.activityType)) return false
 				if (yearLevelFilter.length && !yearLevelFilter.includes(project.yearLevel)) return false
 				if (subjectMatterFilter.length && !subjectMatterFilter.includes(project.subjectMatter)) return false
-				if (levelFilter && levelFilter !== !project.level) return false;
+				if (levelFilter && levelFilter !== project.level) return false;
 				return project
 			}
 			)
 		)
+	}
+
+	useEffect(()=>window.scrollTo(0, 0),[page])
+
+	const handlePageIncrement = (adjustment) => {
+		setPage(page + adjustment)
+	}
+
+	const handlePageChange = (newPage) => {
+		setPage(newPage)
 	}
 
 	// OBJECTS
@@ -154,7 +173,7 @@ export default function ProjectView() {
 			subjectMatter: "Computer Science",
 		},
 		{
-			name: "Introduction",
+			name: "Introduction7",
 			subscription: "Free",
 			image: require("./assets/Projects-Page/Project-01.png").default,
 			activityType: "Animation",
@@ -163,7 +182,7 @@ export default function ProjectView() {
 			subjectMatter: "Computer Science",
 		},
 		{
-			name: "Introduction",
+			name: "Introduction8",
 			subscription: "Free",
 			image: require("./assets/Projects-Page/Project-01.png").default,
 			activityType: "Animation",
@@ -172,7 +191,7 @@ export default function ProjectView() {
 			subjectMatter: "Computer Science",
 		},
 		{
-			name: "Introduction",
+			name: "Introduction9",
 			subscription: "Free",
 			image: require("./assets/Projects-Page/Project-01.png").default,
 			activityType: "Animation",
@@ -181,7 +200,7 @@ export default function ProjectView() {
 			subjectMatter: "Computer Science",
 		},
 		{
-			name: "Introduction",
+			name: "Introduction10",
 			subscription: "Free",
 			image: require("./assets/Projects-Page/Project-01.png").default,
 			activityType: "Animation",
@@ -190,7 +209,7 @@ export default function ProjectView() {
 			subjectMatter: "Computer Science",
 		},
 		{
-			name: "Introduction",
+			name: "Introduction11",
 			subscription: "Free",
 			image: require("./assets/Projects-Page/Project-01.png").default,
 			activityType: "Animation",
@@ -256,9 +275,9 @@ export default function ProjectView() {
 
 					{/* HEADING CONTAINER */}
 					<Grid item xs={9} xl={10} style={{ textAlign: 'left', }}>
-						<Typography variant="h4">PROJECTS</Typography>
+						<Typography variant="h4">PROJECTS{showFilter*(page)+1}</Typography>
 						<Button variant="contained" onClick={handleFilteredProjects}>Tester</Button>
-						<Button variant="contained" onClick={()=>console.log(filteredProjects)}>Console</Button>
+						<Button variant="contained" onClick={() => console.log(filteredProjects)}>Console</Button>
 						<Typography variant="subtitle2">Welcome to the project library. You can use the filters on the right to help you search for specific projects.</Typography>
 					</Grid>
 
@@ -326,9 +345,9 @@ export default function ProjectView() {
 									exclusive
 									onChange={handleShowFilter}
 								>
-									<ToggleButton value="25">25</ToggleButton>
-									<ToggleButton value="50">50</ToggleButton>
-									<ToggleButton value="100">100</ToggleButton>
+									<ToggleButton value={6}>6</ToggleButton>
+									<ToggleButton value={12}>12</ToggleButton>
+									<ToggleButton value={100}>100</ToggleButton>
 								</ToggleButtonGroup>
 							</Grid>
 
@@ -336,23 +355,44 @@ export default function ProjectView() {
 
 						{/* PROJECT ITEM */}
 						<Grid item container>
-							{/* LOOP THROUGH PROJECTS FROM OBJECT AND CREATE GRID ITEMS */}
+							{/* LOOP THROUGH PROJECTS FROM FILTEREDPROJECTS STATE AND CREATE GRID ITEMS */}
 							{
-								filteredProjects.map(project => (
+								filteredProjects.filter((e,i)=>(i>=showFilter*(page-1)) && (i<showFilter*(page))).map(project => (
 									<ProjectItem
 										project={project}
-										subscriptionFilter={subscriptionFilter}
-										activityTypeFilter={activityTypeFilter}
-										yearLevelFilter={yearLevelFilter}
-										subjectMatterFilter={subjectMatterFilter}
-										levelFilter={levelFilter}
+										// subscriptionFilter={subscriptionFilter}
+										// activityTypeFilter={activityTypeFilter}
+										// yearLevelFilter={yearLevelFilter}
+										// subjectMatterFilter={subjectMatterFilter}
+										// levelFilter={levelFilter}
 									/>
 								))
 							}
 						</Grid>
 
+						<Grid item container direction="row" justify="center" spacing={2}>
+							<Grid item>
+								<ToggleButton onClick={()=>handlePageIncrement(-1)} disabled={page-1<1}>Prev</ToggleButton>
+							</Grid>
+							<Grid item>
+								<ToggleButtonGroup
+									// size="small"
+									value={page}
+									exclusive
+									// onChange={handlePageChange}
+								>
+									{
+										[...Array(pageCount)].map((e, i) => (
+											<ToggleButton value={i+1} style={{ paddingLeft: "1em", paddingRight: "1em" }} onClick={()=>handlePageChange(i+1)}>{i+1}</ToggleButton>
+										))
+									}
+								</ToggleButtonGroup>
+							</Grid>
+							<Grid item>
+								<ToggleButton onClick={()=>handlePageIncrement(1)} disabled={page+1>pageCount}>Next</ToggleButton>
+							</Grid>
+						</Grid>
 					</Grid>
-
 				</Grid>
 
 			</Container>
