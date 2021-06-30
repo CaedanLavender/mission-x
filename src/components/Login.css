@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&display=swap');
+
 /* The Modal (background) */
 .modal {
     text-align: center;
@@ -26,7 +29,7 @@
 .close {
     /* Position it in the top right corner outside of the modal */
     position: absolute;
-    right: 100px;
+    right: 50px;
     top: 20;
     color: rgb(61, 60, 60);
     font-size: 35px;
@@ -49,20 +52,20 @@
     to {transform: scale(1)}
 }
 
-.p {
-    font-family: Arial, Helvetica, sans-serif;
-    color: rgb(71, 71, 71);
+.subheader {
+    display: "flex";
+    flex-direction: "row";
 }
 
 .btn {
     background-color: rgb(245, 30, 130);
     color: white;
     font-weight: bold;
-    padding: 10px 70px;
+    padding: 5px 40px;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
-    border-radius: 8px;
+    font-size: 10px;
+    border-radius: 4px;
 }
 
 .row {
@@ -83,4 +86,50 @@ input::placeholder {
 div {
     width: 100%;
     height: auto;
+    justify-content: center;
+}
+
+.style {
+    display: flex;
+    flex-direction: row;
+}
+
+.h1 {
+    font-family: 'Nurito', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgb(71, 71, 71);
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.h3 {
+    font-family: 'Open Sans', sans-serif;
+    color: rgb(71, 71, 71);
+    cursor: pointer;
+    position: relative;
+}
+
+.h3:hover {
+    content: '';
+    height: 1px;
+    margin-top: 20px;
+    border-bottom: 2px solid rgb(90, 198, 248);
+}
+
+button {
+    background: white;
+    margin: 10px;
+    border: none;
+    text-align: center;
+}
+
+.container {
+    text-align: center;
+    border-radius: 16px;
+    border-right: 1px rgb(46, 45, 45);
+    color: rgb(240, 238, 238);
+    font-family: sans-serif;
+    font-size: small;
 }
