@@ -2,12 +2,19 @@ import { Typography } from '@material-ui/core'
 import { Grid } from '@material-ui/core';
 import { ToggleButtonGroup } from '@material-ui/lab';
 import { ToggleButton } from '@material-ui/lab';
+import { makeStyles } from '@material-ui/core/styles';
 
+const useStyles = makeStyles({
+	showText: {
+		padding: '1em'
+	}
+})
 
 const ShowFilter = (props) => {
+	const classes = useStyles();
 	return (
 		<Grid item>
-			<Typography variant="overline" style={{ marginRight: '1em' }}>Show</Typography>
+			<Typography variant="overline" className={classes.showText}>Show</Typography>
 			<ToggleButtonGroup
 				size="small"
 				value={props.showFilter}

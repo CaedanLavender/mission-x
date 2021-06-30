@@ -10,6 +10,7 @@ const LevelFilter = (props) => {
 				value={props.levelFilter}
 				exclusive
 				onChange={props.handleLevelFilter}
+				color="secondary"
 			>
 				<ToggleButton value="Beginner">Beginner</ToggleButton>
 				<ToggleButton value="Intermediate">Intermediate</ToggleButton>

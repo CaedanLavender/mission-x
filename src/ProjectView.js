@@ -259,9 +259,20 @@ export default function ProjectView() {
 		}
 	})
 
+	const useStyles = makeStyles({
+		mainContainer: {
+			padding: '2em'
+		},
+		headingContainer: {
+			textAlign: 'left'
+		}
+	})
+
+	const classes = useStyles();
+
 	return (
 		<ThemeProvider theme={theme}>
-			<Container maxWidth="xl" style={{ padding: '2em' }}>
+			<Container maxWidth="xl" className={classes.mainContainer}>
 				<Grid container spacing={6}>
 
 					{/* BLANK SPACE */}
@@ -269,7 +280,7 @@ export default function ProjectView() {
 					</Grid>
 
 					{/* HEADING CONTAINER */}
-					<Grid item xs={9} xl={10} style={{ textAlign: 'left', }}>
+					<Grid item xs={9} xl={10} className={classes.headingContainer}>
 						<Typography variant="h4">PROJECTS</Typography>  
 						<Typography variant="subtitle2">Welcome to the project library. You can use the filters on the right to help you search for specific projects.</Typography>
 					</Grid>

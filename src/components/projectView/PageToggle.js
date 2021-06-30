@@ -2,6 +2,8 @@ import { Grid } from '@material-ui/core';
 import { ToggleButtonGroup } from '@material-ui/lab';
 import { ToggleButton } from '@material-ui/lab';
 
+
+
 const PageToggle = (props) => {
 	return (
 		<Grid item container direction="row" justify="center" spacing={2}>
@@ -12,7 +14,7 @@ const PageToggle = (props) => {
 				<ToggleButtonGroup value={props.page} exclusive>
 					{
 						[...Array(props.pageCount)].map((e, i) => (
-							<ToggleButton value={i+1} style={{ paddingLeft: "1em", paddingRight: "1em" }} onClick={()=>props.handlePageChange(i+1)}>{i+1}</ToggleButton>
+							<ToggleButton value={i+1} onClick={()=>props.handlePageChange(i+1)}>{i+1}</ToggleButton>
 						))
 					}
 				</ToggleButtonGroup>
