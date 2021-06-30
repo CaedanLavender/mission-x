@@ -38,3 +38,16 @@
     transform: rotate(360deg);
   }
 }
+
+button.MuiToggleButton-root.Mui-selected {
+	background: linear-gradient(0, rgb(41,131,254) 0%, rgb(94,171,251) 100%);
+	color: white;
+ }
+
+ button.MuiToggleButton-root {
+	 color: black;
+	 padding: 0 2em;
+	 box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px;
+ }
+
+ 
