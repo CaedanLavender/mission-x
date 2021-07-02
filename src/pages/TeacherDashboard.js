@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import './TeacherDashboard.css';
 import Button from '@material-ui/core/Button';
+import { Link } from 'react-router-dom';
 
 export const TeacherDashboard = () => {
 	const [tab, setTab] = useState('Progress Tracker');
@@ -31,7 +32,17 @@ export const TeacherDashboard = () => {
 				}
 			</div>
 			<div className="dashboard__panel--right">
-				<Button>Main thing</Button>
+				<div className="panel--right__buttonContainer">
+					<Link>
+						<Button variant="contained">Take Screenshot</Button>
+					</Link>
+					<Link>
+						<Button variant="contained">Help Centre</Button>
+					</Link>
+					<Link to="/projectview">
+						<Button variant="contained" >More Projects</Button>
+					</Link>
+				</div>
 				<div className="dashboard__panel--right__inner">test</div>
 			</div>
 		</div>

@@ -56,3 +56,9 @@
 	background-color: var(--superlight-blue);
 	border-radius: 20px;
 }
+
+.panel--right__buttonContainer {
+	display: flex;
+	gap: 1em;
+	justify-content: right;
+}
