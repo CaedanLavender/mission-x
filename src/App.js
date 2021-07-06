@@ -14,15 +14,15 @@ function App() {
     <div className="App">
       <Router>
         {/* Bellow is the navigation bar, it's just a material UI appbar for now, there are some dummy buttons in there to make sure Route works. This will need styled of course to match the design on the Adobe XD document */}
-        <AppBar position="static">
+        {/* <AppBar position="static">
           <Toolbar>
             <Link to="/">Home..</Link>
             <Link to="/projectview">Project View..</Link>
             <Link to="/components/Profile/Profile">Profile View..</Link>
-				<Link to="/teacher-dashboard">Teacher Dashboard</Link>
+				<Link to="/teacher-dashboard">Teacher Dashboard</Link> */}
             {/* Add more links here by following the format above */}
-          </Toolbar>
-        </AppBar>
+          {/* </Toolbar>
+        </AppBar> */}
         <Switch>
           <Route path="/" exact render={() => <h1>Home</h1>} />
           <Route path="/projectview" component={ProjectView} />

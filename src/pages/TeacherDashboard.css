@@ -4,19 +4,34 @@
 	--superlight-blue: #d9f2fd;
 }
 
+.wrapper {
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+}
+
 .dashboard__toolbar {
 	width: 100%;
+	padding: 0.5em 1.5em 0.5em 1em;
+	height: 60px;
 	/* height: 100px; */
 	background-color: white;
 	display: flex;
 	justify-content: space-between;
 }
 
+.dashboard__toolbar__flag-container {
+	display: flex;
+	gap: 1em;
+	align-self: center;
+}
+
 .dashboard__container {
 	display: flex;
 	flex-direction: row;
 	width: 100%;
-	height: 100%;
+	flex-basis: 100%;
+	/* height: 100%; */
 }
 
 
@@ -71,6 +86,7 @@
 	border-radius: 20px;
 	padding: 2em;
 }
+
 
 .panel--right__buttonContainer {
 	display: flex;
