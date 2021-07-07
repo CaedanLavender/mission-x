@@ -83,7 +83,6 @@
 
 .panel--left__bottom-navigation {
 	display: flex;
-	bottom: 0;
 	justify-content: space-around;
 	margin-bottom: 2em;
 }
@@ -92,6 +91,14 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	color: white;
+	font-family: 'Nunito';
+	font-size: 0.8rem;
+	gap: 0.5em;
+}
+
+.panel--left__bottom-navigation img {
+	height: 1.5rem;
 }
 
 .container__panel--right {
