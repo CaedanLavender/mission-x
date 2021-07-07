@@ -82,15 +82,28 @@
 }
 
 .panel--left__toggle {
-	align-self: flex-end;
 	background-color: var(--light-blue);
+	padding: 1em 1.5em;
+}
+
+.panel--left__toggle--open {
+	align-self: flex-end;
 	border-top-left-radius: 1em;
 	border-bottom-left-radius: 1em;
-	padding: 1em;
+}
+
+.panel--left__toggle--closed {
+	align-self: flex-start;
+	border-top-right-radius: 1em;
+	border-bottom-right-radius: 1em;
+}
+
+.panel--left__toggle--closed img {
+	rotate: 180deg;
 }
 
 .panel--left__toggle img {
-	height: 50px;
+	height: 40px;
 }
 
 .panel--left__bottom-navigation {

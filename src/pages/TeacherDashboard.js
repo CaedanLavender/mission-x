@@ -109,7 +109,7 @@ export const TeacherDashboard = () => {
 							))
 						}
 					</div>
-					<div className="panel--left__toggle">
+					<div className={`panel--left__toggle ${tabOpen?'panel--left__toggle--open':'panel--left__toggle--closed'}`}>
 						<img src={require("../assets/teacher-dashboard/icons/left-pointing-caret.png").default} alt="arrow"/>
 					</div>
 					<div className="panel--left__bottom-navigation">
