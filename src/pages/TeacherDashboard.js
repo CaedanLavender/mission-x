@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 
 export const TeacherDashboard = () => {
 	const [tab, setTab] = useState('Progress Tracker');
+	const [tabOpen, setTabOpen] = useState(true);
 
 	// handles the changing tab by setting the tab state to the string that is passed in.
 	// A simple shortcircut statement handles when null is passed in and sets tab to itself (no change in otherwords) -- possible side-effect being that the state is still updated so may trigger a potential useEffect if one was implemented in the future
@@ -88,31 +89,34 @@ export const TeacherDashboard = () => {
 			<div className="dashboard__container">
 				<div className="container__panel--left">
 					<div className="panel--left__item-wrapper">
-					<div className="panel--left__profile">
+						<div className="panel--left__profile">
+						</div>
+						{
+							tabList.map(item => (
+								// I know it's shameful to include inline styling, but I just needed the stupid underline to go away -- simpler than makinng a whole theme/class
+								<Link to={item.linksto || '#'} style={{ textDecoration: 'none' }}>
+									<div
+										// Below is a shortcircuit statment that looks for the tab state and the item matching, if true, then include an additional class that applies the 'selected' styling
+										className={`panel--left__item ${tab === item.name && "panel--left__item--selected"}`}
+										// The ternary below is checking if there is a linksto property, if so, send null (this means that the tab is actually an external link and we do not want to run the tabchanging stuff), otherwise send the new tab into the changeTab function
+										onClick={() => changeTab(item.linksto ? null : item.name)}
+									>
+										{/* Ternary in src is saying that if the tab state matches 'this' tab, then do the dark icon, otherwise do the light icon */}
+										<img src={tab === item.name ? item.icon.dark : item.icon.light} alt={item.name + ""} />
+										{item.name}
+									</div>
+								</Link>
+							))
+						}
 					</div>
-					{
-						tabList.map(item => (
-							// I know it's shameful to include inline styling, but I just needed the stupid underline to go away -- simpler than makinng a whole theme/class
-							<Link to={item.linksto || '#'} style={{ textDecoration: 'none' }}>
-								<div
-									// Below is a shortcircuit statment that looks for the tab state and the item matching, if true, then include an additional class that applies the 'selected' styling
-									className={`panel--left__item ${tab === item.name && "panel--left__item--selected"}`}
-									// The ternary below is checking if there is a linksto property, if so, send null (this means that the tab is actually an external link and we do not want to run the tabchanging stuff), otherwise send the new tab into the changeTab function
-									onClick={() => changeTab(item.linksto ? null : item.name)}
-								>
-									{/* Ternary in src is saying that if the tab state matches 'this' tab, then do the dark icon, otherwise do the light icon */}
-									<img src={tab === item.name ? item.icon.dark : item.icon.light} alt={item.name + ""} />
-									{item.name}
-								</div>
-							</Link>
-						))
-					}
+					<div className="panel--left__toggle">
+						<img src={require("../assets/teacher-dashboard/icons/left-pointing-caret.png").default} alt="arrow"/>
 					</div>
 					<div className="panel--left__bottom-navigation">
 						{
 							bottomTabList.map(item => (
 								<div>
-									<img src={item.icon} alt={item.name}/>
+									<img src={item.icon} alt={item.name} />
 									{item.name}
 								</div>
 							))

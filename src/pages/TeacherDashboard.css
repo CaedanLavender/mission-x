@@ -81,6 +81,18 @@
 	color: black;
 }
 
+.panel--left__toggle {
+	align-self: flex-end;
+	background-color: var(--light-blue);
+	border-top-left-radius: 1em;
+	border-bottom-left-radius: 1em;
+	padding: 1em;
+}
+
+.panel--left__toggle img {
+	height: 50px;
+}
+
 .panel--left__bottom-navigation {
 	display: flex;
 	justify-content: space-around;
