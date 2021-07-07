@@ -10,7 +10,7 @@ export const TeacherDashboard = () => {
 	const [tab, setTab] = useState('Progress Tracker');
 
 	const changeTab = (newTab) => {
-		setTab(newTab)
+		setTab(newTab || tab)
 	}
 
 	const tabList = [
@@ -18,9 +18,9 @@ export const TeacherDashboard = () => {
 			name: "Progress Tracker",
 			icon: {
 				light: require("../assets/teacher-dashboard/icons/progress--icon--light.png").default,
-				dark: require("../assets/teacher-dashboard/icons/progress--icon--light.png").default
+				dark: require("../assets/teacher-dashboard/icons/progress--icon--dark.png").default
 			},
-			isTab: true
+			linksto: null
 		},
 		{
 			name: "Student Profiles",
@@ -28,7 +28,7 @@ export const TeacherDashboard = () => {
 				light: require("../assets/teacher-dashboard/icons/student-profiles--icon--light.png").default,
 				dark: require("../assets/teacher-dashboard/icons/student-profiles--icon--dark.png").default
 			},
-			isTab: true
+			linksto: null
 		},
 		{
 			name: "Help Requests",
@@ -36,7 +36,7 @@ export const TeacherDashboard = () => {
 				light: require("../assets/teacher-dashboard/icons/help-requests--icon--light.png").default,
 				dark: require("../assets/teacher-dashboard/icons/help-requests--icon--dark.png").default
 			},
-			isTab: true
+			linksto: null
 		},
 		{
 			name: "Project Submissions",
@@ -44,7 +44,7 @@ export const TeacherDashboard = () => {
 				light: require("../assets/teacher-dashboard/icons/project-submissions--icon--light.png").default,
 				dark: require("../assets/teacher-dashboard/icons/project-submissions--icon--dark.png").default
 			},
-			isTab: true
+			linksto: null
 		},
 		{
 			name: "Project Library",
@@ -52,7 +52,7 @@ export const TeacherDashboard = () => {
 				light: require("../assets/teacher-dashboard/icons/project-library--icon--light.png").default,
 				dark: null
 			},
-			isTab: true
+			linksto: "/projectview"
 		}
 	]
 
@@ -70,13 +70,16 @@ export const TeacherDashboard = () => {
 				<div className="panel--left__profile"></div>
 				{
 					tabList.map(item => (
+						// I know it's shameful to include inline styling, but I just needed the stupid underline to go away -- simpler than makinng a whole theme/class
+						<Link to={item.linksto || '#'} style={{textDecoration: 'none'}}>
 						<div
 							className={`panel--left__item ${tab===item.name && "panel--left__item--selected"}`}
-							onClick={()=>changeTab(item.name)}
+							onClick={()=>changeTab(item.linksto?null:item.name)}
 						>
-							<img src={item.icon.light} alt={item.name + ""}/>
+							<img src={tab===item.name?item.icon.dark:item.icon.light} alt={item.name + ""}/>
 							{item.name}
 						</div>
+						</Link>
 					))
 				}
 			</div>
