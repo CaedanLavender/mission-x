@@ -37,7 +37,7 @@
 
 .container__panel--left {
 	background-color: var(--main-blue);
-	width: 300px;
+	width: 350px;
 	height: 100%;
 	display: flex;
 	flex-direction: column;
@@ -62,6 +62,16 @@
 	cursor: pointer;
 	text-align: left;
 	font-weight: 900;
+	display: flex;
+	gap: 1em;
+	/* height: 80px; */
+	/* justify-content: space-between; */
+	align-items: center;
+	/* align-self: center;     */
+}
+
+.panel--left__item img {
+	height: 30px;
 }
 
 .panel--left__item--selected {

@@ -17,40 +17,40 @@ export const TeacherDashboard = () => {
 		{
 			name: "Progress Tracker",
 			icon: {
-				light: "../assets/teacher-dashboard/icons/progress--icon--light.png",
-				dark: "../assets/teacher-dashboard/icons/progress--icon--light.png"
+				light: require("../assets/teacher-dashboard/icons/progress--icon--light.png").default,
+				dark: require("../assets/teacher-dashboard/icons/progress--icon--light.png").default
 			},
 			isTab: true
 		},
 		{
 			name: "Student Profiles",
 			icon: {
-				light: "../assets/teacher-dashboard/icons/student-profiles--icon--light.png",
-				dark: "../assets/teacher-dashboard/icons/student-profiles--dark.png"
+				light: require("../assets/teacher-dashboard/icons/student-profiles--icon--light.png").default,
+				dark: require("../assets/teacher-dashboard/icons/student-profiles--icon--dark.png").default
 			},
 			isTab: true
 		},
 		{
 			name: "Help Requests",
 			icon: {
-				light: "../assets/teacher-dashboard/icons/help-requests--icon--light.png",
-				dark: "../assets/teacher-dashboard/icons/help-requests--dark.png"
+				light: require("../assets/teacher-dashboard/icons/help-requests--icon--light.png").default,
+				dark: require("../assets/teacher-dashboard/icons/help-requests--icon--dark.png").default
 			},
 			isTab: true
 		},
 		{
 			name: "Project Submissions",
 			icon: {
-				light: "../assets/teacher-dashboard/icons/project-submissions--icon--light.png",
-				dark: "../assets/teacher-dashboard/icons/project-submissions--dark.png"
+				light: require("../assets/teacher-dashboard/icons/project-submissions--icon--light.png").default,
+				dark: require("../assets/teacher-dashboard/icons/project-submissions--icon--dark.png").default
 			},
 			isTab: true
 		},
 		{
 			name: "Project Library",
 			icon: {
-				light: "../assets/teacher-dashboard/icons/project-library--icon--light.png",
-				dark: "../assets/teacher-dashboard/icons/project-library--dark.png"
+				light: require("../assets/teacher-dashboard/icons/project-library--icon--light.png").default,
+				dark: null
 			},
 			isTab: true
 		}
@@ -74,7 +74,7 @@ export const TeacherDashboard = () => {
 							className={`panel--left__item ${tab===item.name && "panel--left__item--selected"}`}
 							onClick={()=>changeTab(item.name)}
 						>
-							<img src={""} alt={item.name + ""}/>
+							<img src={item.icon.light} alt={item.name + ""}/>
 							{item.name}
 						</div>
 					))
