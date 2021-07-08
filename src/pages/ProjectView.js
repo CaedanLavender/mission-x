@@ -1,12 +1,15 @@
 // LIBRARY IMPORTS
 import { useState, useEffect } from 'react'
-import { Container } from '@material-ui/core';
-import { Typography } from '@material-ui/core'
-import { Grid } from '@material-ui/core';
-import Button from '@material-ui/core/Button';
-import { ToggleButtonGroup } from '@material-ui/lab';
-import { ToggleButton } from '@material-ui/lab';
-import { createMuiTheme, makeStyles, ThemeProvider } from '@material-ui/core/styles';
+import {
+	Container,
+	Typography,
+	Grid
+} from '@material-ui/core';
+import {
+	createMuiTheme,
+	makeStyles,
+	ThemeProvider
+} from '@material-ui/core/styles';
 
 // COMPONENT IMPORTS
 import Filter from '../components/projectView/Filter';
@@ -80,8 +83,8 @@ export default function ProjectView() {
 	}, [subscriptionFilter, activityTypeFilter, yearLevelFilter, subjectMatterFilter, levelFilter, showFilter]);
 
 	// This updates the pageCount and page state every time the filteredProjects changes. It's in a separate useEffect so that the filteredProjects can complete it's change before triggering these updates
-	useEffect(()=>{
-		setPageCount(Math.ceil(filteredProjects.length/showFilter))
+	useEffect(() => {
+		setPageCount(Math.ceil(filteredProjects.length / showFilter))
 		setPage(1)
 	}, [filteredProjects])
 
@@ -101,7 +104,7 @@ export default function ProjectView() {
 	}
 
 	// A simple useEffect that scrolls to the top when the page variable is updated. In other words, when the user changes page.
-	useEffect(() => window.scrollTo(0, 0),[page])
+	useEffect(() => window.scrollTo(0, 0), [page])
 
 	// Adds the adjustment (which will be either 1 or -1) to the page state which, in other words, just bumps it up or down
 	const handlePageIncrement = (adjustment) => setPage(page + adjustment)
@@ -227,7 +230,7 @@ export default function ProjectView() {
 			yearLevel: "1-4",
 			level: "Advanced",
 			subjectMatter: "Computer Science",
-		},	
+		},
 		{
 			name: "Project 14.1",
 			subscription: "Premium",
@@ -249,7 +252,7 @@ export default function ProjectView() {
 
 	// simply setting the 
 	const themeGrey = "#6c6c6c"
-	
+
 	// THEME -- may get rid of in favor of something more global, but this will do for now
 	const theme = createMuiTheme({
 		typography: {
@@ -308,7 +311,7 @@ export default function ProjectView() {
 
 					{/* HEADING CONTAINER */}
 					<Grid item xs={9} xl={10} className={classes.headingContainer}>
-						<Typography variant="h4">PROJECTS</Typography>  
+						<Typography variant="h4">PROJECTS</Typography>
 						<Typography variant="subtitle2">Welcome to the project library. You can use the filters on the right to help you search for specific projects.</Typography>
 					</Grid>
 
@@ -354,7 +357,7 @@ export default function ProjectView() {
 								handleLevelFilter={handleLevelFilter}
 							/>
 
-							<ShowFilter 
+							<ShowFilter
 								showFilter={showFilter}
 								handleShowFilter={handleShowFilter}
 							/>
@@ -364,8 +367,8 @@ export default function ProjectView() {
 						<Grid item container>
 							{/* LOOP THROUGH PROJECTS FROM FILTEREDPROJECTS STATE AND CREATE GRID ITEMS */}
 							{
-								filteredProjects.filter((e,i)=>(i>=showFilter*(page-1)) && (i<showFilter*(page))).map(project => (
-									<ProjectItem project={project}/>
+								filteredProjects.filter((e, i) => (i >= showFilter * (page - 1)) && (i < showFilter * (page))).map(project => (
+									<ProjectItem project={project} />
 								))
 							}
 						</Grid>
