@@ -83,18 +83,8 @@ td {
 .backButtonMain {
   text-align: end;
 }
-
-/* ---- */
+/* 896 */
 @media screen and (max-width: 896px) {
-  .mainSection {
-    width: 90%;
-    margin: 0;
-    padding: 0;
-  }
-}
-/* ----- */
-
-@media screen and (max-width: 768px) {
   .mainSection {
     width: 90%;
     margin: 0;

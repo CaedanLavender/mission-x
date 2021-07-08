@@ -6,7 +6,7 @@ export default function ProfileInfo() {
     <div className="mainSection">
       <div className="infoBlock">
         <div>
-          <h1 className="fullName">[First Name] [Last Name]</h1>
+          <h1 className="fullName">Frankie</h1>
 
           <table>
             <tbody>
@@ -16,23 +16,23 @@ export default function ProfileInfo() {
               </tr>
               <tr>
                 <td>Teacher</td>
-                <td>Jasmina Salvador</td>
+                <td className="teacherName">Jasmina Salvador</td>
               </tr>
               <tr>
                 <td>Course</td>
-                <td>Beginner</td>
+                <td className="courseName">Beginner</td>
               </tr>
               <tr>
                 <td>Date of Birth</td>
-                <td>25 June 2010</td>
+                <td className="studentDob">25 June 2010</td>
               </tr>
               <tr>
                 <td>Contact No</td>
-                <td>022 524 6399</td>
+                <td className="studentNo">022 524 6399</td>
               </tr>
               <tr>
                 <td>Email address</td>
-                <td>fletchy.r@gmail.com</td>
+                <td className="studentEmail">fletchy.r@gmail.com</td>
               </tr>
             </tbody>
           </table>
