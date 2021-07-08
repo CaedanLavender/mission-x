@@ -109,12 +109,10 @@ div {
     color: rgb(71, 71, 71);
     cursor: pointer;
     position: relative;
+	 border-bottom: 2px solid transparent;
 }
 
 .h3:hover {
-    content: '';
-    height: 1px;
-    margin-top: 20px;
     border-bottom: 2px solid rgb(90, 198, 248);
 }
 
