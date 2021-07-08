@@ -1,7 +1,7 @@
 import "./App.css";
 // Component imports
 import NavigationBar from "./components/NavigationBar";
-import ProjectView from "./ProjectView";
+import ProjectView from "./pages/ProjectView";
 import Profile from "./components/Profile/Profile";
 
 // React Router import

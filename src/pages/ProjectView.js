@@ -9,11 +9,11 @@ import { ToggleButton } from '@material-ui/lab';
 import { createMuiTheme, makeStyles, ThemeProvider } from '@material-ui/core/styles';
 
 // COMPONENT IMPORTS
-import Filter from './components/projectView/Filter';
-import ProjectItem from './components/projectView/ProjectItem';
-import PageToggle from './components/projectView/PageToggle';
-import ShowFilter from './components/projectView/ShowFilter';
-import LevelFilter from './components/projectView/LevelFilter';
+import Filter from '../components/projectView/Filter';
+import ProjectItem from '../components/projectView/ProjectItem';
+import PageToggle from '../components/projectView/PageToggle';
+import ShowFilter from '../components/projectView/ShowFilter';
+import LevelFilter from '../components/projectView/LevelFilter';
 
 export default function ProjectView() {
 	// STATE HOOKS
@@ -114,7 +114,7 @@ export default function ProjectView() {
 		{
 			name: "Introduction",
 			subscription: "Free",
-			image: require("./assets/Projects-Page/Project-01.png").default,
+			image: '/images/Projects-Page/Project-01.png',
 			activityType: "Animation",
 			yearLevel: "1-4",
 			level: "Beginner",
@@ -123,7 +123,7 @@ export default function ProjectView() {
 		{
 			name: "My Birthday",
 			subscription: "Free",
-			image: require("./assets/Projects-Page/Project-02.png").default,
+			image: '/images/Projects-Page/Project-02.png',
 			activityType: "Animation",
 			yearLevel: "5-6",
 			level: "Intermediate",
@@ -132,7 +132,7 @@ export default function ProjectView() {
 		{
 			name: "10 Block Challenge",
 			subscription: "Free",
-			image: require("./assets/Projects-Page/Project-03.png").default,
+			image: 'images/Projects-Page/Project-03.png',
 			activityType: "Game",
 			yearLevel: "5-6",
 			level: "Beginner",
@@ -141,7 +141,7 @@ export default function ProjectView() {
 		{
 			name: "Build a band",
 			subscription: "Free",
-			image: require("./assets/Projects-Page/Project-04.png").default,
+			image: 'images/Projects-Page/Project-04.png',
 			activityType: "Game",
 			yearLevel: "1-4",
 			level: "Beginner",
@@ -150,7 +150,7 @@ export default function ProjectView() {
 		{
 			name: "The bear and the monkey",
 			subscription: "Free",
-			image: require("./assets/Projects-Page/Project-05.png").default,
+			image: 'images/Projects-Page/Project-05.png',
 			activityType: "Augmented Reality",
 			yearLevel: "1-4",
 			level: "Beginner",
@@ -159,7 +159,7 @@ export default function ProjectView() {
 		{
 			name: "Debugging",
 			subscription: "Free",
-			image: require("./assets/Projects-Page/Project-06.png").default,
+			image: 'images/Projects-Page/Project-06.png',
 			activityType: "Animation",
 			yearLevel: "1-4",
 			level: "Beginner",
@@ -168,7 +168,7 @@ export default function ProjectView() {
 		{
 			name: "Project 7",
 			subscription: "Free",
-			image: require("./assets/Projects-Page/Project-07.png").default,
+			image: 'images/Projects-Page/Project-07.png',
 			activityType: "Animation",
 			yearLevel: "1-4",
 			level: "Intermediate",
@@ -177,7 +177,7 @@ export default function ProjectView() {
 		{
 			name: "Project 8",
 			subscription: "Free",
-			image: require("./assets/Projects-Page/Project-08.png").default,
+			image: 'images/Projects-Page/Project-08.png',
 			activityType: "Animation",
 			yearLevel: "1-4",
 			level: "Intermediate",
@@ -186,7 +186,7 @@ export default function ProjectView() {
 		{
 			name: "Project 9",
 			subscription: "Premium",
-			image: require("./assets/Projects-Page/Project-09.png").default,
+			image: 'images/Projects-Page/Project-09.png',
 			activityType: "Animation",
 			yearLevel: "1-4",
 			level: "Beginner",
@@ -195,7 +195,7 @@ export default function ProjectView() {
 		{
 			name: "Project 10",
 			subscription: "Free",
-			image: require("./assets/Projects-Page/Project-10.png").default,
+			image: 'images/Projects-Page/Project-10.png',
 			activityType: "Animation",
 			yearLevel: "1-4",
 			level: "Beginner",
@@ -204,7 +204,7 @@ export default function ProjectView() {
 		{
 			name: "Project 11",
 			subscription: "Premium",
-			image: require("./assets/Projects-Page/Project-11.png").default,
+			image: 'images/Projects-Page/Project-11.png',
 			activityType: "Animation",
 			yearLevel: "1-4",
 			level: "Beginner",
@@ -213,7 +213,7 @@ export default function ProjectView() {
 		{
 			name: "Project 12",
 			subscription: "Premium",
-			image: require("./assets/Projects-Page/Project-12.png").default,
+			image: 'images/Projects-Page/Project-12.png',
 			activityType: "Animation",
 			yearLevel: "1-4",
 			level: "Beginner",
@@ -222,7 +222,7 @@ export default function ProjectView() {
 		{
 			name: "Project 13",
 			subscription: "Free",
-			image: require("./assets/Projects-Page/Project-13.png").default,
+			image: 'images/Projects-Page/Project-13.png',
 			activityType: "Animation",
 			yearLevel: "1-4",
 			level: "Advanced",
@@ -231,7 +231,7 @@ export default function ProjectView() {
 		{
 			name: "Project 14.1",
 			subscription: "Premium",
-			image: require("./assets/Projects-Page/Project-14.1.png").default,
+			image: 'images/Projects-Page/Project-14.1.png',
 			activityType: "Animation",
 			yearLevel: "1-4",
 			level: "Advanced",
