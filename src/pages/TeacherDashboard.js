@@ -34,12 +34,46 @@ import logoutIcon from '../assets/global/logout--icon--light.png';
 
 export const TeacherDashboard = () => {
 	// STYLING
-	const useStyles = makeStyles({
+	const globalStyles = makeStyles((theme) => ({
+		orangeButton:{
+			color: 'white',
+			background: '#E5AB2C',
+			fontFamily: 'Nunito',
+			fontWeight: '900',
+			textTransform: 'none',
+			padding: '0.3em 2em',
+			'&:hover':{
+				background: '#CC9213'
+			}
+		},
+		pinkButton:{
+			color: 'white',
+			background: '#F91C85',
+			fontFamily: 'Nunito',
+			fontWeight: '900',
+			textTransform: 'none',
+			padding: '0.3em 2em',
+			'&:hover':{
+				background: '#E0036C'
+			}
+		},
+		blueButton:{
+			color: 'white',
+			background: '#43C0F6',
+			fontFamily: 'Nunito',
+			fontWeight: '900',
+			textTransform: 'none',
+			padding: '0.3em 2em',
+			'&:hover':{
+				background: '#2AA7DD'
+			}
+		},
 		tweakedLink: {
 			textDecoration: 'none'
 		}
-	})
-	const classes = useStyles();
+	}));
+
+	const global = globalStyles();
 
 	// STATE
 	const [tab, setTab] = useState('Progress Tracker');
@@ -133,7 +167,7 @@ export const TeacherDashboard = () => {
 						{
 							tabList.map(item => (
 								// I know it's shameful to include inline styling, but I just needed the stupid underline to go away -- simpler than makinng a whole theme/class
-								<Link to={item.linksto || '#'} className={classes.tweakedLink}>
+								<Link to={item.linksto || '#'} className={global.tweakedLink}>
 									<div
 										// Below is a shortcircuit statment that looks for the tab state and the item matching, if true, then include an additional class that applies the 'selected' styling
 										className={`panel--left__item ${tab === item.name && "panel--left__item--selected"} ${!tabOpen && 'panel--left__item--closed'}`}
@@ -161,7 +195,7 @@ export const TeacherDashboard = () => {
 					<div className={`panel--left__bottom-navigation ${!tabOpen && 'panel--left__bottom-navigation--closed'}`}>
 						{
 							bottomTabList.map(item => (
-								<Link to={item.linksto || '#'} className={classes.tweakedLink}>
+								<Link to={item.linksto || '#'} className={global.tweakedLink}>
 									<div>
 										<img src={item.icon} alt={item.name} />
 										{tabOpen && item.name}
@@ -174,13 +208,13 @@ export const TeacherDashboard = () => {
 				<div className="container__panel--right">
 					<div className="panel--right__buttonContainer">
 						<Link>
-							<Button variant="contained">Take Screenshot</Button>
+							<Button className={global.orangeButton}variant="contained">Take Screenshot</Button>
 						</Link>
 						<Link>
-							<Button variant="contained">Help Centre</Button>
+							<Button className={global.pinkButton} variant="contained">Help Centre</Button>
 						</Link>
 						<Link to="/projectview">
-							<Button variant="contained" >More Projects</Button>
+							<Button className={global.blueButton} variant="contained" >More Projects</Button>
 						</Link>
 					</div>
 					<div className="container__panel--right__inner">Content Goes here</div>
