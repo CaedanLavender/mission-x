@@ -1,6 +1,8 @@
-import { Grid } from '@material-ui/core';
-import { CardMedia } from '@material-ui/core';
-import { Typography } from '@material-ui/core'
+import {
+	Grid,
+	CardMedia,
+	Typography
+} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({

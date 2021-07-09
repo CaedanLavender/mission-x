@@ -1,6 +1,8 @@
 import { Grid } from '@material-ui/core';
-import { ToggleButtonGroup } from '@material-ui/lab';
-import { ToggleButton } from '@material-ui/lab';
+import {
+	ToggleButtonGroup,
+	ToggleButton
+} from '@material-ui/lab';
 
 const LevelFilter = (props) => {
 	return (
