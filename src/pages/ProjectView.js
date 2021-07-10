@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 // LIBRARY IMPORTS
 import { useState, useEffect } from 'react'
 import {
@@ -19,6 +21,18 @@ import ShowFilter from '../components/projectView/ShowFilter';
 import LevelFilter from '../components/projectView/LevelFilter';
 
 export default function ProjectView() {
+	// AXIOS
+
+	const getProjects = () => {
+		axios.get('http://localhost:4000/projects')
+			.then(res => {
+				console.log(res.data);
+			})
+			.catch(() => {
+				console.log("Caught error");
+			});
+	};
+
 	// STATE HOOKS
 	const [filteredProjects, setFilteredProjects] = useState([]);
 	const [subscriptionFilter, setSubscriptionFilter] = useState([]);
@@ -311,7 +325,7 @@ export default function ProjectView() {
 
 					{/* HEADING CONTAINER */}
 					<Grid item xs={9} xl={10} className={classes.headingContainer}>
-						<Typography variant="h4">PROJECTS</Typography>
+						<Typography variant="h4" onClick={getProjects}>PROJECTS</Typography>
 						<Typography variant="subtitle2">Welcome to the project library. You can use the filters on the right to help you search for specific projects.</Typography>
 					</Grid>
 
