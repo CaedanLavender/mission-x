@@ -29,9 +29,17 @@ export default function ProjectView() {
 				console.log(res.data);
 			})
 			.catch(() => {
-				console.log("Caught error");
+				console.log("Catch error");
 			});
 	};
+
+	const getProject = (project) => {
+		axios.get('http://localhost:4000/project', {
+			project: project
+		})
+		.then(res => console.log(res))
+		.catch(console.log("Catch error"))
+	}
 
 	// STATE HOOKS
 	const [filteredProjects, setFilteredProjects] = useState([]);
