@@ -83,7 +83,8 @@ td {
 .backButtonMain {
   text-align: end;
 }
-/* 896 */
+
+/* 869px because the two divs together are 896px wide, so it the div css needs to update the moment they split one on top of the other */
 @media screen and (max-width: 896px) {
   .mainSection {
     width: 90%;
@@ -92,13 +93,13 @@ td {
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 896px) {
   .backButtonMain {
     text-align: center;
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 896px) {
   .backButton {
     margin: 10px;
   }

@@ -5,7 +5,7 @@ import ProfileInfo from "./ProfileInfo";
 
 export default function Profile() {
   return (
-    <div className="main">
+    <div className="container">
       <ProfileAvatar />
       <ProfileInfo />
     </div>
