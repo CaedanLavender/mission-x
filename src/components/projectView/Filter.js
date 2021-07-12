@@ -5,6 +5,7 @@ import {
 	FormControlLabel,
 	Checkbox
 } from '@material-ui/core';
+import { PinDropRounded } from '@material-ui/icons';
 
 
 const Filter = (props) => {
@@ -17,8 +18,8 @@ const Filter = (props) => {
 				props.filterArray.map(option => (
 					<FormControlLabel
 						key={option}
-						control={<Checkbox checked={props.filterState.includes(option)} onChange={props.filterHandler} name={option} value={option} color="primary" />}
-						label={option}
+						control={<Checkbox checked={props.filterState.toString().includes(option)} onChange={props.filterHandler} name={option} value={option} color="primary" />}
+						label={props.filterTitle==="Year Level"?option[0] + "-" + option[option.length-1]:option}
 					/>
 				))
 			}

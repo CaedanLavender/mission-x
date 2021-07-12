@@ -8,20 +8,23 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles({
 	projectItem: {
 		padding: '1.5em'
+	},
+	upperText: {
+		textTransform: "uppercase"
 	}
 })
 
 const ProjectItem = (props) => {
 	const classes = useStyles();
 	return (
-		<Grid item xs={12} sm={6} md={4} className={classes.projectItem} key={props.project.name}>
+		<Grid item xs={12} sm={6} md={4} className={classes.projectItem} key={props.project.project_number}>
 			<CardMedia
 				component="img"
-				alt={props.project.name}
-				image={props.project.image}
+				alt={props.project.project_name}
+				image={props.project.project_thumbnail}
 			/>
-			<Typography variant="h5">{props.project.name}</Typography>
-			<Typography variant="subtitle2">{props.project.level.toUpperCase()} | {props.project.activityType}</Typography>
+			<Typography variant="h5">{props.project.project_name}</Typography>
+			<Typography variant="subtitle2" className={classes.upperText}>{props.project.course} | {props.project.activity_type}</Typography>
 		</Grid>
 	)
 }
