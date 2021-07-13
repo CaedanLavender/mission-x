@@ -35,7 +35,7 @@ function App() {
         <Switch>
           <Route path="/" exact render={() => <h1>Home</h1>} />
           <Route path="/projectview" exact component={ProjectView} />
-			 <Route path="/projectview/projects/:id" component={ProjectDashboard} />
+			 <Route path="/projects/:id" component={ProjectDashboard} />
           <Route path="/profile" component={Profile} />
           <Route path="/teacher-dashboard" component={TeacherDashboard} />
           <Route path="/student-profiles" component={StudentProfiles} />

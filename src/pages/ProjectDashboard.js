@@ -10,6 +10,25 @@ import levelUpLogo from '../assets/global/star-logo.png';
 import nzFlag from '../assets/global/nz-flag.png';
 import maoriFlag from '../assets/global/maori-flag.png';
 
+import learningObjectivesIconLight from '../assets/global/learning-objectives--icon--light.png'
+import learningObjectivesIconDark from '../assets/global/learning-objectives--icon--dark.png'
+
+import instructionsIconLight from '../assets/global/instructions--icon--light.png'
+import instructionsIconDark from '../assets/global/instructions--icon--dark.png'
+
+import videoTutorialIconLight from '../assets/global/video-tutorial--icon--light.png'
+import videoTutorialIconDark from '../assets/global/video-tutorial--icon--dark.png'
+
+import previewProjectIconLight from '../assets/global/preview-project--icon--light.png'
+import previewProjectIconDark from '../assets/global/preview-project--icon--dark.png'
+
+import checkSubmissionsIconLight from '../assets/global/project-submissions--icon--light.png'
+import checkSubmissionsIconDark from '../assets/global/project-submissions--icon--dark.png'
+
+import offlineActivitiesIconLight from '../assets/global/offline-activities--icon--light.png'
+
+import viewQuizResultsIconLight from '../assets/global/view-quiz-results--icon--light.png'
+
 import progressIconLight from '../assets/global/progress--icon--light.png';
 import progressIconDark from '../assets/global/progress--icon--dark.png';
 
@@ -61,8 +80,67 @@ const ProjectDashboard = ({ match }) => {
 
 	const global = globalStyles();
 
+	const tabList = [
+		{
+			name: "Learning Objectives",
+			icon: {
+				light: learningObjectivesIconLight,
+				dark: learningObjectivesIconDark
+			},
+			linksto: null
+		},
+		{
+			name: "Instructions",
+			icon: {
+				light: instructionsIconLight,
+				dark: instructionsIconDark
+			},
+			linksto: null
+		},
+		{
+			name: "Video Tutorial",
+			icon: {
+				light: videoTutorialIconLight,
+				dark: videoTutorialIconDark
+			},
+			linksto: null
+		},
+		{
+			name: "Preview Project",
+			icon: {
+				light: previewProjectIconLight,
+				dark: previewProjectIconDark
+			},
+			linksto: null
+		},
+		{
+			name: "Check Submissions",
+			icon: {
+				light: checkSubmissionsIconLight,
+				dark: checkSubmissionsIconDark
+			},
+			linksto: null
+		},
+		{
+			name: "Offline Activities",
+			icon: {
+				light: offlineActivitiesIconLight,
+				dark: null
+			},
+			linksto: '#'
+		},
+		{
+			name: "View Quiz Results",
+			icon: {
+				light: viewQuizResultsIconLight,
+				dark: null
+			},
+			linksto: '#'
+		}
+	]
+
 	// STATE
-	const [tab, setTab] = useState('Progress Tracker');
+	const [tab, setTab] = useState(tabList[0].name);
 	const [tabOpen, setTabOpen] = useState(true);
 
 	// handles the changing tab by setting the tab state to the string that is passed in.
@@ -81,64 +159,6 @@ const ProjectDashboard = ({ match }) => {
 			.catch(() => console.log('There was a catch error'))
 	}
 
-	const tabList = [
-		{
-			name: "Learning Objectives",
-			icon: {
-				light: progressIconLight,
-				dark: progressIconDark
-			},
-			linksto: null
-		},
-		{
-			name: "Instructions",
-			icon: {
-				light: progressIconLight,
-				dark: progressIconDark
-			},
-			linksto: null
-		},
-		{
-			name: "Video Tutorial",
-			icon: {
-				light: progressIconLight,
-				dark: progressIconDark
-			},
-			linksto: null
-		},
-		{
-			name: "Preview Project",
-			icon: {
-				light: progressIconLight,
-				dark: progressIconDark
-			},
-			linksto: null
-		},
-		{
-			name: "Check Submissions",
-			icon: {
-				light: progressIconLight,
-				dark: progressIconDark
-			},
-			linksto: null
-		},
-		{
-			name: "Offline Activities",
-			icon: {
-				light: progressIconLight,
-				dark: null
-			},
-			linksto: '#'
-		},
-		{
-			name: "View Quiz Results",
-			icon: {
-				light: progressIconLight,
-				dark: null
-			},
-			linksto: '#'
-		}
-	]
 
 
 
