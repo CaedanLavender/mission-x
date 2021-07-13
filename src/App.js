@@ -4,6 +4,7 @@ import NavigationBar from "./components/NavigationBar";
 import ProjectView from "./pages/ProjectView";
 import Profile from "./components/Profile/Profile";
 import StudentProfiles from "./components/StudentProfiles/StudentProfiles";
+import Test from "./components/Profile/Test";
 // React Router import
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { AppBar, Toolbar } from "@material-ui/core";
@@ -18,14 +19,21 @@ function App() {
           <Switch>
             <Route
               exact
-              path={["/", "/projectview", "/Profile", "/Student-Profiles"]}
+              path={[
+                "/",
+                "/projectview",
+                "/profile",
+                "/student-profiles",
+                "/test",
+              ]}
             >
               <Toolbar className="menu">
                 <Link to="/">Home |</Link>
                 <Link to="/projectview"> Project View |</Link>
-                <Link to="/Profile">Profile View |</Link>
+                <Link to="/profile">Profile View |</Link>
                 <Link to="/teacher-dashboard">Teacher Dashboard |</Link>
                 <Link to="/student-profiles">Student Profiles |</Link>
+                <Link to="/test">reubentest |</Link>
                 {/* Add more links here by following the format above */}
               </Toolbar>
             </Route>
@@ -37,6 +45,7 @@ function App() {
           <Route path="/profile" component={Profile} />
           <Route path="/teacher-dashboard" component={TeacherDashboard} />
           <Route path="/student-profiles" component={StudentProfiles} />
+          <Route path="/test" component={Test} />
           {/* Add your page to the route by following the example above. */}
         </Switch>
       </Router>
