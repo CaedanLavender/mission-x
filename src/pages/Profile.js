@@ -1,7 +1,7 @@
 import React from "react";
 import "./Profile.css";
-import ProfileAvatar from "./ProfileAvatar";
-import ProfileInfo from "./ProfileInfo";
+import ProfileAvatar from "../components/Profile/ProfileAvatar";
+import ProfileInfo from "../components/Profile/ProfileInfo";
 
 export default function Profile() {
   return (
