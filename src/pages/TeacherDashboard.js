@@ -6,6 +6,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
+import TeacherDashboardContent from "../components/teacherDashboard/teacherDashboardContent";
 
 // icon (*.png) imports
 import levelUpLogo from "../assets/global/star-logo.png";
@@ -225,7 +226,7 @@ export const TeacherDashboard = () => {
 						</Link>
 					</div>
 					<div className="container__panel--right__inner">
-						Content Goes here
+							<TeacherDashboardContent tab={tab}/>
 					</div>
 				</div>
 			</div>
