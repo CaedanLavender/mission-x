@@ -4,6 +4,7 @@ import {
 	Typography
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles({
 	projectItem: {
@@ -18,6 +19,7 @@ const ProjectItem = (props) => {
 	const classes = useStyles();
 	return (
 		<Grid item xs={12} sm={6} md={4} className={classes.projectItem} key={props.project.project_number}>
+			<Link to={`projects/${props.project.project_id}`}>
 			<CardMedia
 				component="img"
 				alt={props.project.project_name}
@@ -25,6 +27,7 @@ const ProjectItem = (props) => {
 			/>
 			<Typography variant="h5">{props.project.project_name}</Typography>
 			<Typography variant="subtitle2" className={classes.upperText}>{props.project.course} | {props.project.activity_type}</Typography>
+			</Link>
 		</Grid>
 	)
 }

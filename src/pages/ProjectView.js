@@ -150,7 +150,7 @@ export default function ProjectView() {
 	const handlePageChange = (newPage) => setPage(newPage)
 
 	// OBJECTS
-	const projects = [
+	const projectsOld = [
 		{
 			name: "Introduction",
 			subscription: "Free",
