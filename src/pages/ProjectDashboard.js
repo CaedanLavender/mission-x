@@ -1,5 +1,5 @@
 import './Dashboard.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
@@ -80,6 +80,7 @@ const ProjectDashboard = ({ match }) => {
 
 	const global = globalStyles();
 
+	// Tab list needs to be above state, because the tab state uses this object to figure out what the initial 'selected' tab should be
 	const tabList = [
 		{
 			name: "Learning Objectives",
@@ -142,16 +143,17 @@ const ProjectDashboard = ({ match }) => {
 	// STATE
 	const [tab, setTab] = useState(tabList[0].name);
 	const [tabOpen, setTabOpen] = useState(true);
+	const [project, setProject] = useState({});
 
 	// handles the changing tab by setting the tab state to the string that is passed in.
 	// A simple shortcircut statement handles when null is passed in and sets tab to itself (no change in otherwords) -- possible side-effect being that the state is still updated so may trigger a potential useEffect if one was implemented in the future
 	const changeTab = (newTab) => {
 		setTab(newTab || tab)
 	}
-	const [project, setProject] = useState({});
 
-	const fetchProject = (projectID) => {
-		axios.get(`http://localhost:4000/project?project=${projectID}`)
+	// Gets the project data based on the 'id' in the url
+	const fetchProject = () => {
+		axios.get(`http://localhost:4000/project?project=${match.params.id}`)
 			.then(res => {
 				console.log(res.data[0])
 				setProject(res.data[0])
@@ -159,8 +161,9 @@ const ProjectDashboard = ({ match }) => {
 			.catch(() => console.log('There was a catch error'))
 	}
 
-
-
+	useEffect(() => {
+		fetchProject()
+	}, []);
 
 	const bottomTabList = [
 		{
@@ -184,6 +187,9 @@ const ProjectDashboard = ({ match }) => {
 		<div className="wrapper">
 			<div className="dashboard__toolbar">
 				<img src={levelUpLogo} alt="Levelup Works logo" />
+				<div className="project-tracker">
+					<div className="project-tracker__dot"></div>
+				</div>
 				<div className="dashboard__toolbar__flag-container">
 					<img src={nzFlag} alt="Levelup Works logo" />
 					<img src={maoriFlag} alt="Levelup Works logo" />

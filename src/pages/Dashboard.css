@@ -164,3 +164,18 @@
 	gap: 1em;
 	justify-content: right;
 }
+
+.project-tracker {
+	flex-basis: 100%;
+	background-color: red;
+	display: flex;
+	align-items: center;
+}
+
+.project-tracker__dot {
+	height: 1.5em;
+	width: 1.5em;
+	border-radius: 50%;
+	border: .25em solid var(--main-blue);
+	background-color: white;
+}
