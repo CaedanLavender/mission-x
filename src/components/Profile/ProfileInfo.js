@@ -1,18 +1,38 @@
 import React from "react";
 import "./ProfileInfo.css";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 export default function ProfileInfo() {
+  const [loggedIn, setLoggedIn] = useState([]);
+
+  const loggedInUser = () => {
+    axios
+      .get("http://localhost:4000/userslogged")
+      .then((res) => {
+        console.log(res.data[0]);
+        setLoggedIn(res.data[0]);
+      })
+      .catch(() => console.log("Catch error fix meee"));
+  };
+
+  useEffect(() => {
+    loggedInUser();
+  }, []);
+
   return (
     <div className="mainSection">
       <div className="infoBlock">
         <div>
-          <h1 className="fullName">Frankie</h1>
+          <h1 className="fullName">
+            {loggedIn.first_name} {loggedIn.last_name}
+          </h1>
 
           <table>
             <tbody>
               <tr>
                 <td className="col1">School</td>
-                <td>Homai School</td>
+                <td>{loggedIn.school}</td>
               </tr>
               <tr>
                 <td>Teacher</td>
@@ -28,11 +48,11 @@ export default function ProfileInfo() {
               </tr>
               <tr>
                 <td>Contact No</td>
-                <td className="studentNo">022 524 6399</td>
+                <td className="studentNo">{loggedIn.contact_number}</td>
               </tr>
               <tr>
                 <td>Email address</td>
-                <td className="studentEmail">fletchy.r@gmail.com</td>
+                <td className="studentEmail">{loggedIn.email}</td>
               </tr>
             </tbody>
           </table>

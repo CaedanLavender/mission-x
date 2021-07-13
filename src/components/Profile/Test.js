@@ -13,26 +13,26 @@ const useStyles = makeStyles(() => ({
 
 export default function Test() {
   const [loggedIn, setLoggedIn] = useState([]);
-  const classes = useStyles();
 
-  const getLoggedInUser = () => {
+  const loggedInUser = () => {
     axios
       .get("http://localhost:4000/userslogged")
       .then((res) => {
-        console.log(res.data);
+        console.log(res.data[0]);
+        setLoggedIn(res.data[0]);
       })
-      .catch(() => console.log("Catch error"));
+      .catch(() => console.log("Catch error fix meee"));
   };
 
   useEffect(() => {
-    axios.get("http://localhost:4000/users").then((response) => {
-      setLoggedIn(response.data);
-    });
+    loggedInUser();
   }, []);
 
   return (
     <div className="container">
-      <p>if working then should display something here:{getLoggedInUser()}</p>
+      <p>
+        if working then should display something here: {loggedIn.first_name}
+      </p>
       {/* {loggedIn.map((user) => (
         <div className="card">
           <Avatar
