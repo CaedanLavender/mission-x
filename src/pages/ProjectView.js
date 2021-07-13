@@ -48,7 +48,7 @@ export default function ProjectView() {
 			.then(res => {
 				console.log(res)
 			})
-			.catch(console.log("Catch error"))
+			.catch(() => console.log("Catch error"))
 	}
 
 	// Triggers the axios request that populates the projectList with all the projects, will run every page render

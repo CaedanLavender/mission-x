@@ -18,17 +18,17 @@ export default function Test() {
   const getLoggedInUser = () => {
     axios
       .get("http://localhost:4000/userslogged")
-      .then((res) => {
+      .then(res => {
         console.log(res.data);
       })
-      .catch(console.log("Catch error"));
+      .catch(() => console.log("Catch error"));
   };
 
   useEffect(() => {
     axios.get("http://localhost:4000/users").then((response) => {
       setLoggedIn(response.data);
     });
-  });
+  },[]);
 
   return (
     <div className="container">
