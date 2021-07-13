@@ -2,6 +2,7 @@ import "./App.css";
 // Component imports
 import NavigationBar from "./components/NavigationBar";
 import ProjectView from "./pages/ProjectView";
+import ProjectDashboard from "./pages/ProjectDashboard"
 import Profile from "./components/Profile/Profile";
 import StudentProfiles from "./components/StudentProfiles/StudentProfiles";
 import Test from "./components/Profile/Test";
@@ -41,7 +42,8 @@ function App() {
         </AppBar>
         <Switch>
           <Route path="/" exact render={() => <h1>Home</h1>} />
-          <Route path="/projectview" component={ProjectView} />
+          <Route path="/projectview" exact component={ProjectView} />
+			 <Route path="/projects/:id" component={ProjectDashboard} />
           <Route path="/profile" component={Profile} />
           <Route path="/teacher-dashboard" component={TeacherDashboard} />
           <Route path="/student-profiles" component={StudentProfiles} />

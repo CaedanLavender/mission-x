@@ -21,18 +21,6 @@ import ShowFilter from '../components/projectView/ShowFilter';
 import LevelFilter from '../components/projectView/LevelFilter';
 
 export default function ProjectView() {
-	// AXIOS
-
-	const getProjects = () => {
-		axios.get('http://localhost:4000/projects')
-			.then(res => {
-				console.log(res.data);
-			})
-			.catch(() => {
-				console.log("Caught error");
-			});
-	};
-
 	// STATE HOOKS
 	const [filteredProjects, setFilteredProjects] = useState([]);
 	const [subscriptionFilter, setSubscriptionFilter] = useState([]);
@@ -43,6 +31,37 @@ export default function ProjectView() {
 	const [showFilter, setShowFilter] = useState(6);
 	const [page, setPage] = useState(1);
 	const [pageCount, setPageCount] = useState(2);
+	const [projectList, setProjectList] = useState([]);
+
+
+	// AXIOS
+	const getProjects = () => {
+		axios.get('http://localhost:4000/projects')
+			.then(res => {
+				setProjectList(res.data)
+			})
+			.catch(() => console.log("Catch error"))
+	};
+
+	const getProject = (project) => {
+		axios.get(`http://localhost:4000/project?project=${project}`)
+			.then(res => {
+				console.log(res)
+			})
+			.catch(console.log("Catch error"))
+	}
+
+	// Triggers the axios request that populates the projectList with all the projects, will run every page render
+	useEffect(() => {
+		getProjects()
+	}, [])
+
+	useEffect(() => {
+		// For development, console logs the projectList every time it changes
+		// console.log(projectList)
+		// Sets the filteredProjects to the projectList, triggered to run everytime the projectList state changes, which will generally only be on the first pageload
+		setFilteredProjects(projectList)
+	}, [projectList])
 
 	// TOGGLE GROUP HANDLERS
 	const handleShowFilter = (event, newShowFilter) => {
@@ -75,6 +94,7 @@ export default function ProjectView() {
 
 	const handleYearLevelFilter = (event) => {
 		let newFilter = event.target.value;
+		console.log(event.target.value);
 		if (yearLevelFilter.includes(newFilter)) {
 			setYearLevelFilter(yearLevelFilter.filter(filter => filter !== newFilter))
 		} else {
@@ -98,6 +118,7 @@ export default function ProjectView() {
 
 	// This updates the pageCount and page state every time the filteredProjects changes. It's in a separate useEffect so that the filteredProjects can complete it's change before triggering these updates
 	useEffect(() => {
+		// console.log(filteredProjects)
 		setPageCount(Math.ceil(filteredProjects.length / showFilter))
 		setPage(1)
 	}, [filteredProjects])
@@ -105,12 +126,12 @@ export default function ProjectView() {
 	// Refilters the projects based on all the filters. This could pottentially be made more efficient by splitting all of this out into separate functions so that it's only refiltering based on the specific filter that changed instead of rechecking everything, but the return wouldn't be that great for the amount of effort put in
 	const handleFilteredProjects = () => {
 		setFilteredProjects(
-			projects.filter(project => {
+			projectList.filter(project => {
 				if (subscriptionFilter.length && !subscriptionFilter.includes(project.subscription)) return false
-				if (activityTypeFilter.length && !activityTypeFilter.includes(project.activityType)) return false
-				if (yearLevelFilter.length && !yearLevelFilter.includes(project.yearLevel)) return false
-				if (subjectMatterFilter.length && !subjectMatterFilter.includes(project.subjectMatter)) return false
-				if (levelFilter && levelFilter !== project.level) return false;
+				if (activityTypeFilter.length && !activityTypeFilter.includes(project.activity_type)) return false
+				if (yearLevelFilter.length && !yearLevelFilter.toString().split(",").includes(project.year+"")) return false
+				if (subjectMatterFilter.length && !subjectMatterFilter.includes(project.subject_matter1 || project.subject_matter2 || project.subject_matter3)) return false
+				if (levelFilter && levelFilter !== project.course) return false;
 				return project
 			}
 			)
@@ -120,14 +141,16 @@ export default function ProjectView() {
 	// A simple useEffect that scrolls to the top when the page variable is updated. In other words, when the user changes page.
 	useEffect(() => window.scrollTo(0, 0), [page])
 
+	// useEffect(() => console.log(yearLevelFilter.toString().split(",").includes("1")),[yearLevelFilter])
+
 	// Adds the adjustment (which will be either 1 or -1) to the page state which, in other words, just bumps it up or down
 	const handlePageIncrement = (adjustment) => setPage(page + adjustment)
 
-	// Simply directly updates the current page
+	// Directly updates the current page
 	const handlePageChange = (newPage) => setPage(newPage)
 
 	// OBJECTS
-	const projects = [
+	const projectsOld = [
 		{
 			name: "Introduction",
 			subscription: "Free",
@@ -256,11 +279,12 @@ export default function ProjectView() {
 		}
 	];
 
-	// An object containing all of the filters and their options for the sake of dynamically generating the filters --- this is soley because I am lazy
+	// An object containing all of the filters and their options for the sake of dynamically generating the filters --- this is purely because I'm lazy
 	const filters = {
 		subscription: ['Free', 'Premium'],
 		activityType: ['Animation', 'Game', 'Chatbot', 'Augmented Reality'],
-		yearLevel: ['1-4', '5-6', '7-8', '9-13'],
+		// yearLevel: ['1-4', '5-6', '7-8', '9-13'],
+		yearLevel: [[1,2,3,4],[5,6],[7,8],[9,10,11,12,13]],
 		subjectMatter: ['Computer Science', 'Maths', 'Science', 'Language', 'Art', 'Music']
 	}
 
@@ -337,6 +361,7 @@ export default function ProjectView() {
 							filterState={subscriptionFilter}
 							filterArray={filters.subscription}
 							filterHandler={handleSubscriptionFilter}
+							key="Subscription"
 						/>
 						<Filter
 							filters={filters}
@@ -344,6 +369,7 @@ export default function ProjectView() {
 							filterState={activityTypeFilter}
 							filterArray={filters.activityType}
 							filterHandler={handleActivityTypeFilter}
+							key="Activity Type"
 						/>
 						<Filter
 							filters={filters}
@@ -351,6 +377,7 @@ export default function ProjectView() {
 							filterState={yearLevelFilter}
 							filterArray={filters.yearLevel}
 							filterHandler={handleYearLevelFilter}
+							key="Year Level"
 						/>
 						<Filter
 							filters={filters}
@@ -358,6 +385,7 @@ export default function ProjectView() {
 							filterState={subjectMatterFilter}
 							filterArray={filters.subjectMatter}
 							filterHandler={handleSubjectMatterFilter}
+							key="Subject Matter"
 						/>
 					</Grid>
 
@@ -382,7 +410,7 @@ export default function ProjectView() {
 							{/* LOOP THROUGH PROJECTS FROM FILTEREDPROJECTS STATE AND CREATE GRID ITEMS */}
 							{
 								filteredProjects.filter((e, i) => (i >= showFilter * (page - 1)) && (i < showFilter * (page))).map(project => (
-									<ProjectItem project={project} />
+									<ProjectItem project={project} key={project.project_name} />
 								))
 							}
 						</Grid>

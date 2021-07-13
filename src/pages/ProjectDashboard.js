@@ -1,70 +1,75 @@
-// CSS classnames follow rough BEM naming conventions: "__" to denote child item and "--" to denote modifier
-// http://getbem.com/naming/
-
 import './Dashboard.css';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
+import axios from 'axios';
 
-// icon (*.png) imports
 import levelUpLogo from '../assets/global/star-logo.png';
 
 import nzFlag from '../assets/global/nz-flag.png';
 import maoriFlag from '../assets/global/maori-flag.png';
 
+import learningObjectivesIconLight from '../assets/global/learning-objectives--icon--light.png'
+import learningObjectivesIconDark from '../assets/global/learning-objectives--icon--dark.png'
+
+import instructionsIconLight from '../assets/global/instructions--icon--light.png'
+import instructionsIconDark from '../assets/global/instructions--icon--dark.png'
+
+import videoTutorialIconLight from '../assets/global/video-tutorial--icon--light.png'
+import videoTutorialIconDark from '../assets/global/video-tutorial--icon--dark.png'
+
+import previewProjectIconLight from '../assets/global/preview-project--icon--light.png'
+import previewProjectIconDark from '../assets/global/preview-project--icon--dark.png'
+
+import checkSubmissionsIconLight from '../assets/global/project-submissions--icon--light.png'
+import checkSubmissionsIconDark from '../assets/global/project-submissions--icon--dark.png'
+
+import offlineActivitiesIconLight from '../assets/global/offline-activities--icon--light.png'
+
+import viewQuizResultsIconLight from '../assets/global/view-quiz-results--icon--light.png'
+
 import progressIconLight from '../assets/global/progress--icon--light.png';
 import progressIconDark from '../assets/global/progress--icon--dark.png';
-
-import studentProfilesIconLight from '../assets/global/student-profiles--icon--light.png';
-import studentProfilesIconDark from '../assets/global/student-profiles--icon--dark.png';
-
-import helpRequestsIconLight from '../assets/global/help-requests--icon--light.png';
-import helpRequestsIconDark from '../assets/global/help-requests--icon--dark.png';
-
-import projectSubmissionsIconLight from '../assets/global/project-submissions--icon--light.png';
-import projectSubmissionsIconDark from '../assets/global/project-submissions--icon--dark.png';
-
-import projectLibraryIconLight from '../assets/global/project-library--icon--light.png';
 
 import profileIcon from '../assets/global/profile--icon--light.png';
 import settingsIcon from '../assets/global/settings--icon--light.png';
 import logoutIcon from '../assets/global/logout--icon--light.png';
 
 
-export const TeacherDashboard = () => {
+const ProjectDashboard = ({ match }) => {
 	// STYLING
 	const globalStyles = makeStyles((theme) => ({
-		orangeButton:{
+		orangeButton: {
 			color: 'white',
 			background: '#E5AB2C',
 			fontFamily: 'Nunito',
 			fontWeight: '900',
 			textTransform: 'none',
 			padding: '0.3em 2em',
-			'&:hover':{
+			'&:hover': {
 				background: '#CC9213'
 			}
 		},
-		pinkButton:{
+		pinkButton: {
 			color: 'white',
 			background: '#F91C85',
 			fontFamily: 'Nunito',
 			fontWeight: '900',
 			textTransform: 'none',
 			padding: '0.3em 2em',
-			'&:hover':{
+			'&:hover': {
 				background: '#E0036C'
 			}
 		},
-		blueButton:{
+		blueButton: {
 			color: 'white',
 			background: '#43C0F6',
 			fontFamily: 'Nunito',
 			fontWeight: '900',
 			textTransform: 'none',
 			padding: '0.3em 2em',
-			'&:hover':{
+			'&:hover': {
 				background: '#2AA7DD'
 			}
 		},
@@ -75,59 +80,87 @@ export const TeacherDashboard = () => {
 
 	const global = globalStyles();
 
+	const tabList = [
+		{
+			name: "Learning Objectives",
+			icon: {
+				light: learningObjectivesIconLight,
+				dark: learningObjectivesIconDark
+			},
+			linksto: null
+		},
+		{
+			name: "Instructions",
+			icon: {
+				light: instructionsIconLight,
+				dark: instructionsIconDark
+			},
+			linksto: null
+		},
+		{
+			name: "Video Tutorial",
+			icon: {
+				light: videoTutorialIconLight,
+				dark: videoTutorialIconDark
+			},
+			linksto: null
+		},
+		{
+			name: "Preview Project",
+			icon: {
+				light: previewProjectIconLight,
+				dark: previewProjectIconDark
+			},
+			linksto: null
+		},
+		{
+			name: "Check Submissions",
+			icon: {
+				light: checkSubmissionsIconLight,
+				dark: checkSubmissionsIconDark
+			},
+			linksto: null
+		},
+		{
+			name: "Offline Activities",
+			icon: {
+				light: offlineActivitiesIconLight,
+				dark: null
+			},
+			linksto: '#'
+		},
+		{
+			name: "View Quiz Results",
+			icon: {
+				light: viewQuizResultsIconLight,
+				dark: null
+			},
+			linksto: '#'
+		}
+	]
+
 	// STATE
-	const [tab, setTab] = useState('Progress Tracker');
+	const [tab, setTab] = useState(tabList[0].name);
 	const [tabOpen, setTabOpen] = useState(true);
-	
+
 	// handles the changing tab by setting the tab state to the string that is passed in.
 	// A simple shortcircut statement handles when null is passed in and sets tab to itself (no change in otherwords) -- possible side-effect being that the state is still updated so may trigger a potential useEffect if one was implemented in the future
 	const changeTab = (newTab) => {
 		setTab(newTab || tab)
 	}
+	const [project, setProject] = useState({});
 
-	// Object list for tabs
-	const tabList = [
-		{
-			name: "Progress Tracker",
-			icon: {
-				light: progressIconLight,
-				dark: progressIconDark
-			},
-			linksto: null
-		},
-		{
-			name: "Student Profiles",
-			icon: {
-				light: studentProfilesIconLight,
-				dark: studentProfilesIconDark
-			},
-			linksto: null
-		},
-		{
-			name: "Help Requests",
-			icon: {
-				light: helpRequestsIconLight,
-				dark: helpRequestsIconDark
-			},
-			linksto: null
-		},
-		{
-			name: "Project Submissions",
-			icon: {
-				light: projectSubmissionsIconLight,
-				dark: projectSubmissionsIconDark
-			},
-			linksto: null
-		},
-		{
-			name: "Project Library",
-			icon: {
-				light: projectLibraryIconLight,
-				dark: null
-			},
-			linksto: "/projectview"
-		}
-	]
+	const fetchProject = (projectID) => {
+		axios.get(`http://localhost:4000/project?project=${projectID}`)
+			.then(res => {
+				console.log(res.data[0])
+				setProject(res.data[0])
+			})
+			.catch(() => console.log('There was a catch error'))
+	}
+
+
+
 
 	const bottomTabList = [
 		{
@@ -148,8 +181,6 @@ export const TeacherDashboard = () => {
 	]
 
 	return (
-		// Wrapper was introduced out of necessity as the stupid app wouldn't fill the screen -- I believe this comes from unwanted inheritance from app.js. Anyway, it's fixed now.
-		// Wrapper is just a flex box with the main part (not the toolbar) set to have a flex-basis of 100% so that it tries to fill 100% but will accept anything lese (this will break if flex-shrink is changed, leave as default).
 		<div className="wrapper">
 			<div className="dashboard__toolbar">
 				<img src={levelUpLogo} alt="Levelup Works logo" />
@@ -208,7 +239,7 @@ export const TeacherDashboard = () => {
 				<div className="container__panel--right">
 					<div className="panel--right__buttonContainer">
 						<Link>
-							<Button className={global.orangeButton}variant="contained">Take Screenshot</Button>
+							<Button className={global.orangeButton} variant="contained">Take Screenshot</Button>
 						</Link>
 						<Link>
 							<Button className={global.pinkButton} variant="contained">Help Centre</Button>
@@ -221,5 +252,9 @@ export const TeacherDashboard = () => {
 				</div>
 			</div>
 		</div>
+
+
 	)
 }
+
+export default ProjectDashboard;
