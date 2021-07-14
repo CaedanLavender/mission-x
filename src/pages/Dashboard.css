@@ -166,8 +166,9 @@
 }
 
 .project-tracker {
+	margin-left: 2em;
 	flex-basis: 100%;
-	background-color: red;
+	/* background-color: red; */
 	display: flex;
 	align-items: center;
 }

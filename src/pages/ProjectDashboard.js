@@ -1,4 +1,5 @@
 import "./Dashboard.css";
+import ProjectDashboardContent from '../components/projectView/ProjectItem/ProjectDashboardContent'
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Button from "@material-ui/core/Button";
@@ -143,6 +144,8 @@ const ProjectDashboard = ({ match }) => {
 	const [tab, setTab] = useState(tabList[0].name);
 	const [tabOpen, setTabOpen] = useState(true);
 	const [project, setProject] = useState({});
+	const [projectCount, setProjectCount] = useState('');
+	const [projectIndex, setProjectIndex] = useState('');
 
 	// handles the changing tab by setting the tab state to the string that is passed in.
 	// A simple shortcircut statement handles when null is passed in and sets tab to itself (no change in otherwords) -- possible side-effect being that the state is still updated so may trigger a potential useEffect if one was implemented in the future
@@ -160,8 +163,27 @@ const ProjectDashboard = ({ match }) => {
 			.catch(() => console.log("There was a catch error"));
 	};
 
+	const fetchProjectCount = () => {
+		axios.get('http://localhost:4000/count?table=project')
+			.then((res) => {
+				console.log(res.data.count)
+				setProjectCount(res.data.count)
+			})
+			.catch(() => console.log("There was a catch error retrieving the project count"))
+	}
+
+	const getProjectIndex = () => {
+		axios.get(`http://localhost:4000/projectindex?project=${match.params.id}`)
+			.then(res =>{
+				setProjectIndex(res.data.rownumber)
+			})
+			.catch(() => console.log("There was a catch error retrieving the project index"))
+	}
+
 	useEffect(() => {
 		fetchProject();
+		fetchProjectCount();
+		getProjectIndex();
 	}, []);
 
 	const bottomTabList = [
@@ -186,7 +208,7 @@ const ProjectDashboard = ({ match }) => {
 		<div className="wrapper">
 			<div className="dashboard__toolbar">
 				<img src={levelUpLogo} alt="Levelup Works logo" />
-				<div className="project-tracker">
+				<div onClick={() => fetchProjectCount()} className="project-tracker">
 					<div className="project-tracker__dot"></div>
 				</div>
 				<div className="dashboard__toolbar__flag-container">
@@ -263,7 +285,7 @@ const ProjectDashboard = ({ match }) => {
 						</Link>
 					</div>
 					<div className="container__panel--right__inner">
-						Content Goes here
+						<ProjectDashboardContent tab={tab} project={project} />
 					</div>
 				</div>
 			</div>
