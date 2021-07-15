@@ -3,6 +3,7 @@ import ProjectDashboardContent from '../components/projectView/ProjectItem/Proje
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Button from "@material-ui/core/Button";
+import { Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import axios from "axios";
 
@@ -174,8 +175,9 @@ const ProjectDashboard = ({ match }) => {
 
 	const getProjectIndex = () => {
 		axios.get(`http://localhost:4000/projectindex?project=${match.params.id}`)
-			.then(res =>{
-				setProjectIndex(res.data.rownumber)
+			.then(res => {
+				console.log(res.data)
+				setProjectIndex(res.data.index)
 			})
 			.catch(() => console.log("There was a catch error retrieving the project index"))
 	}
@@ -209,7 +211,18 @@ const ProjectDashboard = ({ match }) => {
 			<div className="dashboard__toolbar">
 				<img src={levelUpLogo} alt="Levelup Works logo" />
 				<div onClick={() => fetchProjectCount()} className="project-tracker">
-					<div className="project-tracker__dot"></div>
+					<div className="project-tracker__title-container">
+						<span className="project-tracker__title">Project</span>
+						<span className="project-tracker__subtitle">{project.project_name}</span>
+					</div>
+					{
+						[...Array(projectCount)].map((dot,iteration) => (
+							<>
+							<div className={`project-tracker__dot ${projectIndex===(iteration+1) && "project-tracker__dot--active"}`}>{projectIndex===(iteration+1) && projectIndex}</div>
+							</>
+						)
+						)
+					}
 				</div>
 				<div className="dashboard__toolbar__flag-container">
 					<img src={nzFlag} alt="Levelup Works logo" />
@@ -227,8 +240,7 @@ const ProjectDashboard = ({ match }) => {
 							<Link to={item.linksto || "#"} className={global.tweakedLink}>
 								<div
 									// Below is a shortcircuit statment that looks for the tab state and the item matching, if true, then include an additional class that applies the 'selected' styling
-									className={`panel--left__item ${tab === item.name && "panel--left__item--selected"
-										} ${!tabOpen && "panel--left__item--closed"}`}
+									className={`panel--left__item ${tab === item.name && "panel--left__item--selected"} ${!tabOpen && "panel--left__item--closed"}`}
 									// The ternary below is checking if there is a linksto property, if so, send null (this means that the tab is actually an external link and we do not want to run the tabchanging stuff), otherwise send the new tab into the changeTab function
 									onClick={() => changeTab(item.linksto ? null : item.name)}
 								>

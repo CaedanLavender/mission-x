@@ -338,13 +338,7 @@ export default function ProjectView() {
 
 	const classes = useStyles();
 
-	const globalStyles = makeStyles((theme) => ({
-		tweakedLink: {
-			textDecoration: "none",
-		},
-	}));
-
-	const global = globalStyles();
+	
 
 	return (
 		<ThemeProvider theme={theme}>

@@ -3,6 +3,7 @@
 	--light-blue: #b2e4fa;
 	--superlight-blue: #d9f2fd;
 	--defaultGrey: #6c6c6c;
+	--pale-yellow: #fcf6bf;
 }
 
 .wrapper {
@@ -18,6 +19,10 @@
 	background-color: white;
 	display: flex;
 	justify-content: space-between;
+}
+
+.dashboard__toolbar__image-container {
+	width: ;
 }
 
 .dashboard__toolbar__flag-container {
@@ -166,17 +171,48 @@
 }
 
 .project-tracker {
-	margin-left: 2em;
 	flex-basis: 100%;
 	/* background-color: red; */
 	display: flex;
+	gap: 0.5em;
 	align-items: center;
+	font-family: 'Nunito';
+	color: var(--defaultGrey);
+}
+
+.project-tracker__title-container {
+	margin: auto 1.5em;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+}
+
+.project-tracker__title {
+	font-size: 1em;
+	font-weight: 900;
+	text-transform: uppercase;
+}
+.project-tracker__subtitle {
+	font-size: 0.75em;
 }
 
 .project-tracker__dot {
-	height: 1.5em;
-	width: 1.5em;
+	height: 1em;
+	width: 1em;
 	border-radius: 50%;
-	border: .25em solid var(--main-blue);
+	border: .2em solid var(--main-blue);
 	background-color: white;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.project-tracker__dot--active {
+	height: 2em;
+	width: 2em;
+	font-weight: 900;
+	font-size: 1em;
+	overflow: hidden;
+	background-color: var(--pale-yellow);
 }

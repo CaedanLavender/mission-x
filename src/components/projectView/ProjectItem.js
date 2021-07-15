@@ -12,6 +12,9 @@ const useStyles = makeStyles({
 	},
 	upperText: {
 		textTransform: "uppercase"
+	},
+	tweakedLink: {
+		textDecoration: "none"
 	}
 })
 
@@ -19,7 +22,7 @@ const ProjectItem = (props) => {
 	const classes = useStyles();
 	return (
 		<Grid item xs={12} sm={6} md={4} className={classes.projectItem} key={props.project.project_number}>
-			<Link to={`projects/${props.project.project_id}`}>
+			<Link to={`/ProjectView/projects/${props.project.project_id}`} className={classes.tweakedLink}>
 			<CardMedia
 				component="img"
 				alt={props.project.project_name}
