@@ -1,0 +1,17 @@
+.project__instructions {
+	text-align: left;
+	max-width: 1000px;
+	margin: 0 auto;
+}
+
+.project__instructions h1 {
+	/* color: red; */
+}
+
+.project__instructions h2 {
+	/* color: red; */
+}
+
+.project__instructions a::after {
+	content: attr(href);
+}

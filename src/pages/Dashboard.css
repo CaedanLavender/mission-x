@@ -15,15 +15,25 @@
 .dashboard__toolbar {
 	width: 100%;
 	padding: 0.5em 1.5em 0.5em 1em;
-	height: 60px;
+	/* height: 60px; */
 	background-color: white;
 	display: flex;
 	justify-content: space-between;
 }
 
-.dashboard__toolbar__image-container {
-	width: ;
+
+/* .dashboard__toolbar__image-container {
+	width: 500px;
+	background-color: red;
 }
+
+.dashboard__toolbar__image-container--closed {
+	background-color: green;
+}
+
+.dashboard__toolbar__image-container--closed  img{
+	height: 3em;
+} */
 
 .dashboard__toolbar__flag-container {
 	display: flex;
@@ -158,10 +168,12 @@
 .container__panel--right__inner {
 	/* margin: 2em; */
 	flex-basis: 100%;
-	height: 100px;
+	max-height: 85vh;
 	background-color: var(--superlight-blue);
 	border-radius: 20px;
 	padding: 2em;
+	overflow-y: scroll;
+	scrollbar-width: none;
 }
 
 .panel--right__buttonContainer {

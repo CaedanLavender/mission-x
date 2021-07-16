@@ -209,7 +209,8 @@ const ProjectDashboard = ({ match }) => {
 	return (
 		<div className="wrapper">
 			<div className="dashboard__toolbar">
-				<img src={levelUpLogo} alt="Levelup Works logo" />
+
+					<img src={levelUpLogo} alt="Levelup Works logo"/>
 				<div onClick={() => fetchProjectCount()} className="project-tracker">
 					<div className="project-tracker__title-container">
 						<span className="project-tracker__title">Project</span>
@@ -264,10 +265,7 @@ const ProjectDashboard = ({ match }) => {
 							alt="arrow"
 						/>
 					</div>
-					<div
-						className={`panel--left__bottom-navigation ${!tabOpen && "panel--left__bottom-navigation--closed"
-							}`}
-					>
+					<div className={`panel--left__bottom-navigation ${!tabOpen && "panel--left__bottom-navigation--closed"}`}>
 						{bottomTabList.map((item) => (
 							<Link to={item.linksto || "#"} className={global.tweakedLink}>
 								<div>
