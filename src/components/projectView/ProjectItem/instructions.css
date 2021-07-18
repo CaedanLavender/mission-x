@@ -12,6 +12,10 @@
 	/* color: red; */
 }
 
+.project__instructions > .heading-centered {
+	text-align: center;
+}
+
 .project__instructions a::after {
 	content: attr(href);
 }
