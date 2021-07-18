@@ -210,16 +210,16 @@ const ProjectDashboard = ({ match }) => {
 		<div className="wrapper">
 			<div className="dashboard__toolbar">
 
-					<img src={levelUpLogo} alt="Levelup Works logo"/>
+				<img src={levelUpLogo} alt="Levelup Works logo" />
 				<div onClick={() => fetchProjectCount()} className="project-tracker">
 					<div className="project-tracker__title-container">
 						<span className="project-tracker__title">Project</span>
 						<span className="project-tracker__subtitle">{project.project_name}</span>
 					</div>
 					{
-						[...Array(projectCount)].map((dot,iteration) => (
+						[...Array(projectCount)].map((dot, iteration) => (
 							<>
-							<div className={`project-tracker__dot ${projectIndex===(iteration+1) && "project-tracker__dot--active"}`}>{projectIndex===(iteration+1) && projectIndex}</div>
+								<div className={`project-tracker__dot ${projectIndex === (iteration + 1) && "project-tracker__dot--active"}`}>{projectIndex === (iteration + 1) && projectIndex}</div>
 							</>
 						)
 						)
