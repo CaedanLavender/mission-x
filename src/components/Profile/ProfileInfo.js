@@ -18,15 +18,17 @@ export default function ProfileInfo(props) {
               </tr>
               <tr>
                 <td>Teacher</td>
-                <td className="teacherName">.</td>
+                <td className="teacherName">Frank Fitzgerald</td>
               </tr>
               <tr>
                 <td>Course</td>
-                <td className="courseName">.</td>
+                <td className="courseName">{props.selectedStudent.course}</td>
               </tr>
               <tr>
                 <td>Date of Birth</td>
-                <td className="studentDob">.</td>
+                <td className="studentDob">
+                  {props.selectedStudent.date_of_birth}
+                </td>
               </tr>
               <tr>
                 <td>Contact No</td>
