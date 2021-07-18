@@ -2,12 +2,12 @@ import React from "react";
 import "./ProfileAvatar.css";
 import { Avatar } from "@material-ui/core";
 
-export default function ProfileAvatar({ selectedUser }) {
+export default function ProfileAvatar({ selectedStudent }) {
   return (
     <div className="avatarBlock">
       <div className="avatar">
         <Avatar
-          src={selectedUser.profile_pic}
+          src={selectedStudent.profile_pic}
           style={{
             width: "100px",
             height: "100px",

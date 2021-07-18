@@ -13,7 +13,7 @@ import { AppBar, Toolbar } from "@material-ui/core";
 import { TeacherDashboard } from "./pages/TeacherDashboard";
 
 function App() {
-  const [selectedUser, setSelectedUser] = useState({});
+  const [selectedStudent, setSelectedStudent] = useState({});
 
   return (
     <div className="App">
@@ -50,11 +50,11 @@ function App() {
             component={ProjectDashboard}
           />
           <Route path="/profile">
-            <Profile selectedUser={selectedUser} />
+            <Profile selectedStudent={selectedStudent} />
           </Route>
           <Route path="/teacher-dashboard" component={TeacherDashboard} />
           <Route path="/student-profiles">
-            <StudentProfiles setSelectedUser={setSelectedUser} />
+            <StudentProfiles setSelectedStudent={setSelectedStudent} />
           </Route>
 
           {/* Add your page to the route by following the example above. */}

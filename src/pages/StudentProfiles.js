@@ -13,24 +13,24 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-export default function StudentProfiles({ setSelectedUser }) {
-  const [studentUsers, setStudentUsers] = useState([]);
+const StudentProfiles = (props) => {
+  const [students, setStudents] = useState([]);
   const classes = useStyles();
 
   // Need to update this useEffect once you figured out dymanic database input I think
   useEffect(() => {
     axios.get("http://localhost:4000/users").then((response) => {
-      setStudentUsers(response.data);
+      setStudents(response.data);
     });
   }, []);
 
   const handleSubmit = (event) => {
-    setSelectedUser(studentUsers[parseInt(event.currentTarget.id)]);
+    props.setSelectedStudent(students[parseInt(event.currentTarget.id)]);
   };
 
   return (
     <div className="container">
-      {studentUsers.map((user, index) => (
+      {students.map((user, index) => (
         <div className="card" onClick={handleSubmit} id={index}>
           <Link to="profile">
             <Avatar
@@ -45,4 +45,6 @@ export default function StudentProfiles({ setSelectedUser }) {
       ))}
     </div>
   );
-}
+};
+
+export default StudentProfiles;
