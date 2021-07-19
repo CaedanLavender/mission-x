@@ -38,7 +38,7 @@ import profileIcon from "../assets/global/profile--icon--light.png";
 import settingsIcon from "../assets/global/settings--icon--light.png";
 import logoutIcon from "../assets/global/logout--icon--light.png";
 
-const ProjectDashboard = ({ match }) => {
+const ProjectDashboard = ({ match, user }) => {
 	// STYLING
 	const globalStyles = makeStyles((theme) => ({
 		orangeButton: {
@@ -90,6 +90,7 @@ const ProjectDashboard = ({ match }) => {
 				dark: learningObjectivesIconDark,
 			},
 			linksto: null,
+			permission: ['student', 'teacher']
 		},
 		{
 			name: "Instructions",
@@ -98,6 +99,7 @@ const ProjectDashboard = ({ match }) => {
 				dark: instructionsIconDark,
 			},
 			linksto: null,
+			permission: ['student', 'teacher']
 		},
 		{
 			name: "Video Tutorial",
@@ -106,6 +108,7 @@ const ProjectDashboard = ({ match }) => {
 				dark: videoTutorialIconDark,
 			},
 			linksto: null,
+			permission: ['student', 'teacher']
 		},
 		{
 			name: "Preview Project",
@@ -114,6 +117,16 @@ const ProjectDashboard = ({ match }) => {
 				dark: previewProjectIconDark,
 			},
 			linksto: null,
+			permission: ['teacher']
+		},
+		{
+			name: "Make Project",
+			icon: {
+				light: previewProjectIconLight,
+				dark: previewProjectIconDark,
+			},
+			linksto: null,
+			permission: ['student']
 		},
 		{
 			name: "Check Submissions",
@@ -122,6 +135,16 @@ const ProjectDashboard = ({ match }) => {
 				dark: checkSubmissionsIconDark,
 			},
 			linksto: null,
+			permission: ['teacher']
+		},
+		{
+			name: "Submit Project",
+			icon: {
+				light: checkSubmissionsIconLight,
+				dark: checkSubmissionsIconDark,
+			},
+			linksto: null,
+			permission: ['student']
 		},
 		{
 			name: "Offline Activities",
@@ -130,6 +153,16 @@ const ProjectDashboard = ({ match }) => {
 				dark: null,
 			},
 			linksto: "#",
+			permission: ['teacher']
+		},
+		{
+			name: 'Bonus Challenge',
+			icon: {
+				light: offlineActivitiesIconLight,
+				dark: null,
+			},
+			linksto: "#",
+			permission: ['student']
 		},
 		{
 			name: "View Quiz Results",
@@ -138,7 +171,17 @@ const ProjectDashboard = ({ match }) => {
 				dark: null,
 			},
 			linksto: "#",
+			permission: ['teacher']
 		},
+		{
+			name: 'Take The Quiz',
+			icon: {
+				light: viewQuizResultsIconLight,
+				dark: null,
+			},
+			linksto: "#",
+			permission: ['student']
+		}
 	];
 
 	// STATE
@@ -213,7 +256,7 @@ const ProjectDashboard = ({ match }) => {
 				<img src={levelUpLogo} alt="Levelup Works logo" />
 				<div onClick={() => fetchProjectCount()} className="project-tracker">
 					<div className="project-tracker__title-container">
-						<span className="project-tracker__title">Project</span>
+						<span className="project-tracker__title">Project{user.role}</span>
 						<span className="project-tracker__subtitle">{project.project_name}</span>
 					</div>
 					{
@@ -236,7 +279,7 @@ const ProjectDashboard = ({ match }) => {
 						<div className="panel--left__profile">
 							<img src="" alt="" />
 						</div>
-						{tabList.map((item) => (
+						{tabList.filter(item => item.permission.includes(user.role)).map((item) => (
 							// I know it's shameful to include inline styling, but I just needed the stupid underline to go away -- simpler than makinng a whole theme/class
 							<Link to={item.linksto || "#"} className={global.tweakedLink}>
 								<div
