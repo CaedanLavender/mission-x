@@ -11,6 +11,7 @@ import { useState } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { AppBar, Toolbar } from "@material-ui/core";
 import { TeacherDashboard } from "./pages/TeacherDashboard";
+import AccessDenied from "./pages/AccessDenied";
 
 function App() {
 	const [selectedStudent, setSelectedStudent] = useState({});
