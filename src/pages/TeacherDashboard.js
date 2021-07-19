@@ -215,7 +215,7 @@ export const TeacherDashboard = (props) => {
 					<div className="panel--right__buttonContainer">
 						<Link>
 							<Button className={global.orangeButton} variant="contained">
-								Take Screenshot
+								Take Screenshot{props.user.name}
 							</Button>
 						</Link>
 						<Link>

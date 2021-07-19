@@ -14,6 +14,7 @@ import { TeacherDashboard } from "./pages/TeacherDashboard";
 
 function App() {
 	const [selectedStudent, setSelectedStudent] = useState({});
+	const [user, setUser] = useState({ name: 'Caedan', role: 'teacher' });
 
 	return (
 		<div className="App">
@@ -42,17 +43,29 @@ function App() {
 						</Route>
 					</Switch>
 				</AppBar>
+				{/* Page renders below */}
 				<Switch>
 					<Route path="/" exact render={() => <h1>Home</h1>} />
-					<Route path="/projectview" exact component={ProjectView} />
-					<Route
-						path="/projectview/projects/:id"
-						component={ProjectDashboard}
-					/>
+					
+					<Route path="/projectview" exact>
+							<ProjectView />
+					</Route>
+					
+					<Route path="/projectview/projects/:id">
+						<ProjectDashboard />
+					</Route>
+					
 					<Route path="/profile">
 						<Profile selectedStudent={selectedStudent} />
 					</Route>
-					<Route path="/teacher-dashboard" component={TeacherDashboard} setSelectedStudent={setSelectedStudent}/>
+
+					<Route path="/teacher-dashboard">
+						<TeacherDashboard
+							user={user}
+							setSelectedStudent={setSelectedStudent}
+						/>
+					</Route>
+					
 					<Route path="/student-profiles">
 						<StudentProfiles setSelectedStudent={setSelectedStudent} />
 					</Route>
