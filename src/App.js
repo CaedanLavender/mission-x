@@ -53,7 +53,7 @@ function App() {
 							<ProjectView />
 					</Route>
 					
-					<Route path="/projectview/projects/:id" render={({match})=> <ProjectDashboard match={match} user={user}/>} />
+					<Route path="/projectview/projects/:id" render={({match})=> <ProjectDashboard match={match} user={user} setUser={setUser}/>} />
 					
 					<Route path="/profile">
 						<Profile selectedStudent={selectedStudent} />
@@ -62,6 +62,7 @@ function App() {
 					<Route path="/teacher-dashboard">
 						<TeacherDashboard
 							user={user}
+							setUser={setUser}
 							setSelectedStudent={setSelectedStudent}
 						/>
 					</Route>
