@@ -135,16 +135,21 @@ export const TeacherDashboard = (props) => {
 			name: "Profile",
 			icon: profileIcon,
 			linksto: "/Profile",
+			action: null
 		},
 		{
 			name: "Settings",
 			icon: settingsIcon,
 			linksto: null,
+			action: null
 		},
 		{
 			name: "Log out",
 			icon: logoutIcon,
 			linksto: "/",
+			action: function() {
+				props.setUser({})
+			}
 		},
 	];
 	if (props.user.role === 'teacher') {
@@ -203,7 +208,7 @@ export const TeacherDashboard = (props) => {
 								}`}
 						>
 							{bottomTabList.map((item) => (
-								<Link to={item.linksto || "#"} className={global.tweakedLink}>
+								<Link to={item.linksto || "#"} className={global.tweakedLink} onClick={item.action}>
 									<div>
 										<img src={item.icon} alt={item.name} />
 										{tabOpen && item.name}
