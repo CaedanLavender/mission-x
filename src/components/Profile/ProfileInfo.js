@@ -27,7 +27,9 @@ export default function ProfileInfo(props) {
               </tr>
               <tr>
                 <td>Teacher</td>
-                <td className="teacherName">Frank Fitzgerald</td>
+                <td className="teacherName">
+                  {props.selectedStudent.teacher_name}
+                </td>
               </tr>
               <tr>
                 <td>Course</td>

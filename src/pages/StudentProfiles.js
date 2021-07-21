@@ -17,7 +17,6 @@ const StudentProfiles = (props) => {
   const [students, setStudents] = useState([]);
   const classes = useStyles();
 
-  // Need to update this useEffect once you figured out dymanic database input I think
   useEffect(() => {
     axios.get("http://localhost:4000/users").then((response) => {
       setStudents(response.data);
