@@ -38,7 +38,7 @@ import profileIcon from "../assets/global/profile--icon--light.png";
 import settingsIcon from "../assets/global/settings--icon--light.png";
 import logoutIcon from "../assets/global/logout--icon--light.png";
 
-const ProjectDashboard = ({ match, user }) => {
+const ProjectDashboard = ({ match, user, setUser }) => {
 	// STYLING
 	const globalStyles = makeStyles((theme) => ({
 		orangeButton: {
@@ -236,16 +236,21 @@ const ProjectDashboard = ({ match, user }) => {
 			name: "Profile",
 			icon: profileIcon,
 			linksto: "/Profile",
+			action: null
 		},
 		{
 			name: "Settings",
 			icon: settingsIcon,
 			linksto: null,
+			action: null
 		},
 		{
 			name: "Log out",
 			icon: logoutIcon,
 			linksto: "/",
+			action: function() {
+				setUser({})
+			}
 		},
 	];
 
@@ -310,7 +315,7 @@ const ProjectDashboard = ({ match, user }) => {
 					</div>
 					<div className={`panel--left__bottom-navigation ${!tabOpen && "panel--left__bottom-navigation--closed"}`}>
 						{bottomTabList.map((item) => (
-							<Link to={item.linksto || "#"} className={global.tweakedLink}>
+							<Link to={item.linksto || "#"} className={global.tweakedLink} onClick={item.action}>
 								<div>
 									<img src={item.icon} alt={item.name} />
 									{tabOpen && item.name}

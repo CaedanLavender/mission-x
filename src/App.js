@@ -33,7 +33,6 @@ function App() {
                 "/projectview",
                 "/profile",
                 "/student-profiles",
-                "/help-requests",
               ]}
             >
               <Toolbar className="menu">
@@ -42,7 +41,6 @@ function App() {
                 <Link to="/profile">Profile View |</Link>
                 <Link to="/teacher-dashboard">Teacher Dashboard |</Link>
                 <Link to="/student-profiles">Student Profiles |</Link>
-                <Link to="/help-requests">help requests |</Link>
                 {/* Add more links here by following the format above */}
               </Toolbar>
             </Route>
@@ -54,6 +52,29 @@ function App() {
 
           <Route path="/projectview" exact>
             <ProjectView />
+          </Route>
+
+          <Route
+            path="/projectview/projects/:id"
+            render={({ match }) => (
+              <ProjectDashboard match={match} user={user} setUser={setUser} />
+            )}
+          />
+
+          <Route path="/profile">
+            <Profile selectedStudent={selectedStudent} />
+          </Route>
+
+          <Route path="/teacher-dashboard">
+            <TeacherDashboard
+              user={user}
+              setUser={setUser}
+              setSelectedStudent={setSelectedStudent}
+            />
+          </Route>
+
+          <Route path="/student-profiles">
+            <StudentProfiles setSelectedStudent={setSelectedStudent} />
           </Route>
 
           <Route
