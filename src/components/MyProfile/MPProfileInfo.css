@@ -1,0 +1,152 @@
+* {
+  /* The CSS box-sizing property allows us to include the padding and border in an element's total width and height. */
+  box-sizing: border-box;
+}
+.fullNameMP {
+  color: grey;
+}
+
+/* Profile Block section component */
+.infoBlockMP {
+  background-color: white;
+  border: solid 2px lightgrey;
+  border-radius: 20px;
+  padding: 20px;
+}
+.mainSectionMP {
+  display: inline-block;
+  width: 550px;
+  margin: 20px;
+}
+
+table {
+  letter-spacing: 1px;
+  font-size: 1.1rem;
+  width: 100%;
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+tr,
+td {
+  padding: 10px 20px;
+}
+
+.col1MP {
+  width: 70%;
+}
+
+.dashboardButtonMP {
+  cursor: pointer;
+  font-size: 8pt;
+  font-weight: bold;
+  border: 2px solid rgb(231, 76, 148);
+  background-color: rgb(231, 76, 148);
+  color: white;
+  border-radius: 5px;
+  box-shadow: 0px 2px 2px #c7c5c5;
+  padding: 5px;
+  margin-top: 20px;
+  text-decoration: none;
+}
+
+/*  Change color on hover */
+.dashboardButtonMP:hover {
+  cursor: pointer;
+  font-size: 8pt;
+  font-weight: bold;
+  border: 2px solid rgb(231, 76, 148);
+  background-color: rgb(226, 126, 173);
+  color: white;
+  border-radius: 5px;
+  box-shadow: 0px 2px 2px #c7c5c5;
+  padding: 5px;
+  margin-top: 20px;
+  text-decoration: none;
+}
+
+/*  Change color on hover */
+.dashboardButtonMP:active {
+  cursor: pointer;
+  font-size: 8pt;
+  font-weight: bold;
+  border: 2px solid rgb(231, 76, 148);
+  background-color: rgb(187, 3, 89);
+  color: white;
+  border-radius: 5px;
+  box-shadow: 0px 2px 2px #c7c5c5;
+  padding: 5px;
+  margin-top: 20px;
+  text-decoration: none;
+}
+
+.projectsButtonMP {
+  cursor: pointer;
+  font-size: 8pt;
+  font-weight: bold;
+  border: 2px solid rgb(231, 151, 76);
+  background-color: rgb(231, 151, 76);
+  color: white;
+  border-radius: 5px;
+  box-shadow: 0px 2px 2px #c7c5c5;
+  padding: 5px;
+  margin-top: 20px;
+  margin-right: 20px;
+  text-decoration: none;
+}
+
+/*  Change color on hover */
+.projectsButtonMP:hover {
+  cursor: pointer;
+  font-size: 8pt;
+  font-weight: bold;
+  border: 2px solid rgb(231, 151, 76);
+  background-color: rgb(235, 185, 139);
+  color: white;
+  border-radius: 5px;
+  box-shadow: 0px 2px 2px #c7c5c5;
+  padding: 5px;
+  margin-top: 20px;
+  text-decoration: none;
+}
+
+/*  Change color on click */
+.projectsButtonMP:active {
+  cursor: pointer;
+  font-size: 8pt;
+  font-weight: bold;
+  border: 2px solid rgb(231, 151, 76);
+  background-color: rgb(223, 118, 20);
+  color: white;
+  border-radius: 5px;
+  box-shadow: 0px 2px 2px #c7c5c5;
+  padding: 5px;
+  margin-top: 20px;
+  text-decoration: none;
+}
+
+.backButtonContainerMP {
+  text-align: end;
+}
+
+/* 869px because the two divs together are 896px wide, so it the div css needs to update the moment they split one on top of the other */
+@media screen and (max-width: 896px) {
+  .mainSectionMP {
+    width: 90%;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+@media screen and (max-width: 896px) {
+  .backButtonContainerMP {
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 896px) {
+  .dashboardButtonMP,
+  .projectsButtonMP {
+    margin: 10px;
+  }
+}

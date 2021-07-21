@@ -3,9 +3,10 @@ import "./App.css";
 import NavigationBar from "./components/NavigationBar";
 import ProjectView from "./pages/ProjectView";
 import ProjectDashboard from "./pages/ProjectDashboard";
-import Profile from "./pages/Profile";
+import ProfileViewer from "./pages/ProfileViewer";
 import StudentProfiles from "./pages/StudentProfiles";
 import HelpRequests from "./pages/HelpRequests";
+import MyProfile from "./pages/MyProfile";
 
 import { useState } from "react";
 // React Router import
@@ -17,7 +18,15 @@ import AccessDenied from "./pages/AccessDenied";
 function App() {
   const [selectedStudent, setSelectedStudent] = useState({});
   // State to keep track of who is logged in, at the moment I've just got an object with name and role. We should change this to be the id and the role so that we can query for more information where we need it. I think we should also leave in the role so that we can conditionally render without having to first search the database for the user's role
-  const [user, setUser] = useState({ name: "Caedan", role: "teacher" });
+  const [user, setUser] = useState({
+    name: "Caedan",
+    role: "teacher",
+    school: "Homai School",
+    courses: "Beginner",
+    date_of_birth: "25 June 1986",
+    contact_number: "027000000",
+    email: "caedan@caedan.com",
+  });
 
   return (
     <div className="App">
@@ -31,8 +40,8 @@ function App() {
                 // A list of pages where the tab bar 'should' be displayed
                 "/",
                 "/projectview",
-                "/profile",
-                "/student-profiles",
+                "/my-profile",
+                "/profile-viewer",
                 "/help-requests",
               ]}
             >
@@ -61,8 +70,8 @@ function App() {
             )}
           />
 
-          <Route path="/profile">
-            <Profile selectedStudent={selectedStudent} />
+          <Route path="/profile-viewer">
+            <ProfileViewer selectedStudent={selectedStudent} />
           </Route>
 
           <Route path="/teacher-dashboard">
@@ -79,6 +88,10 @@ function App() {
 
           <Route path="/help-requests">
             <HelpRequests />
+          </Route>
+
+          <Route path="/my-profile">
+            <MyProfile user={user} />
           </Route>
 
           {/* Add your page to the route by following the example above. */}

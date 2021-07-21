@@ -31,7 +31,7 @@ const StudentProfiles = (props) => {
     <div className="container">
       {students.map((user, index) => (
         <div className="card" onClick={handleSubmit} id={index}>
-          <Link to="profile">
+          <Link to="profile-viewer">
             <Avatar
               className={classes.avatarStyle}
               src={user.profile_pic}

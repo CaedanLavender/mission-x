@@ -1,0 +1,6 @@
+.containerProfileMMP {
+  background-color: rgb(241, 241, 241);
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
