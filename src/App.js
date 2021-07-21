@@ -40,7 +40,7 @@ function App() {
                 <Link to="/projectview"> Project View |</Link>
                 <Link to="/profile">Profile View |</Link>
                 <Link to="/teacher-dashboard">Teacher Dashboard |</Link>
-                <Link to="/student-profiles">Student Profiles |</Link>
+
                 {/* Add more links here by following the format above */}
               </Toolbar>
             </Route>
