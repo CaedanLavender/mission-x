@@ -20,7 +20,7 @@ function App() {
 	// State to keep track of who is logged in, at the moment I've just got an object with name and role. We should change this to be the id and the role so that we can query for more information where we need it. I think we should also leave in the role so that we can conditionally render without having to first search the database for the user's role
 	const [user, setUser] = useState({
 		name: "Caedan",
-		role: "student",
+		role: "teacher",
 		school: "Homai School",
 		courses: "Beginner",
 		date_of_birth: "25 June 1986",
