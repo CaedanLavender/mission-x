@@ -1,11 +1,11 @@
 import React from "react";
-import "./MPProfileAvatar.css";
+import "./TProfileAvatar.css";
 import { Avatar } from "@material-ui/core";
 
-export default function MPProfileAvatar({ selectedStudent }) {
+export default function TProfileAvatar({ selectedStudent }) {
   return (
-    <div className="avatarBlockMP">
-      <div className="avatarMP">
+    <div className="avatarBlockT">
+      <div className="avatarT">
         {/* <Avatar
           src={selectedStudent.profile_pic}
           style={{
@@ -15,9 +15,9 @@ export default function MPProfileAvatar({ selectedStudent }) {
         ></Avatar> */}
         bla
       </div>
-      <button className="buttonMP">EDIT PROFILE</button>
+      <button className="buttonT">EDIT PROFILE</button>
       <br />
-      <button className="buttonMP">CHANGE PHOTO</button>
+      <button className="buttonT">CHANGE PHOTO</button>
     </div>
   );
 }

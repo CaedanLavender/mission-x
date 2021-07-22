@@ -1,5 +1,5 @@
 /* Avatar section component */
-.avatarBlockMP {
+.avatarBlockT {
   display: inline-block;
   width: 250px;
   border: solid 2px lightgrey;
@@ -11,7 +11,7 @@
   vertical-align: top;
 }
 
-.buttonMP {
+.buttonT {
   cursor: pointer;
   font-size: 8pt;
   font-weight: bold;
@@ -26,7 +26,7 @@
   width: 120px;
 }
 
-.buttonMP:hover {
+.buttonT:hover {
   cursor: pointer;
   font-size: 8pt;
   font-weight: bold;
@@ -41,7 +41,7 @@
   width: 120px;
 }
 
-.buttonMP:active {
+.buttonT:active {
   cursor: pointer;
   font-size: 8pt;
   font-weight: bold;
@@ -56,7 +56,7 @@
   width: 120px;
 }
 
-.avatarMP {
+.avatarT {
   display: flex;
   justify-content: center;
   padding-bottom: 30px;
@@ -64,7 +64,7 @@
 
 /* 869px because the two divs together are 896px wide, so it the div css needs to update the moment they split one on top of the other */
 @media screen and (max-width: 896px) {
-  .avatarBlockMP {
+  .avatarBlockT {
     width: 90%;
     margin: 0;
     margin-bottom: 20px;

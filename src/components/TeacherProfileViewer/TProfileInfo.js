@@ -1,7 +1,7 @@
 import React from "react";
-import "./MPProfileInfo.css";
+import "./TProfileInfo.css";
 
-export default function ProfileInfo(props) {
+export default function TProfileInfo(props) {
   function birthdate(date) {
     const dateObj = new Date(date); //returned from mysql timestamp/datetime field
     const month = dateObj.getUTCMonth() + 1; //months from 1-12
@@ -12,15 +12,15 @@ export default function ProfileInfo(props) {
   }
 
   return (
-    <div className="mainSectionMP">
-      <div className="infoBlockMP">
+    <div className="mainSectionT">
+      <div className="infoBlockT">
         <div>
-          <h1 className="fullNameMP">MY PROFILE PAGE - {props.user.name}</h1>
+          <h1 className="fullNameT">MY PROFILE PAGE - {props.user.name}</h1>
 
           <table>
             <tbody>
               <tr>
-                <td className="col1MP">School</td>
+                <td className="col1T">School</td>
                 <td>{props.user.school}</td>
               </tr>
               <tr>
@@ -43,12 +43,12 @@ export default function ProfileInfo(props) {
           </table>
         </div>
       </div>
-      <div className="backButtonContainerMP">
+      <div className="backButtonContainerT">
         <a href="/projectview/">
-          <button className="projectsButtonMP">BACK TO PROJECTS</button>
+          <button className="projectsButtonT">BACK TO PROJECTS</button>
         </a>
         <a href="/teacher-dashboard/">
-          <button className="dashboardButtonMP">BACK TO DASHBOARD</button>
+          <button className="dashboardButtonT">BACK TO DASHBOARD</button>
         </a>
       </div>
     </div>

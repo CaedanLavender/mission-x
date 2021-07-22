@@ -2,18 +2,18 @@
   /* The CSS box-sizing property allows us to include the padding and border in an element's total width and height. */
   box-sizing: border-box;
 }
-.fullNameMP {
+.fullNameT {
   color: grey;
 }
 
 /* Profile Block section component */
-.infoBlockMP {
+.infoBlockT {
   background-color: white;
   border: solid 2px lightgrey;
   border-radius: 20px;
   padding: 20px;
 }
-.mainSectionMP {
+.mainSectionT {
   display: inline-block;
   width: 550px;
   margin: 20px;
@@ -32,11 +32,11 @@ td {
   padding: 10px 20px;
 }
 
-.col1MP {
+.col1T {
   width: 70%;
 }
 
-.dashboardButtonMP {
+.dashboardButtonT {
   cursor: pointer;
   font-size: 8pt;
   font-weight: bold;
@@ -51,7 +51,7 @@ td {
 }
 
 /*  Change color on hover */
-.dashboardButtonMP:hover {
+.dashboardButtonT:hover {
   cursor: pointer;
   font-size: 8pt;
   font-weight: bold;
@@ -66,7 +66,7 @@ td {
 }
 
 /*  Change color on hover */
-.dashboardButtonMP:active {
+.dashboardButtonT:active {
   cursor: pointer;
   font-size: 8pt;
   font-weight: bold;
@@ -80,7 +80,7 @@ td {
   text-decoration: none;
 }
 
-.projectsButtonMP {
+.projectsButtonT {
   cursor: pointer;
   font-size: 8pt;
   font-weight: bold;
@@ -96,7 +96,7 @@ td {
 }
 
 /*  Change color on hover */
-.projectsButtonMP:hover {
+.projectsButtonT:hover {
   cursor: pointer;
   font-size: 8pt;
   font-weight: bold;
@@ -111,7 +111,7 @@ td {
 }
 
 /*  Change color on click */
-.projectsButtonMP:active {
+.projectsButtonT:active {
   cursor: pointer;
   font-size: 8pt;
   font-weight: bold;
@@ -125,13 +125,13 @@ td {
   text-decoration: none;
 }
 
-.backButtonContainerMP {
+.backButtonContainerT {
   text-align: end;
 }
 
 /* 869px because the two divs together are 896px wide, so it the div css needs to update the moment they split one on top of the other */
 @media screen and (max-width: 896px) {
-  .mainSectionMP {
+  .mainSectionT {
     width: 90%;
     margin: 0;
     padding: 0;
@@ -139,14 +139,14 @@ td {
 }
 
 @media screen and (max-width: 896px) {
-  .backButtonContainerMP {
+  .backButtonContainerT {
     text-align: center;
   }
 }
 
 @media screen and (max-width: 896px) {
-  .dashboardButtonMP,
-  .projectsButtonMP {
+  .dashboardButtonT,
+  .projectsButtonT {
     margin: 10px;
   }
 }
