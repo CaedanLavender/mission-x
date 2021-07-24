@@ -5,6 +5,7 @@ import axios from "axios";
 import { Avatar } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { KeyboardReturnSharp } from "@material-ui/icons";
+import Checkbox from "@material-ui/core/Checkbox";
 
 const useStyles = makeStyles(() => ({
   avatarStyle: {
@@ -13,12 +14,25 @@ const useStyles = makeStyles(() => ({
     margin: "10px",
   },
 }));
+
 export default function HelpRequests() {
-  const [students, setStudents] = useState([]);
+  const [checked, setChecked] = useState({});
+  const [studentRequests, setStudentRequests] = useState([]);
   const classes = useStyles();
+
+  // function checkboxValue(newValue) {
+  //   setChecked({
+  //     isChecked: { checked },
+  //     userIdCheckbox: newValue.target.id,
+  //     newCheck: newValue,
+  //   });
+  //   console.log(newValue.target.id, newValue.target.checked);
+  //   console.log(checked);
+  // }
+
   useEffect(() => {
     axios.get("http://localhost:4000/help-requests").then((response) => {
-      setStudents(response.data);
+      setStudentRequests(response.data);
     });
   }, []);
 
@@ -30,9 +44,25 @@ export default function HelpRequests() {
 
   return (
     <div className="containerHR">
-      {students.map((user) => (
+      {studentRequests.map((user, index) => (
         <div className="cardHR">
-          <div className="checkboxHR">BOX</div>
+          <div key={index} className="checkboxHR">
+            <Checkbox
+              value={checked[user.user_id]}
+              onChange={(newValue) => {
+                setChecked({
+                  ...checked,
+                  [user.user_id]: newValue.target.id,
+                });
+                console.log(checked);
+              }}
+              // checked={checked[0]}
+
+              id={`custom-checkbox-${user.user_id}`}
+              // onChange={checkboxValue}
+              inputProps={{ "aria-label": "primary checkbox" }}
+            />
+          </div>
           <div className="middleHR">
             <Avatar
               className={classes.avatarStyle}
@@ -41,7 +71,8 @@ export default function HelpRequests() {
           </div>
           <div className="rightHR">
             <p className="studentNameHR">
-              {user.first_name} needs help with [his or her] project.
+              {user.first_name}
+              {user.user_id} needs help with [his or her] project.
               {user.date_created}
             </p>
           </div>
