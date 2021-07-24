@@ -20,16 +20,12 @@ export default function HelpRequests() {
   const [studentRequests, setStudentRequests] = useState([]);
   const classes = useStyles();
 
-  // function checkboxValue(newValue) {
-  //   setChecked({
-  //     isChecked: { checked },
-  //     userIdCheckbox: newValue.target.id,
-  //     newCheck: newValue,
-  //   });
-  //   console.log(newValue.target.id, newValue.target.checked);
-  //   console.log(checked);
+  // if (checked.isTrue === true) {
+  //   console.log("it's true");
+  // } else {
+  //   console.log("it's false");
   // }
-
+  console.log(checked);
   useEffect(() => {
     axios.get("http://localhost:4000/help-requests").then((response) => {
       setStudentRequests(response.data);
@@ -44,22 +40,21 @@ export default function HelpRequests() {
 
   return (
     <div className="containerHR">
-      {studentRequests.map((user, index) => (
-        <div className="cardHR">
-          <div key={index} className="checkboxHR">
+      {studentRequests.map((user) => (
+        <div
+          className={
+            checked[user.user_id] === true ? "cardHR makeYellow" : "cardHR"
+          }
+          id={`divId${checked.user_id}`}
+        >
+          <div className="checkboxHR">
             <Checkbox
-              value={checked[user.user_id]}
-              onChange={(newValue) => {
+              onChange={(event) => {
                 setChecked({
-                  ...checked,
-                  [user.user_id]: newValue.target.id,
+                  [user.user_id]: event.target.checked,
+                  isTrue: event.target.checked,
                 });
-                console.log(checked);
               }}
-              // checked={checked[0]}
-
-              id={`custom-checkbox-${user.user_id}`}
-              // onChange={checkboxValue}
               inputProps={{ "aria-label": "primary checkbox" }}
             />
           </div>
