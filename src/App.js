@@ -42,14 +42,13 @@ function App() {
                 "/projectview",
                 "/teacher-profile-viewer",
                 "/student-profile-viewer",
-                "/help-requests",
               ]}
             >
               <Toolbar className="menu">
                 <Link to="/">Home |</Link>
                 <Link to="/projectview"> Project View |</Link>
                 <Link to="/teacher-dashboard">Teacher Dashboard |</Link>
-                <Link to="/help-requests">help requests |</Link>
+
                 {/* Add more links here by following the format above */}
               </Toolbar>
             </Route>
@@ -80,14 +79,6 @@ function App() {
               setUser={setUser}
               setSelectedStudent={setSelectedStudent}
             />
-          </Route>
-
-          <Route path="/student-profiles">
-            <StudentProfiles setSelectedStudent={setSelectedStudent} />
-          </Route>
-
-          <Route path="/help-requests">
-            <HelpRequests />
           </Route>
 
           <Route path="/teacher-profile-viewer">

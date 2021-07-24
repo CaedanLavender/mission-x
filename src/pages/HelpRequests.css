@@ -4,9 +4,9 @@
 }
 
 .containerHR {
-  display: inline-block;
+  display: flex;
   justify-content: center;
-  flex-direction: "column";
+  flex-direction: row;
   flex-wrap: wrap;
   align-content: center;
 }
@@ -14,7 +14,7 @@
 /* Card styling */
 .cardHR {
   display: flex;
-  justify-content: center;
+  justify-content: left;
   width: 800px;
   height: 60px;
   border: solid 2px lightgrey;
@@ -31,6 +31,30 @@
   color: grey;
 }
 
-.makeYellow {
-  background-color: yellow;
+.checkedHR {
+  text-decoration: line-through;
+}
+
+.checkboxHR {
+  display: flex;
+  align-items: center;
+}
+
+.leftCardHR {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.middleCardHR {
+  display: flex;
+  justify-content: left;
+}
+
+.rightCardHR {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  flex-direction: column;
+  margin-left: 400px;
 }
