@@ -13,7 +13,7 @@ export default function TProfileAvatar({ selectedStudent }) {
             height: "100px",
           }}
         ></Avatar> */}
-        bla
+        [Pic]
       </div>
       <button className="buttonT">EDIT PROFILE</button>
       <br />

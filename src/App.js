@@ -4,8 +4,7 @@ import NavigationBar from "./components/NavigationBar";
 import ProjectView from "./pages/ProjectView";
 import ProjectDashboard from "./pages/ProjectDashboard";
 import StudentProfileViewer from "./pages/StudentProfileViewer";
-import StudentProfiles from "./pages/StudentProfiles";
-import HelpRequests from "./pages/HelpRequests";
+
 import TeacherProfileViewer from "./pages/TeacherProfileViewer";
 
 import { useState } from "react";

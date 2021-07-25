@@ -1,6 +1,6 @@
-import StudentProfiles from "../../pages/StudentProfiles";
+import StudentProfiles from "./StudentProfiles";
 import ProgressTracker from "./ProgressTracker";
-import HelpRequests from "../../pages/HelpRequests";
+import HelpRequests from "./HelpRequests";
 
 const TeacherDashboardContent = (props) => {
   switch (props.tab) {
