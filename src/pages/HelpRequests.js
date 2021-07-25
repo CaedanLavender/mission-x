@@ -20,53 +20,50 @@ export default function HelpRequests() {
   const [checked, setChecked] = useState({});
   const [studentRequests, setStudentRequests] = useState([]);
   const classes = useStyles();
-  function date(date) {
-    const dateObj = new Date(date); //returned from mysql timestamp/datetime field
-    const month = dateObj.getUTCMonth() + 1; //months from 1-12
-    const dayOfWeek = dateObj.getUTCDay();
-    const day = dateObj.getUTCDate();
-    const year = dateObj.getUTCFullYear();
-    const newdate = realDay(dayOfWeek) + ", " + day + "/" + month + "/" + year;
-    return newdate;
-  }
-
-  function realDay(day) {
-    let newDay;
-    if (day === 0) {
-      newDay = "Sunday";
-    } else if (day === 1) {
-      newDay = "Monday";
-    } else if (day === 2) {
-      newDay = "Tuesday";
-    } else if (day === 3) {
-      newDay = "Wednesday";
-    } else if (day === 4) {
-      newDay = "Thursday";
-    } else if (day === 5) {
-      newDay = "Friday";
-    } else if (day === 6) {
-      newDay = "Saturday";
-    }
-    return newDay;
-  }
-
   useEffect(() => {
     axios.get("http://localhost:4000/help-requests").then((response) => {
       setStudentRequests(response.data);
     });
   }, []);
 
-  // This capitalisefunction doesn't work
-  // function capitalise(string) {
-  //   let text = string;
-  //   text.toUpperCase();
-  // }
+  // Take the SQL UTC date and convert it back to NZST, then return the formatted date.
+  const formatDate = function (datetime) {
+    let date = new Date(datetime);
+    let options = {
+      weekday: "short",
+      day: "numeric",
+      month: "numeric",
+      year: "numeric",
+      timeZone: "NZ",
+    };
+    let formattedDate = date.toLocaleString("en-NZ", options);
+    return formattedDate;
+  };
+
+  // Take the SQL UTC time and convert it back to NZST, then return the formatted time.
+  const formatTime = function (datetime) {
+    let time = new Date(datetime);
+    let options = {
+      hour: "numeric",
+      minute: "numeric",
+      hour12: true,
+      timeZone: "NZ",
+    };
+    let formattedTime = time.toLocaleString("en-NZ", options);
+    return formattedTime;
+  };
+
+  // Capitalise the student's name
+  function capitalise(string) {
+    return string.toUpperCase();
+  }
 
   return (
     <div className="containerHR">
       {studentRequests.map((user) => (
         <div className="checkboxHR">
           <div>
+            {/* When a checkbox is checked, store that checked box ID (set by user.id) and value (whether true/false) into a state object. The state stores multiple checkbox IDs/Values independently  */}
             <Checkbox
               onChange={(event) => {
                 setChecked({
@@ -91,13 +88,13 @@ export default function HelpRequests() {
             </div>
             <div className="middleCardHR">
               <p className="studentNameHR">
-                {user.first_name} needs help with their project.
+                {capitalise(user.first_name)} needs help with their project.
               </p>
             </div>
             <div className="rightCardHR">
-              <p className="studentNameHR"> {date(user.date_created)}</p>
+              <p className="dateHR"> {formatDate(user.date_created)}</p>
 
-              <p className="studentNameHR">time</p>
+              <p className="dateHR">{formatTime(user.date_created)}</p>
             </div>
           </div>
         </div>

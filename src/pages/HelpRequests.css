@@ -6,15 +6,14 @@
 .containerHR {
   display: flex;
   justify-content: center;
-  flex-direction: row;
+
   flex-wrap: wrap;
-  align-content: center;
 }
 
 /* Card styling */
 .cardHR {
   display: flex;
-  justify-content: left;
+  justify-content: space-between;
   width: 800px;
   height: 60px;
   border: solid 2px lightgrey;
@@ -26,13 +25,15 @@
 }
 
 .studentNameHR {
-  font-size: 8pt;
+  font-size: 12pt;
   font-weight: bold;
   color: grey;
 }
 
 .checkedHR {
   text-decoration: line-through;
+  font-style: italic;
+  background-color: rgb(247, 244, 244);
 }
 
 .checkboxHR {
@@ -48,13 +49,18 @@
 
 .middleCardHR {
   display: flex;
-  justify-content: left;
+  align-items: center;
 }
 
 .rightCardHR {
   display: flex;
-  justify-content: flex-end;
-  flex-wrap: wrap;
   flex-direction: column;
-  margin-left: 400px;
+  justify-content: center;
+}
+
+.dateHR {
+  margin: 5px;
+  font-size: 8pt;
+  font-weight: bold;
+  color: grey;
 }
