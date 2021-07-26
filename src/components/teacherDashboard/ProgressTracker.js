@@ -33,19 +33,20 @@ const ProgressTracker = () => {
 	return (
 		<div className="progress-tracker-super">
 			{
-
-			}
-			<div className="progress-tracker-container" >
-				<div className="progress-tracker__text-container">
-					<div className="progress-tracker__title">Aiden Andrews</div>
-					<div className="progress-tracker__subtitle">4/15 Projects Completed</div>
-				</div>
-				<div className="progress-tracker__dot-container">
-					<div className="progress-tracker__dot">
-						1
+				progressData.map(row => (
+					<div className="progress-tracker-container" >
+						<div className="progress-tracker__text-container">
+							<div className="progress-tracker__title">{row.name}</div>
+							<div className="progress-tracker__subtitle">{row.completedProjects[0]?row.completedProjects.length:0}/{projectCount} Projects Completed</div>
+						</div>
+						<div className="progress-tracker__dot-container">
+							<div className="progress-tracker__dot">
+								1
+							</div>
+						</div>
 					</div>
-				</div>
-			</div>
+				))
+			}
 		</div>
 	)
 }
