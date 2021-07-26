@@ -9,6 +9,9 @@
 .progress-tracker-super {
 	margin: 0 auto;
 	max-width: 1200px;
+	display: flex;
+	flex-direction: column;
+	gap: 2em;
 }
 
 .progress-tracker-container {
@@ -24,7 +27,6 @@
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
-	background-color: red;
 	flex: 20%;
 }
 
