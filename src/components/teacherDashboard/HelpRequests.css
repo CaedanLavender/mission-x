@@ -64,3 +64,15 @@
   font-weight: bold;
   color: grey;
 }
+
+.cardHR2 {
+  display: flex;
+  justify-content: flex-end;
+  width: 840px;
+  font-weight: bold;
+  color: grey;
+}
+
+.iconHR {
+  cursor: pointer;
+}

@@ -5,6 +5,7 @@ import axios from "axios";
 import { Avatar } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Checkbox from "@material-ui/core/Checkbox";
+import DoneIcon from "@material-ui/icons/Done";
 
 // Getting these checkboxes took me such a long to get working. I am so pleased they are now :D
 
@@ -17,15 +18,20 @@ const useStyles = makeStyles(() => ({
 }));
 
 export default function HelpRequests() {
-  const [checked, setChecked] = useState({});
+  const [completedRequests, setCompletedRequests] = useState({});
   const [studentRequests, setStudentRequests] = useState([]);
-  const classes = useStyles();
+  const [check, setCheck] = useState(false);
+  const [userNewId, setUserNewId] = useState();
   useEffect(() => {
     axios.get("http://localhost:4000/help-requests").then((response) => {
       setStudentRequests(response.data);
     });
   }, []);
 
+  const classes = useStyles();
+  console.log(completedRequests);
+  console.log(userNewId);
+  console.log(check);
   // Take the SQL UTC date and convert it back to NZST, then return the formatted date.
   const formatDate = function (datetime) {
     let date = new Date(datetime);
@@ -58,18 +64,69 @@ export default function HelpRequests() {
     return string.toUpperCase();
   }
 
+  // function to make DB Post 1 or 0
+  const checkedValue = function () {
+    if (check === true) {
+      return 1;
+    } else {
+      return 0;
+    }
+  };
+
+  // function to make checkbox be true or false by default
+  const defaultCheckedValue = function (value) {
+    if (value === 1) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  const getUserId = function (id) {
+    // console.log(toString(userId));
+    setUserNewId(id);
+  };
+
+  // Update the database table's DONE column to "1" if checkbox becomes ticked.
+  function updateDatabase() {
+    axios
+      .post("http://localhost:4000/help-requests-post", {
+        user_id: userNewId,
+        done: checkedValue(),
+      })
+      .then((response) => {
+        console.log(response.status);
+        console.log("Sent checkbox value to db");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
   return (
     <div className="containerHR">
+      <div className="cardHR2">
+        <DoneIcon className="iconHR" onClick={updateDatabase} />
+        <label className="iconHR" onClick={updateDatabase}>
+          Mark As Done
+        </label>
+      </div>
       {studentRequests.map((user) => (
         <div className="checkboxHR">
           <div>
             {/* When a checkbox is checked, store that checked box ID (set by user.id) and value (whether true/false) into a state object. The state stores multiple checkbox IDs/Values independently  */}
             <Checkbox
+              defaultChecked={defaultCheckedValue(user.done)}
               onChange={(event) => {
-                setChecked({
-                  ...checked,
-                  [user.user_id]: event.target.checked,
-                });
+                setCompletedRequests(
+                  {
+                    ...completedRequests,
+                    [user.user_id]: event.target.checked,
+                  },
+
+                  setCheck(!check),
+                  getUserId(user.user_id)
+                );
               }}
               inputProps={{ "aria-label": "primary checkbox" }}
             />
@@ -77,7 +134,7 @@ export default function HelpRequests() {
 
           <div
             className={
-              checked[user.user_id] === true ? "cardHR checkedHR " : "cardHR "
+              completedRequests[user.user_id] ? "cardHR checkedHR " : "cardHR "
             }
           >
             <div className="leftCardHR">
