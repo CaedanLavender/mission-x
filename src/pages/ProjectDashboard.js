@@ -261,7 +261,7 @@ const ProjectDashboard = ({ match, user, setUser }) => {
 				<img src={levelUpLogo} alt="Levelup Works logo" />
 				<div onClick={() => fetchProjectCount()} className="project-tracker">
 					<div className="project-tracker__title-container">
-						<span className="project-tracker__title">Project{user.role}</span>
+						<span className="project-tracker__title">Project</span>
 						<span className="project-tracker__subtitle">{project.project_name}</span>
 					</div>
 					{

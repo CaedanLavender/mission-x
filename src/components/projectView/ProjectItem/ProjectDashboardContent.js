@@ -6,6 +6,7 @@ import {
 	ThemeProvider
 } from '@material-ui/core/styles';
 import "./instructions.css";
+import SubmitProject from './SubmitProject';
 
 const ProjectDashboardContent = ({ tab, project }) => {
 
@@ -31,6 +32,8 @@ const ProjectDashboardContent = ({ tab, project }) => {
 			return(
 				<img src={project.project_preview} width="80%" alt={tab}/>
 			)
+		case 'Submit Project':
+			return <SubmitProject />
 		default:
 			return (
 				<p>{tab}</p>
