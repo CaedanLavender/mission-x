@@ -104,7 +104,8 @@ export default function ProjectView() {
 
 	const handleSubjectMatterFilter = (event) => {
 		let newFilter = event.target.value;
-		if (subjectMatterFilter.includes(newFilter)) {
+		console.log(newFilter)
+		if (subjectMatterFilter.map(item => "--"+item).includes("--"+newFilter)) {
 			setSubjectMatterFilter(subjectMatterFilter.filter(filter => filter !== newFilter))
 		} else {
 			setSubjectMatterFilter([...subjectMatterFilter, newFilter])
@@ -125,12 +126,32 @@ export default function ProjectView() {
 
 	// Refilters the projects based on all the filters. This could pottentially be made more efficient by splitting all of this out into separate functions so that it's only refiltering based on the specific filter that changed instead of rechecking everything, but the return wouldn't be that great for the amount of effort put in
 	const handleFilteredProjects = () => {
+		console.log(subjectMatterFilter)
 		setFilteredProjects(
 			projectList.filter(project => {
+				console.log(subjectMatterFilter.map(item => "--"+item))
+				console.log(subjectMatterFilter.map(item => "--"+item).includes(("--"+project.subject_matter2)))
 				if (subscriptionFilter.length && !subscriptionFilter.includes(project.subscription)) return false
 				if (activityTypeFilter.length && !activityTypeFilter.includes(project.activity_type)) return false
 				if (yearLevelFilter.length && !yearLevelFilter.toString().split(",").includes(project.year+"")) return false
-				if (subjectMatterFilter.length && !subjectMatterFilter.includes(project.subject_matter1 || project.subject_matter2 || project.subject_matter3)) return false
+				if (subjectMatterFilter.length && !subjectMatterFilter.map(item => "--"+item).includes(("--"+project.subject_matter1) || ("--"+project.subject_matter2) || ("--"+project.subject_matter3))) {
+					console.log("xxx")
+					console.log(project)
+					console.log(subjectMatterFilter.map(item => "--"+item))
+					console.log(project.subject_matter1)
+					console.log(project.subject_matter2)
+					console.log(project.subject_matter3)
+					console.log("===")
+					return false
+				} else {
+					console.log(":):):)")
+					console.log(project)
+					console.log(subjectMatterFilter.map(item => "--"+item))
+					console.log(project.subject_matter1)
+					console.log(project.subject_matter2)
+					console.log(project.subject_matter3)
+					console.log("===")
+				}
 				if (levelFilter && levelFilter !== project.course) return false;
 				return project
 			}
@@ -149,135 +170,6 @@ export default function ProjectView() {
 	// Directly updates the current page
 	const handlePageChange = (newPage) => setPage(newPage)
 
-	// OBJECTS
-	const projectsOld = [
-		{
-			name: "Introduction",
-			subscription: "Free",
-			image: '/images/Projects-Page/Project-01.png',
-			activityType: "Animation",
-			yearLevel: "1-4",
-			level: "Beginner",
-			subjectMatter: "Computer Science",
-		},
-		{
-			name: "My Birthday",
-			subscription: "Free",
-			image: '/images/Projects-Page/Project-02.png',
-			activityType: "Animation",
-			yearLevel: "5-6",
-			level: "Intermediate",
-			subjectMatter: "Computer Science",
-		},
-		{
-			name: "10 Block Challenge",
-			subscription: "Free",
-			image: 'images/Projects-Page/Project-03.png',
-			activityType: "Game",
-			yearLevel: "5-6",
-			level: "Beginner",
-			subjectMatter: "Computer Science",
-		},
-		{
-			name: "Build a band",
-			subscription: "Free",
-			image: 'images/Projects-Page/Project-04.png',
-			activityType: "Game",
-			yearLevel: "1-4",
-			level: "Beginner",
-			subjectMatter: "Computer Science",
-		},
-		{
-			name: "The bear and the monkey",
-			subscription: "Free",
-			image: 'images/Projects-Page/Project-05.png',
-			activityType: "Augmented Reality",
-			yearLevel: "1-4",
-			level: "Beginner",
-			subjectMatter: "Computer Science",
-		},
-		{
-			name: "Debugging",
-			subscription: "Free",
-			image: 'images/Projects-Page/Project-06.png',
-			activityType: "Animation",
-			yearLevel: "1-4",
-			level: "Beginner",
-			subjectMatter: "Computer Science",
-		},
-		{
-			name: "Project 7",
-			subscription: "Free",
-			image: 'images/Projects-Page/Project-07.png',
-			activityType: "Animation",
-			yearLevel: "1-4",
-			level: "Intermediate",
-			subjectMatter: "Computer Science",
-		},
-		{
-			name: "Project 8",
-			subscription: "Free",
-			image: 'images/Projects-Page/Project-08.png',
-			activityType: "Animation",
-			yearLevel: "1-4",
-			level: "Intermediate",
-			subjectMatter: "Computer Science",
-		},
-		{
-			name: "Project 9",
-			subscription: "Premium",
-			image: 'images/Projects-Page/Project-09.png',
-			activityType: "Animation",
-			yearLevel: "1-4",
-			level: "Beginner",
-			subjectMatter: "Computer Science",
-		},
-		{
-			name: "Project 10",
-			subscription: "Free",
-			image: 'images/Projects-Page/Project-10.png',
-			activityType: "Animation",
-			yearLevel: "1-4",
-			level: "Beginner",
-			subjectMatter: "Computer Science",
-		},
-		{
-			name: "Project 11",
-			subscription: "Premium",
-			image: 'images/Projects-Page/Project-11.png',
-			activityType: "Animation",
-			yearLevel: "1-4",
-			level: "Beginner",
-			subjectMatter: "Computer Science",
-		},
-		{
-			name: "Project 12",
-			subscription: "Premium",
-			image: 'images/Projects-Page/Project-12.png',
-			activityType: "Animation",
-			yearLevel: "1-4",
-			level: "Beginner",
-			subjectMatter: "Computer Science",
-		},
-		{
-			name: "Project 13",
-			subscription: "Free",
-			image: 'images/Projects-Page/Project-13.png',
-			activityType: "Animation",
-			yearLevel: "1-4",
-			level: "Advanced",
-			subjectMatter: "Computer Science",
-		},
-		{
-			name: "Project 14.1",
-			subscription: "Premium",
-			image: 'images/Projects-Page/Project-14.1.png',
-			activityType: "Animation",
-			yearLevel: "1-4",
-			level: "Advanced",
-			subjectMatter: "Computer Science",
-		}
-	];
 
 	// An object containing all of the filters and their options for the sake of dynamically generating the filters --- this is purely because I'm lazy
 	const filters = {

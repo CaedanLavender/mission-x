@@ -29,11 +29,11 @@ const ProjectDashboardContent = ({ tab, user, project, match }) => {
 			)
 		case 'Make Project':
 		case 'Preview Project':
-			return(
-				<img src={project.project_preview} width="80%" alt={tab}/>
+			return (
+				<img src={project.project_preview} width="80%" alt={tab} />
 			)
 		case 'Submit Project':
-			return <SubmitProject user={user} project={project}/>
+			return <SubmitProject user={user} project={project} />
 		default:
 			return (
 				<p>{tab}</p>

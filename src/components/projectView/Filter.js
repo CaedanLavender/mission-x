@@ -18,7 +18,7 @@ const Filter = (props) => {
 				props.filterArray.map(option => (
 					<FormControlLabel
 						key={option}
-						control={<Checkbox checked={props.filterState.toString().includes(option)} onChange={props.filterHandler} name={option} value={option} color="primary" />}
+						control={<Checkbox checked={props.filterState.map(item=>"--"+item).toString().includes("--"+option)} onChange={props.filterHandler} name={option} value={option} color="primary" />}
 						label={props.filterTitle==="Year Level"?option[0] + "-" + option[option.length-1]:option}
 					/>
 				))
