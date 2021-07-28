@@ -1,19 +1,16 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-const SubmitProject = () => {
-
-	// useEffect(() => {
-
-	//  }, [image-upload]);
+const SubmitProject = ({user, project}) => {
 
 	const startUpload = () => {
 		let formData = new FormData();
 		let submissionFile = document.querySelector('#image-upload');
 		console.log(submissionFile)
 		formData.append("image", submissionFile.files[0])
-		formData.append("user_id", "caedan the brave")
-		axios.post('http://localhost:4000/upload', formData, {
+		formData.append("user_id", user.user_id)
+		formData.append("project_id", project.project_id)
+		axios.post('http://localhost:4000/project-submissions/upload', formData, {
 			headers: {
 				'Content-Type': 'multipart/form-data'
 			}
@@ -29,7 +26,7 @@ const SubmitProject = () => {
 
 	return (
 		<>
-			<h1>Hello World!2</h1>
+			<h1>Hello World!</h1>
 			<form>
 				<input type="file" id="image-upload" name="image" />
 			</form>
