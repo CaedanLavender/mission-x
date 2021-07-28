@@ -129,29 +129,10 @@ export default function ProjectView() {
 		console.log(subjectMatterFilter)
 		setFilteredProjects(
 			projectList.filter(project => {
-				console.log(subjectMatterFilter.map(item => "--"+item))
-				console.log(subjectMatterFilter.map(item => "--"+item).includes(("--"+project.subject_matter2)))
 				if (subscriptionFilter.length && !subscriptionFilter.includes(project.subscription)) return false
 				if (activityTypeFilter.length && !activityTypeFilter.includes(project.activity_type)) return false
 				if (yearLevelFilter.length && !yearLevelFilter.toString().split(",").includes(project.year+"")) return false
-				if (subjectMatterFilter.length && !subjectMatterFilter.map(item => "--"+item).includes(("--"+project.subject_matter1) || ("--"+project.subject_matter2) || ("--"+project.subject_matter3))) {
-					console.log("xxx")
-					console.log(project)
-					console.log(subjectMatterFilter.map(item => "--"+item))
-					console.log(project.subject_matter1)
-					console.log(project.subject_matter2)
-					console.log(project.subject_matter3)
-					console.log("===")
-					return false
-				} else {
-					console.log(":):):)")
-					console.log(project)
-					console.log(subjectMatterFilter.map(item => "--"+item))
-					console.log(project.subject_matter1)
-					console.log(project.subject_matter2)
-					console.log(project.subject_matter3)
-					console.log("===")
-				}
+				if (subjectMatterFilter.length && !subjectMatterFilter.map(item => "--"+item).includes(("--"+project.subject_matter1) || ("--"+project.subject_matter2) || ("--"+project.subject_matter3))) return false
 				if (levelFilter && levelFilter !== project.course) return false;
 				return project
 			}
