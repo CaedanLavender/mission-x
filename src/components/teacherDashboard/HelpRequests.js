@@ -22,6 +22,8 @@ export default function HelpRequests() {
   const [studentRequests, setStudentRequests] = useState([]);
   const [check, setCheck] = useState(false);
   const [userNewId, setUserNewId] = useState();
+  console.log(completedRequests);
+
   useEffect(() => {
     axios.get("http://localhost:4000/help-requests").then((response) => {
       setStudentRequests(response.data);
@@ -29,9 +31,7 @@ export default function HelpRequests() {
   }, []);
 
   const classes = useStyles();
-  console.log(completedRequests);
-  console.log(userNewId);
-  console.log(check);
+
   // Take the SQL UTC date and convert it back to NZST, then return the formatted date.
   const formatDate = function (datetime) {
     let date = new Date(datetime);
@@ -64,7 +64,7 @@ export default function HelpRequests() {
     return string.toUpperCase();
   }
 
-  // function to make DB Post 1 or 0
+  // For the axios.post, convert the "true" or "false" value of a checkbox to 1 or 0 for the database
   const checkedValue = function () {
     if (check === true) {
       return 1;
@@ -73,7 +73,7 @@ export default function HelpRequests() {
     }
   };
 
-  // function to make checkbox be true or false by default
+  // Make the checkbox be true or false by default based on the 1 or 0 provided by the database
   const defaultCheckedValue = function (value) {
     if (value === 1) {
       return true;
@@ -82,8 +82,8 @@ export default function HelpRequests() {
     }
   };
 
+  // Get the user ID [aka the checkbox ID] of the current checkbox that was just changed to either checked or unchecked
   const getUserId = function (id) {
-    // console.log(toString(userId));
     setUserNewId(id);
   };
 
@@ -91,8 +91,11 @@ export default function HelpRequests() {
   function updateDatabase() {
     axios
       .post("http://localhost:4000/help-requests-post", {
-        user_id: userNewId,
+        userToSend: userNewId,
+        // userToSend: completedRequests,
         done: checkedValue(),
+
+        // done: completedRequests,
       })
       .then((response) => {
         console.log(response.status);
@@ -114,10 +117,17 @@ export default function HelpRequests() {
       {studentRequests.map((user) => (
         <div className="checkboxHR">
           <div>
-            {/* When a checkbox is checked, store that checked box ID (set by user.id) and value (whether true/false) into a state object. The state stores multiple checkbox IDs/Values independently  */}
+            {/* When a checkbox is checked, store that checked box ID (set by user_id) and value (whether true/false) into a state object. The state stores multiple checkbox IDs/Values independently  */}
             <Checkbox
               defaultChecked={defaultCheckedValue(user.done)}
               onChange={(event) => {
+                // setCompletedRequests(
+                // {
+                //   ...completedRequests,
+                //   [user.user_id]: event.target.checked,
+                //   userToSend: user.user_id,
+                //   done: event.target.checked,
+                // },
                 setCompletedRequests(
                   {
                     ...completedRequests,

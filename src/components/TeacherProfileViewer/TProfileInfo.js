@@ -15,7 +15,7 @@ export default function TProfileInfo(props) {
     <div className="mainSectionT">
       <div className="infoBlockT">
         <div>
-          <h1 className="fullNameT">MY PROFILE PAGE - {props.user.name}</h1>
+          <h1 className="fullNameT">{props.user.name}</h1>
 
           <table>
             <tbody>
