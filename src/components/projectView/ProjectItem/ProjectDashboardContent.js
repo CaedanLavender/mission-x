@@ -8,7 +8,7 @@ import {
 import "./instructions.css";
 import SubmitProject from './SubmitProject';
 
-const ProjectDashboardContent = ({ tab, user, project }) => {
+const ProjectDashboardContent = ({ tab, user, project, match }) => {
 
 	switch (tab) {
 		case 'Learning Objectives':

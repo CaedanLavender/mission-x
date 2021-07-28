@@ -1,7 +1,28 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-const SubmitProject = ({user, project}) => {
+const SubmitProject = ({ user, project }) => {
+	const [projectSubmitted, setProjectSubmitted] = useState(false);
+
+	const checkProjectProgress = () => {
+		axios.get('http://localhost:4000/user/project-submissions', {
+			params: {
+				user_id: user.user_id,
+				project_id: project.project_id
+			}
+		})
+			.then(res => {
+				console.log(res)
+				setProjectSubmitted(res.data.projectSubmitted)
+			})
+			.catch(() => {
+				console.log("There was a catch error")
+			})
+	}
+
+	useEffect(() => {
+		checkProjectProgress();
+	}, []);
 
 	const startUpload = () => {
 		let formData = new FormData();
@@ -23,17 +44,22 @@ const SubmitProject = ({user, project}) => {
 			})
 	}
 
+	if (projectSubmitted) {
+		return (
+			<h1>You have already submitted this project</h1>
+		)
+	} else {
+		return (
+			<>
+				<h1>Hello World!</h1>
+				<form>
+					<input type="file" id="image-upload" name="image" />
+				</form>
 
-	return (
-		<>
-			<h1>Hello World!</h1>
-			<form>
-				<input type="file" id="image-upload" name="image" />
-			</form>
-
-			<button onClick={startUpload}>Upload</button>
-		</>
-	)
+				<button onClick={startUpload}>Upload</button>
+			</>
+		)
+	}
 }
 
 export default SubmitProject;
