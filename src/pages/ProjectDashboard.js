@@ -371,7 +371,12 @@ const ProjectDashboard = ({ match, user, setUser }) => {
             </Link>
           </div>
           <div className="container__panel--right__inner">
-            <ProjectDashboardContent tab={tab} project={project} />
+            <ProjectDashboardContent
+              tab={tab}
+              match={match}
+              user={user}
+              project={project}
+            />
           </div>
         </div>
       </div>
