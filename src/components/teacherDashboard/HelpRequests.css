@@ -31,9 +31,10 @@
 }
 
 .checkedHR {
-  text-decoration: line-through;
+  /* text-decoration: line-through;
   font-style: italic;
-  background-color: rgb(247, 244, 244);
+  background-color: rgb(247, 244, 244); */
+  display: none;
 }
 
 .checkboxHR {

@@ -15,14 +15,15 @@ const useStyles = makeStyles(() => ({
     height: "40px",
     margin: "10px",
   },
+  hideCard: { display: "none" },
 }));
 
 export default function HelpRequests() {
   const [completedRequests, setCompletedRequests] = useState({});
   const [studentRequests, setStudentRequests] = useState([]);
-  const [check, setCheck] = useState(false);
-  const [userNewId, setUserNewId] = useState();
+  const [hideMomentarily, setHideMomentarily] = useState({ 1: false });
   console.log(completedRequests);
+  console.log(hideMomentarily);
 
   useEffect(() => {
     axios.get("http://localhost:4000/help-requests").then((response) => {
@@ -64,42 +65,25 @@ export default function HelpRequests() {
     return string.toUpperCase();
   }
 
-  // For the axios.post, convert the "true" or "false" value of a checkbox to 1 or 0 for the database
-  const checkedValue = function () {
-    if (check === true) {
-      return 1;
-    } else {
-      return 0;
-    }
-  };
+  // NEED TO UNDERSTAND THIS IMPORTANT FUNCTION
+  function handleChange(e) {
+    let temp = { ...completedRequests };
+    temp[e.target.value] = e.target.checked;
+    setCompletedRequests(temp);
+  }
 
-  // Make the checkbox be true or false by default based on the 1 or 0 provided by the database
-  const defaultCheckedValue = function (value) {
-    if (value === 1) {
-      return true;
-    } else {
-      return false;
-    }
-  };
-
-  // Get the user ID [aka the checkbox ID] of the current checkbox that was just changed to either checked or unchecked
-  const getUserId = function (id) {
-    setUserNewId(id);
-  };
-
-  // Update the database table's DONE column to "1" if checkbox becomes ticked.
+  // Update the help_requests table's DONE column to "1" if checkbox is ticked.
   function updateDatabase() {
     axios
       .post("http://localhost:4000/help-requests-post", {
-        userToSend: userNewId,
-        // userToSend: completedRequests,
-        done: checkedValue(),
-
-        // done: completedRequests,
+        completed_requests: completedRequests,
       })
       .then((response) => {
         console.log(response.status);
-        console.log("Sent checkbox value to db");
+        console.log(
+          "help_requests table successfully updated (sincerely, frontend)"
+        );
+        setHideMomentarily(completedRequests);
       })
       .catch((err) => {
         console.log(err);
@@ -115,38 +99,20 @@ export default function HelpRequests() {
         </label>
       </div>
       {studentRequests.map((user) => (
-        <div className="checkboxHR">
+        <div
+          className={
+            hideMomentarily[user.user_id] ? "checkedHR " : "checkboxHR"
+          }
+        >
           <div>
-            {/* When a checkbox is checked, store that checked box ID (set by user_id) and value (whether true/false) into a state object. The state stores multiple checkbox IDs/Values independently  */}
             <Checkbox
-              defaultChecked={defaultCheckedValue(user.done)}
-              onChange={(event) => {
-                // setCompletedRequests(
-                // {
-                //   ...completedRequests,
-                //   [user.user_id]: event.target.checked,
-                //   userToSend: user.user_id,
-                //   done: event.target.checked,
-                // },
-                setCompletedRequests(
-                  {
-                    ...completedRequests,
-                    [user.user_id]: event.target.checked,
-                  },
-
-                  setCheck(!check),
-                  getUserId(user.user_id)
-                );
-              }}
+              value={user.user_id}
+              onChange={handleChange}
               inputProps={{ "aria-label": "primary checkbox" }}
             />
           </div>
 
-          <div
-            className={
-              completedRequests[user.user_id] ? "cardHR checkedHR " : "cardHR "
-            }
-          >
+          <div className="cardHR ">
             <div className="leftCardHR">
               <Avatar
                 className={classes.avatarStyle}
