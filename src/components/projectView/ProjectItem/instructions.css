@@ -4,14 +4,6 @@
 	margin: 0 auto;
 }
 
-.project__instructions h1 {
-	/* color: red; */
-}
-
-.project__instructions h2 {
-	/* color: red; */
-}
-
 .project__instructions > .heading-centered {
 	text-align: center;
 }
