@@ -327,7 +327,7 @@ const ProjectDashboard = ({ match, user, setUser }) => {
 				<div className={`container__panel--left`}>
 					<div className="panel--left__item-wrapper">
 						<div className="panel--left__profile">
-							<img src="" alt="" />
+						<img src={user.profile_pic} alt="" width={'100%'}/>
 						</div>
 						{/* The filter below takes out the tabs that the user doesn't have permission to see (doesn't need to see) */}
 						{tabList

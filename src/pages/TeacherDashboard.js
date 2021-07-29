@@ -170,7 +170,7 @@ export const TeacherDashboard = (props) => {
           <div className={`container__panel--left`}>
             <div className="panel--left__item-wrapper">
               <div className="panel--left__profile">
-                <img src="" alt="" />
+                <img src={props.user.profile_pic} alt="" width={'100%'}/>
               </div>
               {tabList.map((item) => (
                 // I know it's shameful to include inline styling, but I just needed the stupid underline to go away -- simpler than makinng a whole theme/class
