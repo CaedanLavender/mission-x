@@ -16,7 +16,7 @@ const useStyles = makeStyles(() => ({
 const StudentProfiles = (props) => {
   const [students, setStudents] = useState([]);
   const classes = useStyles();
-
+  console.log(students);
   useEffect(() => {
     axios.get("http://localhost:4000/users").then((response) => {
       setStudents(response.data);

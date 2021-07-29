@@ -19,11 +19,10 @@ const useStyles = makeStyles(() => ({
 }));
 
 export default function HelpRequests() {
-  const [completedRequests, setCompletedRequests] = useState({});
-  const [studentRequests, setStudentRequests] = useState([]);
-  const [hideMomentarily, setHideMomentarily] = useState({ 1: false });
-  console.log(completedRequests);
-  console.log(hideMomentarily);
+  const [completedRequests, setCompletedRequests] = useState({}); //Store the checked boxes in here
+  const [studentRequests, setStudentRequests] = useState([]); // Store the data fetched from the help_requests db table in here
+  const [hideMomentarily, setHideMomentarily] = useState({ 1: false }); // Upon marking a request as "done", mark the corresponding card with the "checked" class which hides that card
+  // console.log(completedRequests);
 
   useEffect(() => {
     axios.get("http://localhost:4000/help-requests").then((response) => {
@@ -65,10 +64,10 @@ export default function HelpRequests() {
     return string.toUpperCase();
   }
 
-  // NEED TO UNDERSTAND THIS IMPORTANT FUNCTION
+  // Stores which checkboxes have been updated
   function handleChange(e) {
-    let temp = { ...completedRequests };
-    temp[e.target.value] = e.target.checked;
+    let temp = { ...completedRequests }; // store previous state of completedRequests
+    temp[e.target.value] = e.target.checked; // add to temp's object; the checkbox value aka user_id plus whether it is true or false
     setCompletedRequests(temp);
   }
 
