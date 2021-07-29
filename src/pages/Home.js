@@ -2,6 +2,7 @@ import { Button } from "@material-ui/core"
 
 const Home = ({ user, setUser }) => {
 
+	// Three very quick functions to set the user to different states (this is a temporary measure as the login functionality isn't built yet)
 	const setUserTeacher = () => {
 		setUser({
 			user_id: 16,
@@ -53,6 +54,7 @@ const Home = ({ user, setUser }) => {
 			<h1>Home Page (makeshift)</h1>
 			<p>Currently logged in: {user.first_name || "No one"}</p>
 			<p>Simulate user:</p>
+			{/* Three buttons to set the different user states */}
 			<Button onClick={setUserTeacher} variant='outlined'>Teacher</Button>
 			<Button onClick={setUserStudent} variant='outlined'>Student</Button>
 			<Button onClick={setUserLoggedOut} variant='outlined'>Not Signed In</Button>
