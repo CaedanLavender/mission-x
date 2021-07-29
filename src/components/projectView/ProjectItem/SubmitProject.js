@@ -55,6 +55,7 @@ const SubmitProject = ({ user, project, global }) => {
 		})
 			.then(res => {
 				console.log(res)
+				checkProjectProgress()
 			})
 			.catch(() => {
 				console.log("There was a catch error")
@@ -69,7 +70,7 @@ const SubmitProject = ({ user, project, global }) => {
 		return (
 			<div className="submit-project__container">
 				<div className="submit-project__half">
-				<img src={project.project_preview} />
+				<img src={project.project_preview} alt=""/>
 					<h1>Submit project photo</h1>
 					<p>After completing your project, take a screenshot of your project and upload it here</p>
 					<Button disabled={!fileAttach} className={`send-photo-button ${global.pinkButtonBig}`} onClick={startUpload} variant="contained">
