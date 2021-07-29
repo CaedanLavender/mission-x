@@ -1,11 +1,15 @@
+// import stylesheet and needed components
 import "./Dashboard.css";
 import ProjectDashboardContent from "../components/projectView/ProjectItem/ProjectDashboardContent";
+
+// React imports and other libraries
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import Button from "@material-ui/core/Button";
-import { Typography } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
 import axios from "axios";
+
+// Material UI imports
+import Button from "@material-ui/core/Button";
+import { makeStyles } from "@material-ui/core/styles";
 
 // importing images from assets folder
 import levelUpLogo from "../assets/global/star-logo.png";
@@ -32,15 +36,12 @@ import offlineActivitiesIconLight from "../assets/global/offline-activities--ico
 
 import viewQuizResultsIconLight from "../assets/global/view-quiz-results--icon--light.png";
 
-import progressIconLight from "../assets/global/progress--icon--light.png";
-import progressIconDark from "../assets/global/progress--icon--dark.png";
-
 import profileIcon from "../assets/global/profile--icon--light.png";
 import settingsIcon from "../assets/global/settings--icon--light.png";
 import logoutIcon from "../assets/global/logout--icon--light.png";
 
 const ProjectDashboard = ({ match, user, setUser }) => {
-	// STYLING
+	// STYLING -- used for the buttons, gets passed down to other components as 'global' for them to use
 	const globalStyles = makeStyles((theme) => ({
 		orangeButton: {
 			color: "white",
@@ -96,6 +97,9 @@ const ProjectDashboard = ({ match, user, setUser }) => {
 
 	// Tab list needs to be above state, because the tab state uses this object to figure out what the initial 'selected' tab should be
 	const tabList = [
+		// two sets of icons are included so that it knows which one to render
+		// linksto is mostly unused, but is used to pass in another location if click the button needs to go somewhere instead of just triggering the conditional render
+		// the permission propert contains an array of the roles that are allowed to see it, doing it this way allows for expansion in the future if extra roles are defined
 		{
 			name: "Learning Objectives",
 			icon: {
@@ -197,7 +201,7 @@ const ProjectDashboard = ({ match, user, setUser }) => {
 		},
 	];
 
-	// STATE
+	// Setting all the states (you might wonder why they are down here, this is mostly so that the tab sate can be set after the tablist (above) is defined). I also wanted all the states to be together, so for that reason they are all down here vs just separating them out
 	const [tab, setTab] = useState(tabList[0].name);
 	const [tabOpen, setTabOpen] = useState(true);
 	const [project, setProject] = useState({});
@@ -207,10 +211,11 @@ const ProjectDashboard = ({ match, user, setUser }) => {
 	// handles the changing tab by setting the tab state to the string that is passed in.
 	// A simple shortcircut statement handles when null is passed in and sets tab to itself (no change in otherwords) -- possible side-effect being that the state is still updated so may trigger a potential useEffect if one was implemented in the future
 	const changeTab = (newTab) => {
+		// sets the tab to either the newTab or just itself in the event that nothing is passed in (this way it should still trigger the events that follow a state change)
 		setTab(newTab || tab);
 	};
 
-	// Gets the project data based on the 'id' in the url
+	// Gets the project data based on the 'id' in the url (from the match prop passed in)
 	const fetchProject = () => {
 		axios
 			.get(`http://localhost:4000/project?project=${match.params.id}`)
@@ -233,6 +238,8 @@ const ProjectDashboard = ({ match, user, setUser }) => {
 			);
 	};
 
+	// an axios get method that fetches the index of a project -- you might wonder why I dont just use the projec id -- well, let me tell you...
+	// the index only represents the order that the projects were added to the databse. What if in the future a project was added that actually needs to usurp the second project in terms of sequence. It might have an id of 99. So, but running this request, the backend is set up to send back the row index of where this project appears in a query that gets all projects and sorts them based on the 'project number' field -- the assumption here is that the project number field will always be alphabetically in order -- that is if naming conventions are followed. As a future addition, it could be worth adding an actual project order field, but this is fine for now.
 	const getProjectIndex = () => {
 		axios
 			.get(`http://localhost:4000/projectindex?project=${match.params.id}`)
@@ -261,6 +268,7 @@ const ProjectDashboard = ({ match, user, setUser }) => {
 	}
 	// Send a help request function END
 
+	// the useeffect causes these functions to get run on the page render. This is critical so that the tracker dots and project content can be built (they require info from the database to work)
 	useEffect(() => {
 		fetchProject();
 		fetchProjectCount();
@@ -286,6 +294,7 @@ const ProjectDashboard = ({ match, user, setUser }) => {
 			name: "Log out",
 			icon: logoutIcon,
 			linksto: "/",
+			//simple function that empties the user variable to simulate a log out
 			action: function () {
 				setUser({});
 			},
@@ -295,10 +304,11 @@ const ProjectDashboard = ({ match, user, setUser }) => {
 	return (
 		<div className="wrapper">
 			<div className="dashboard__toolbar">
+				{/* Corner image, links back to home page */}
 				<Link to="/">
 					<img src={levelUpLogo} alt="Levelup Works logo" />
 				</Link>
-				<div onClick={() => fetchProjectCount()} className="project-tracker">
+				<div className="project-tracker">
 					<div className="project-tracker__title-container">
 						<span className="project-tracker__title">Project</span>
 						<span className="project-tracker__subtitle">
@@ -308,6 +318,7 @@ const ProjectDashboard = ({ match, user, setUser }) => {
 					{/* Creates an new array with the projectCount as the size and then maps through it (alternative to a loop which react didn't seem to let me do here in the return statment) */}
 					{[...Array(projectCount)].map((dot, iteration) => (
 						<>
+						{/* Conditionall applies the right styles to highlight the correct dot as the 'current' project */}
 							<div
 								className={`project-tracker__dot ${projectIndex === iteration + 1 &&
 									"project-tracker__dot--active"
@@ -371,6 +382,7 @@ const ProjectDashboard = ({ match, user, setUser }) => {
 						className={`panel--left__bottom-navigation ${!tabOpen && "panel--left__bottom-navigation--closed"
 							}`}
 					>
+						{/* This loops through the tab list array>object and renders the buttons including the functions they are supposed to perform or the places they are supposed to go*/}
 						{bottomTabList.map((item) => (
 							<Link
 								to={item.linksto || "#"}
@@ -387,6 +399,7 @@ const ProjectDashboard = ({ match, user, setUser }) => {
 				</div>
 				<div className="container__panel--right">
 					<div className="panel--right__buttonContainer">
+						{/* Below are the three buttons in the upper right corner, they use the styles that are defined a couple of components up and passed down through the prop 'global' */}
 						<Link className={global.tweakedLink}>
 							<Button className={global.orangeButton} variant="contained">
 								Take Screenshot
