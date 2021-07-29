@@ -158,7 +158,9 @@ export const TeacherDashboard = (props) => {
       // Wrapper is just a flex box with the main part (not the toolbar) set to have a flex-basis of 100% so that it tries to fill 100% but will accept anything lese (this will break if flex-shrink is changed, leave as default).
       <div className="wrapper">
         <div className="dashboard__toolbar">
-          <img src={levelUpLogo} alt="Levelup Works logo" />
+        <Link to="/">
+					<img src={levelUpLogo} alt="Levelup Works logo" />
+				</Link>
           <div className="dashboard__toolbar__flag-container">
             <img src={nzFlag} alt="Levelup Works logo" />
             <img src={maoriFlag} alt="Levelup Works logo" />

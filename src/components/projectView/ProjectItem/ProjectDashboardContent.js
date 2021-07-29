@@ -13,7 +13,9 @@ const ProjectDashboardContent = ({ tab, user, project, global }) => {
 	switch (tab) {
 		case 'Learning Objectives':
 			return (
-				<p>{project.learning_objective}</p>
+				<div className="project__instructions">
+					<div dangerouslySetInnerHTML={{ __html: project.learning_objective }} />
+				</div>
 			)
 		case 'Instructions':
 			return (
@@ -21,7 +23,6 @@ const ProjectDashboardContent = ({ tab, user, project, global }) => {
 					<div dangerouslySetInnerHTML={{ __html: project.instructions }} />
 					<h1 className="heading-centered">Congratulations!<br />You Completed {project.project_number}!</h1>
 				</div>
-				// <iframe title="vimeo-player" src="https://player.vimeo.com/video/65583694" width="640" height="400" frameborder="0" allowfullscreen></iframe>
 			)
 		case 'Video Tutorial':
 			return (
