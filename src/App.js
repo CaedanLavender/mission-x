@@ -103,7 +103,7 @@ function App() {
         {/* Page renders below */}
         <Switch>
           {/* Temporary route for the homepage until it's built */}
-          <Route path="/" exact render={() => <h1>Home</h1>} />
+          <Route path="/" exact render={() => <h1>HomePage</h1>} />
 
           <Route path="/projectview" exact>
             <ProjectView />
