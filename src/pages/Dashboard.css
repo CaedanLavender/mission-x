@@ -15,25 +15,10 @@
 .dashboard__toolbar {
 	width: 100%;
 	padding: 0.5em 1.5em 0.5em 1em;
-	/* height: 60px; */
 	background-color: white;
 	display: flex;
 	justify-content: space-between;
 }
-
-
-/* .dashboard__toolbar__image-container {
-	width: 500px;
-	background-color: red;
-}
-
-.dashboard__toolbar__image-container--closed {
-	background-color: green;
-}
-
-.dashboard__toolbar__image-container--closed  img{
-	height: 3em;
-} */
 
 .dashboard__toolbar__flag-container {
 	display: flex;
@@ -64,7 +49,6 @@
 }
 
 .panel--left__profile {
-	background-color: red;
 	border-radius: 50%;
 	width: 75px;
 	height: 75px;
@@ -184,7 +168,6 @@
 
 .project-tracker {
 	flex-basis: 100%;
-	/* background-color: red; */
 	display: flex;
 	gap: 0.5em;
 	align-items: center;
