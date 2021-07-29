@@ -7,6 +7,8 @@ import { Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import axios from "axios";
 
+
+// importing images from assets folder
 import levelUpLogo from "../assets/global/star-logo.png";
 
 import nzFlag from "../assets/global/nz-flag.png";
@@ -59,6 +61,18 @@ const ProjectDashboard = ({ match, user, setUser }) => {
 			fontWeight: "900",
 			textTransform: "none",
 			padding: "0.3em 2em",
+			"&:hover": {
+				background: "#E0036C",
+			},
+		},
+		pinkButtonBig: {
+			borderRadius: "10px",
+			color: "white",
+			background: "#F91C85",
+			fontFamily: "Nunito",
+			fontWeight: "900",
+			textTransform: "none",
+			padding: "1em",
 			"&:hover": {
 				background: "#E0036C",
 			},
@@ -208,11 +222,11 @@ const ProjectDashboard = ({ match, user, setUser }) => {
 			.catch(() => console.log("There was a catch error"));
 	};
 
+	// Gets the number of projects (for the tracker dots at the top)
 	const fetchProjectCount = () => {
 		axios
 			.get("http://localhost:4000/count?table=project")
 			.then((res) => {
-				console.log(res.data.count);
 				setProjectCount(res.data.count);
 			})
 			.catch(() =>
@@ -238,6 +252,7 @@ const ProjectDashboard = ({ match, user, setUser }) => {
 		getProjectIndex();
 	}, []);
 
+	// buttons are in an array>object so that it can be expanded in the future if needed. Also makes the implementation further down easier to code and read
 	const bottomTabList = [
 		{
 			name: "Profile",
@@ -272,6 +287,7 @@ const ProjectDashboard = ({ match, user, setUser }) => {
 							{project.project_name}
 						</span>
 					</div>
+					{/* Creates an new array with the projectCount as the size and then maps through it (alternative to a loop which react didn't seem to let me do here in the return statment) */}
 					{[...Array(projectCount)].map((dot, iteration) => (
 						<>
 							<div
@@ -295,10 +311,11 @@ const ProjectDashboard = ({ match, user, setUser }) => {
 						<div className="panel--left__profile">
 							<img src="" alt="" />
 						</div>
+						{/* The filter below takes out the tabs that the user doesn't have permission to see (doesn't need to see) */}
 						{tabList
 							.filter((item) => item.permission.includes(user.role))
 							.map((item) => (
-								// I know it's shameful to include inline styling, but I just needed the stupid underline to go away -- simpler than makinng a whole theme/class
+								// shortcircuite expression to either drop in the place to link, or # if 'null' -- also styling to remove underlink from Link
 								<Link to={item.linksto || "#"} className={global.tweakedLink}>
 									<div
 										// Below is a shortcircuit statment that looks for the tab state and the item matching, if true, then include an additional class that applies the 'selected' styling
@@ -319,10 +336,12 @@ const ProjectDashboard = ({ match, user, setUser }) => {
 							))}
 					</div>
 					<div
+					// ternary here checks if the tab is open and then applies the appropriate classname
 						className={`panel--left__toggle ${tabOpen
 								? "panel--left__toggle--open"
 								: "panel--left__toggle--closed"
 							}`}
+							// set's the tabOpen state to the opposite of what it was before
 						onClick={() => setTabOpen(!tabOpen)}
 					>
 						<img
@@ -350,17 +369,17 @@ const ProjectDashboard = ({ match, user, setUser }) => {
 				</div>
 				<div className="container__panel--right">
 					<div className="panel--right__buttonContainer">
-						<Link>
+						<Link className={global.tweakedLink}>
 							<Button className={global.orangeButton} variant="contained">
 								Take Screenshot
 							</Button>
 						</Link>
-						<Link>
+						<Link className={global.tweakedLink}>
 							<Button className={global.pinkButton} variant="contained">
 								Help Centre
 							</Button>
 						</Link>
-						<Link to="/projectview">
+						<Link to="/projectview" className={global.tweakedLink}>
 							<Button className={global.blueButton} variant="contained">
 								More Projects
 							</Button>
@@ -372,6 +391,7 @@ const ProjectDashboard = ({ match, user, setUser }) => {
 							match={match}
 							user={user}
 							project={project}
+							global={global}
 						/>
 					</div>
 				</div>

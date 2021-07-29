@@ -20,7 +20,7 @@ function App() {
 	const [user, setUser] = useState({
 		user_id: 16,
 		first_name: "Jasmina",
-		role: "teacher",
+		role: "student",
 		school: "Homai School",
 		teacher_name: "Sally Rogers",
 		course: "Beginner",

@@ -9,12 +9,17 @@
 .submit-project__container {
 	display: flex;
 	align-items: center;
+	height: 100%;
 }
 
 .submit-project__half {
-	background-color: red;
+	/* background-color: red; */
 	flex: 100%;
 	height: 100%;
+}
+
+.submit-project__half > img {
+	width: 60%;
 }
 
 .submit-project__half h1 {
@@ -27,6 +32,29 @@
 	font-family: 'Nunito';
 }
 
-.submit-project__submit-button {
-	background-color: pink;
+input[type="file"] {
+	display: none;
 }
+
+.upload-screenshot-label {
+	border-radius: 5px;
+	box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+	cursor: pointer;
+}
+
+.send-photo-button__inner {
+	display: flex;
+	flex-direction: column;
+	padding: 1em 3em;
+	gap: 0.5em;
+}
+
+.send-photo-button img {
+	display: block;
+	height: 40px;
+	align-self: center;
+}
+
+/* .submit-project__browse-button {
+	background-color: pink;
+} */
