@@ -414,6 +414,7 @@ const ProjectDashboard = ({ match, user, setUser }) => {
 							user={user}
 							project={project}
 							global={global}
+							sendHelpRequest={updateDatabase}
 						/>
 					</div>
 				</div>
