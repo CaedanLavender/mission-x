@@ -3,6 +3,7 @@ import "./App.css";
 import Home from "./pages/Home"
 import ProjectView from "./pages/ProjectView";
 import ProjectDashboard from "./pages/ProjectDashboard";
+import TeacherDashboard from "./pages/TeacherDashboard";
 import StudentProfileViewer from "./pages/StudentProfileViewer";
 import TeacherProfileViewer from "./pages/TeacherProfileViewer";
 import levelUpLogo from "./assets/Home-Page/Star-Logo-07-2@2x.png";
@@ -12,9 +13,6 @@ import { Avatar } from "@material-ui/core";
 import { useState } from "react";
 // React Router import
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { AppBar, Toolbar } from "@material-ui/core";
-import { TeacherDashboard } from "./pages/TeacherDashboard";
-import AccessDenied from "./pages/AccessDenied";
 
 function App() {
 	let [selectedStudent, setSelectedStudent] = useState({});

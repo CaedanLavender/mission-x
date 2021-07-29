@@ -33,7 +33,7 @@ import profileIcon from "../assets/global/profile--icon--light.png";
 import settingsIcon from "../assets/global/settings--icon--light.png";
 import logoutIcon from "../assets/global/logout--icon--light.png";
 
-export const TeacherDashboard = (props) => {
+const TeacherDashboard = (props) => {
   // STYLING
   const globalStyles = makeStyles((theme) => ({
     orangeButton: {
@@ -260,3 +260,5 @@ export const TeacherDashboard = (props) => {
     return <AccessDenied />;
   }
 };
+
+export default TeacherDashboard;
