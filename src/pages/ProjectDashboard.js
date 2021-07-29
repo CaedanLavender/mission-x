@@ -95,7 +95,7 @@ const ProjectDashboard = ({ match, user, setUser }) => {
 
 	const global = globalStyles();
 
-	// Tab list needs to be above state, because the tab state uses this object to figure out what the initial 'selected' tab should be
+	// tab list needs to be above state, because the tab state uses this object to figure out what the initial 'selected' tab should be
 	const tabList = [
 		// two sets of icons are included so that it knows which one to render
 		// linksto is mostly unused, but is used to pass in another location if click the button needs to go somewhere instead of just triggering the conditional render
