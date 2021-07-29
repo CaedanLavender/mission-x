@@ -16,7 +16,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 function App() {
 	let [selectedStudent, setSelectedStudent] = useState({});
-	// State to keep track of who is logged in, at the moment I've just got an object with name and role. We should change this to be the id and the role so that we can query for more information where we need it. I think we should also leave in the role so that we can conditionally render without having to first search the database for the user's role
+	// State to keep track of who is logged in (temporary measure) initially it's empty to simulate no one being logged in
 	const [user, setUser] = useState({
 		user_id: null,
 		first_name: "",
@@ -69,7 +69,6 @@ function App() {
 									Teacher Dashboard
 								</Link>
 
-								{/* Add more links here by following the format above */}
 							</div>
 							<div className="rightNav">
 								<div className="language">
@@ -109,6 +108,7 @@ function App() {
 						<ProjectView />
 					</Route>
 
+					{/* The slighty differen component render method here seems to be necessary to pass the match prop in -- match is needed for the project dahsboard to display individual projects (dynamic routing) */}
 					<Route
 						path="/projectview/projects/:id"
 						render={({ match }) => (
