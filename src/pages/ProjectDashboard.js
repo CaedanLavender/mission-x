@@ -407,7 +407,6 @@ const ProjectDashboard = ({ match, user, setUser }) => {
                 Send a help request
               </Button>
             </Link>
-
             <Link to="/projectview" className={global.tweakedLink}>
               <Button className={global.blueButton} variant="contained">
                 More Projects
@@ -421,6 +420,7 @@ const ProjectDashboard = ({ match, user, setUser }) => {
               user={user}
               project={project}
               global={global}
+              sendHelpRequest={updateDatabase}
             />
           </div>
         </div>

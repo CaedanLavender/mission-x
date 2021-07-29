@@ -7,7 +7,7 @@ import sendPhotoIcon from "../../../assets/global/send-photo--icon.png";
 import callTeacherIcon from "../../../assets/global/call-teacher--icon.png";
 import callTeacherThumbnail from "../../../assets/global/call-teacher--thumbnail.png"
 
-const SubmitProject = ({ user, project, global }) => {
+const SubmitProject = ({ user, project, global, sendHelpRequest }) => {
 	const [projectSubmitted, setProjectSubmitted] = useState(false);
 	const [fileAttach, setFileAttach] = useState(false);
 
@@ -93,7 +93,7 @@ const SubmitProject = ({ user, project, global }) => {
 					<img src={callTeacherThumbnail} alt="call a teacher"/>
 					<h1>Show your teacher</h1>
 					<p>If your teacher is in the same room as you, click the button below to let them know you are done.</p>
-					<Button className={`send-photo-button ${global.pinkButtonBig}`} onClick={""} variant="contained">
+					<Button className={`send-photo-button ${global.pinkButtonBig}`} onClick={sendHelpRequest} variant="contained">
 								<div className="send-photo-button__inner">
 								<img src={callTeacherIcon} alt="call a teacher button"/>
 								<div>Call Teacher</div>
