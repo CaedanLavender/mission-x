@@ -4,9 +4,11 @@ import NavigationBar from "./components/NavigationBar";
 import ProjectView from "./pages/ProjectView";
 import ProjectDashboard from "./pages/ProjectDashboard";
 import StudentProfileViewer from "./pages/StudentProfileViewer";
-
 import TeacherProfileViewer from "./pages/TeacherProfileViewer";
-
+import levelUpLogo from "./assets/Home-Page/Star-Logo-07-2@2x.png";
+import nzFlag from "./assets/global/nz-flag.png";
+import maoriFlag from "./assets/global/maori-flag.png";
+import { Avatar } from "@material-ui/core";
 import { useState } from "react";
 // React Router import
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
@@ -38,7 +40,7 @@ function App() {
     <div className="App">
       <Router>
         {/* Below is the navigation bar, it's just a material UI appbar for now, there are some dummy buttons in there to make sure Route works. This will need styled of course to match the design on the Adobe XD document */}
-        <AppBar position="static">
+        <div className="navbar" position="static">
           <Switch>
             <Route
               exact
@@ -50,16 +52,54 @@ function App() {
                 "/student-profile-viewer",
               ]}
             >
-              <Toolbar className="menu">
-                <Link to="/">Home |</Link>
-                <Link to="/projectview"> Project View |</Link>
-                <Link to="/teacher-dashboard">Teacher Dashboard |</Link>
+              <div>
+                <img
+                  className="levelUpLogo"
+                  src={levelUpLogo}
+                  alt="Levelup Works logo"
+                />
+              </div>
+
+              <div className="menu">
+                <Link className="buttonNav" to="/">
+                  Home
+                </Link>
+                <Link className="buttonNav" to="/projectview">
+                  Project View
+                </Link>
+                <Link className="buttonNav" to="/teacher-dashboard">
+                  Teacher Dashboard
+                </Link>
 
                 {/* Add more links here by following the format above */}
-              </Toolbar>
+              </div>
+              <div className="rightNav">
+                <div className="language">
+                  LANG
+                  <img
+                    className="flagHome"
+                    src={nzFlag}
+                    alt="New Zealand Flag"
+                  />
+                  <img className="flagHome" src={maoriFlag} alt="Maori Flag" />
+                </div>
+                <div className="loggedInUser">
+                  <Avatar
+                    className="avatarHome"
+                    style={{
+                      width: "24px",
+                      height: "24px",
+                      display: "flex",
+                      padding: "2px",
+                    }}
+                    src={user.profile_pic}
+                  ></Avatar>
+                  REGISTER | LOGIN
+                </div>
+              </div>
             </Route>
           </Switch>
-        </AppBar>
+        </div>
         {/* Page renders below */}
         <Switch>
           {/* Temporary route for the homepage until it's built */}
