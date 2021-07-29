@@ -8,7 +8,7 @@ import {
 import "./instructions.css";
 import SubmitProject from './SubmitProject';
 
-const ProjectDashboardContent = ({ tab, user, project, match }) => {
+const ProjectDashboardContent = ({ tab, user, project, global }) => {
 
 	switch (tab) {
 		case 'Learning Objectives':
@@ -33,7 +33,7 @@ const ProjectDashboardContent = ({ tab, user, project, match }) => {
 				<img src={project.project_preview} width="80%" alt={tab} />
 			)
 		case 'Submit Project':
-			return <SubmitProject user={user} project={project} />
+			return <SubmitProject user={user} project={project} global={global}/>
 		default:
 			return (
 				<p>{tab}</p>

@@ -62,6 +62,7 @@ function App() {
         </AppBar>
         {/* Page renders below */}
         <Switch>
+          {/* Temporary route for the homepage until it's built */}
           <Route path="/" exact render={() => <h1>Home</h1>} />
 
           <Route path="/projectview" exact>
@@ -94,9 +95,6 @@ function App() {
           {/* Add your page to the route by following the example above. */}
         </Switch>
       </Router>
-      {/* Route stuff needs to go here so that each of our components will render based on url ending with /whatever */}
-      {/* ...I'm assuming that's how they want us to do it :) */}
-      {/* Fay, I'm thinking that you build the homepage in a separate file (something like Home.js) and then we can import it to this location into the routes etc. */}
     </div>
   );
 }

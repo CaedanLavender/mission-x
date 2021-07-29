@@ -1,9 +1,21 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import './SubmitProject.css'
+import { Button } from "@material-ui/core";
 
-const SubmitProject = ({ user, project }) => {
+import sendPhotoIcon from "../../../assets/global/send-photo--icon.png";
+import callTeacherIcon from "../../../assets/global/call-teacher--icon.png";
+import callTeacherThumbnail from "../../../assets/global/call-teacher--thumbnail.png"
+
+const SubmitProject = ({ user, project, global }) => {
 	const [projectSubmitted, setProjectSubmitted] = useState(false);
+	const [fileAttach, setFileAttach] = useState(false);
+
+	const checkFileAttach = () => {
+		let submissionFile = document.querySelector('#image-upload');
+		if (submissionFile.files[0]) setFileAttach(true)
+		console.log(submissionFile)
+	}
 
 	const checkProjectProgress = () => {
 		axios.get('http://localhost:4000/user/project-submissions', {
@@ -28,6 +40,10 @@ const SubmitProject = ({ user, project }) => {
 	const startUpload = () => {
 		let formData = new FormData();
 		let submissionFile = document.querySelector('#image-upload');
+		if (!submissionFile.files[0]) {
+			alert("No file uploaded")
+			return null
+		} 
 		console.log(submissionFile)
 		formData.append("image", submissionFile.files[0])
 		formData.append("user_id", user.user_id)
@@ -39,6 +55,7 @@ const SubmitProject = ({ user, project }) => {
 		})
 			.then(res => {
 				console.log(res)
+				checkProjectProgress()
 			})
 			.catch(() => {
 				console.log("There was a catch error")
@@ -53,21 +70,37 @@ const SubmitProject = ({ user, project }) => {
 		return (
 			<div className="submit-project__container">
 				<div className="submit-project__half">
-
-					<div className="submit-project__submit-button">test</div>
+				<img src={project.project_preview} alt=""/>
 					<h1>Submit project photo</h1>
 					<p>After completing your project, take a screenshot of your project and upload it here</p>
+					<Button disabled={!fileAttach} className={`send-photo-button ${global.pinkButtonBig}`} onClick={startUpload} variant="contained">
+								<div className="send-photo-button__inner">
+								<img src={sendPhotoIcon} alt="send submission"/>
+								<div>Send Photo</div>
+								</div>
+					</Button>
+					<br/>
+					<br/>
 					<form>
-						<input type="file" id="image-upload" name="image" />
+						<label for="image-upload" className={`upload-screenshot-label ${global.pinkButton}`}>
+							Upload screenshot
+						</label>
+						<input className="submit-project__browse-button" type="file" id="image-upload" name="image" onChange={()=>checkFileAttach()}/>
 					</form>
-
-					<button onClick={startUpload}>Upload</button>
 				</div>
 
 				<div className="submit-project__half">
+					<img src={callTeacherThumbnail} alt="call a teacher"/>
 					<h1>Show your teacher</h1>
 					<p>If your teacher is in the same room as you, click the button below to let them know you are done.</p>
+					<Button className={`send-photo-button ${global.pinkButtonBig}`} onClick={""} variant="contained">
+								<div className="send-photo-button__inner">
+								<img src={callTeacherIcon} alt="call a teacher button"/>
+								<div>Call Teacher</div>
+								</div>
+					</Button>
 				</div>
+
 
 			</div>
 		)
