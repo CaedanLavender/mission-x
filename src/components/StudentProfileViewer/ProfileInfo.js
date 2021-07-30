@@ -2,6 +2,7 @@ import React from "react";
 import "./ProfileInfo.css";
 
 export default function ProfileInfo(props) {
+  // This Birthdate function takes the sql date data and converts it to readable date data
   function birthdate(date) {
     const dateObj = new Date(date); //returned from mysql timestamp/datetime field
     const month = dateObj.getUTCMonth() + 1; //months from 1-12

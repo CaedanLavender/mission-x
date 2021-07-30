@@ -2,14 +2,15 @@ import React from "react";
 import "./TProfileInfo.css";
 
 export default function TProfileInfo(props) {
-  function birthdate(date) {
-    const dateObj = new Date(date); //returned from mysql timestamp/datetime field
-    const month = dateObj.getUTCMonth() + 1; //months from 1-12
-    const day = dateObj.getUTCDate();
-    const year = dateObj.getUTCFullYear();
-    const newdate = day + "/" + month + "/" + year;
-    return newdate;
-  }
+  // This birthdate function was going to be used from the logged in user data, but as the logged in user is hardcoded, it's not being used right now.
+  // function birthdate(date) {
+  //   const dateObj = new Date(date); //returned from mysql timestamp/datetime field
+  //   const month = dateObj.getUTCMonth() + 1; //months from 1-12
+  //   const day = dateObj.getUTCDate();
+  //   const year = dateObj.getUTCFullYear();
+  //   const newdate = day + "/" + month + "/" + year;
+  //   return newdate;
+  // }
 
   return (
     <div className="mainSectionT">
